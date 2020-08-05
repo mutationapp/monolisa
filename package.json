@@ -20,7 +20,8 @@
     "build": "yarn clean:dist && lerna run build",
     "compile": "tsc --noEmit",
     "stryker": "stryker run",
-    "test": "lerna run test -- -u"
+    "test": "lerna run test -- -u",
+    "mutate": "mutate"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
