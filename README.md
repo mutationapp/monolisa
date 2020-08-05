@@ -1,3 +1,4 @@
 # "Good artists borrow, great artists steal."
 
-monorepo structure used by Mutation.app, will be free to steal (▀̿Ĺ̯▀̿ ̿)
+Monorepo structure used by Mutation.app, will be free to steal (▀̿Ĺ̯▀̿ ̿)\
+https://mutation.app/github/mutationapp/monolisa
