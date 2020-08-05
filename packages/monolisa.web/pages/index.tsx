@@ -1,5 +1,5 @@
-import { dealWithIt } from 'monolisa.lib'
+import { DealWithIt } from '../components'
 
-const Index = () => dealWithIt('Hello world')
+const Index = () => <DealWithIt text="🖼️ Hello world" />
 
 export default Index
