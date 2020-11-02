@@ -1,15 +1,7 @@
-import { DealWithIt, Button } from '../components'
-import { useThemeContext } from '../hooks'
+import { DealWithIt } from '../components'
 
 const Index = () => {
-  const { theme, toggleTheme } = useThemeContext()
-
-  return (
-    <>
-      <DealWithIt text="🖼️ Hello world" />
-      <Button onClick={toggleTheme}>{theme}</Button>
-    </>
-  )
+  return <DealWithIt text="🖼️ Hello world" />
 }
 
 export default Index
