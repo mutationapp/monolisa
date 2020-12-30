@@ -19,6 +19,7 @@
     "start": "yarn cwd:${APP} start",
     "clean:dist": "rm -rf packages/**/dist*",
     "build": "lerna run build",
+    "prestart": "yarn build",
     "build:dev": "yarn clean:dist &&  yarn build",
     "compile": "tsc --noEmit",
     "stryker": "stryker run",
