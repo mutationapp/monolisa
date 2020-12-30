@@ -16,7 +16,7 @@
     "cwd": "yarn --cwd",
     "cwd:web": "yarn cwd packages/monolisa.web",
     "dev": "yarn cwd:web dev",
-    "start": "yarn cwd:${APP} start",
+    "start": "yarn cwd:${APP:-web} start",
     "clean:dist": "rm -rf packages/**/dist*",
     "build": "lerna run build",
     "prestart": "yarn build",

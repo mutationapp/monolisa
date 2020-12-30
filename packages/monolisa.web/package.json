@@ -5,9 +5,9 @@
   "author": "ibsukru",
   "license": "Apache-2.0",
   "scripts": {
-    "dev": "next -- -p ${PORT}",
+    "dev": "next -- -p ${PORT:-2381}",
     "build": "next build",
-    "start": "next start -- -p ${PORT}",
+    "start": "next start -- -p ${PORT:-2381}",
     "prestart": "lerna run build",
     "test": "jest"
   },
