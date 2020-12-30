@@ -1,4 +1,4 @@
-const libs = ['monolisa.lib', 'monolisa.web']
+export const libs = ['monolisa.lib', 'monolisa.web']
 
 const { NODE_ENV } = process.env
 
