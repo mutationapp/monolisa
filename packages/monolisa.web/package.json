@@ -8,6 +8,7 @@
     "dev": "next -- -p ${PORT}",
     "build": "next build",
     "start": "next start -- -p ${PORT}",
+    "prestart": "lerna run build",
     "test": "jest"
   },
   "dependencies": {
