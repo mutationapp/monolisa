@@ -5,9 +5,9 @@
   "author": "ibsukru",
   "license": "Apache-2.0",
   "scripts": {
-    "dev": "next -- -p 2481",
+    "dev": "next -- -p ${PORT:1123}",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -- -p ${PORT:1123}",
     "test": "jest"
   },
   "dependencies": {
