@@ -1,4 +1,2 @@
-const { libs } = require('../../monolisa.config')
-
-const withTM = require('next-transpile-modules')(libs)
+const withTM = require('next-transpile-modules')(['monolisa.lib'])
 module.exports = withTM()

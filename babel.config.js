@@ -1,4 +1,4 @@
-const libs = require('./monolisa.config')
+const libs = ['monolisa.lib', 'monolisa.web']
 
 const { NODE_ENV } = process.env
 
