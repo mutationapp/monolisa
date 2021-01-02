@@ -7,6 +7,7 @@ export default css`
     font-size: 4.8rem;
     line-height: 4.8rem;
     margin: 0 0 2.4rem 0;
+    outline: 1px solid red;
   }
 
   @media screen and (min-width: 600px) {
