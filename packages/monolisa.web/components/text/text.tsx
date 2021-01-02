@@ -1,6 +1,9 @@
-const Text: React.FunctionComponent<{ content: string; of?: 'h1' | 'h2' }> = ({
-  content,
-}) => {
+import { HeaderKindType } from '../header'
+
+const Text: React.FunctionComponent<{
+  content: string
+  of?: HeaderKindType
+}> = ({ content }) => {
   return (
     <div className="text">
       <style jsx>{`
