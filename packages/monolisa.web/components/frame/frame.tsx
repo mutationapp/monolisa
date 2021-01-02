@@ -1,6 +1,36 @@
+import defaultsDeep from 'lodash.defaultsdeep'
+
+import { FrameSpanType } from '.'
+import { Header, render } from '..'
+import { Fragment } from 'react'
+import { Text } from '..'
+
 const Frame: React.FunctionComponent<{
-  weight: 'fullBleed' | 'regular' | 'medium' | 'bold'
-}> = ({ weight, children }) => {
+  weight?: 'fullBleed' | 'regular' | 'medium' | 'bold'
+  span?: FrameSpanType
+  heading?:
+    | string
+    | {
+        kind: 'h1'
+        text: string
+        subHead?: string
+      }
+  brand?:
+    | string
+    | {
+        kind: 'h1'
+        text: string
+      }
+}> = ({ children, heading, brand, ...rest }) => {
+  const weight = rest.weight || 'fullBleed'
+
+  const span = defaultsDeep(rest.span, {
+    'min-width: 0px': '16',
+    'min-width: 900px': '16',
+    'min-width: 1200px': '16',
+    'min-width: 1600px': '16',
+  }) as FrameSpanType
+
   return (
     <div className={`frame ${weight}`}>
       <style jsx>{`
@@ -13,11 +43,19 @@ const Frame: React.FunctionComponent<{
           display: grid;
         }
 
+        .frame-span {
+          grid-column: 1 / span ${span['min-width: 0px']};
+        }
+
         @media screen and (min-width: 600px) {
           .frame {
             width: calc(100vw - 19.200000000000003rem);
             grid-template-columns: repeat(6, 1fr);
             grid-column-gap: 3.2rem;
+          }
+
+          .frame-span {
+            grid-column: 1 / span ${span['min-width: 600px']};
           }
         }
 
@@ -27,6 +65,10 @@ const Frame: React.FunctionComponent<{
             grid-template-columns: repeat(12, 1fr);
             grid-column-gap: 3.6rem;
           }
+
+          .frame-span {
+            grid-column: 1 / span ${span['min-width: 900px']};
+          }
         }
 
         @media screen and (min-width: 1200px) {
@@ -35,6 +77,10 @@ const Frame: React.FunctionComponent<{
             grid-template-columns: repeat(16, 1fr);
             grid-column-gap: 4.8rem;
           }
+
+          .frame-span {
+            grid-column: 1 / span ${span['min-width: 1200px']};
+          }
         }
 
         @media screen and (min-width: 1600px) {
@@ -42,6 +88,10 @@ const Frame: React.FunctionComponent<{
             width: calc(100vw - 38.400000000000006rem);
             grid-template-columns: repeat(16, 1fr);
             grid-column-gap: 6.4rem;
+          }
+
+          .frame-span {
+            grid-column: 1 / span ${span['min-width: 1600px']};
           }
         }
 
@@ -54,12 +104,48 @@ const Frame: React.FunctionComponent<{
         .bold {
           padding: 20px;
         }
-
-        .frame-inner {
-          grid-column: 1 / span 16;
-        }
       `}</style>
-      <div className="frame-inner">{children}</div>
+
+      {(() => {
+        const renderChildren = () => {
+          return (
+            <Fragment>
+              {render(() => {
+                if (typeof heading === 'string')
+                  return <Header kind="h1" text={heading} />
+              })}
+
+              {render(() => {
+                if (typeof heading === 'object')
+                  return <Header kind={heading.kind} text={heading.text} />
+              })}
+
+              {render(() => {
+                if (typeof heading === 'object' && heading.subHead)
+                  return <Text content={heading.subHead} />
+              })}
+
+              {children}
+
+              {render(() => {
+                if (typeof brand === 'string')
+                  return <Header kind="h1" text={brand} />
+              })}
+
+              {render(() => {
+                if (typeof brand === 'object')
+                  return <Header kind={brand.kind} text={brand.text} />
+              })}
+            </Fragment>
+          )
+        }
+
+        return rest.span ? (
+          <div className="frame-span">{renderChildren()}</div>
+        ) : (
+          renderChildren()
+        )
+      })()}
     </div>
   )
 }

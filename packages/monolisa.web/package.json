@@ -12,15 +12,22 @@
     "test": "jest"
   },
   "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/css": "^11.1.3",
+    "@emotion/react": "^11.1.4",
     "classnames": "^2.2.6",
+    "facepaint": "^1.2.1",
     "js-cookie": "^2.2.1",
     "monolisa.lib": "1.0.0",
     "next": "^10.0.4",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "shevyjs": "^1.2.0"
   },
   "devDependencies": {
+    "@types/facepaint": "^1.2.1",
     "@types/js-cookie": "^2.2.6",
-    "@types/react": "^17.0.0"
+    "@types/react": "^17.0.0",
+    "@types/shevyjs": "^1.1.0"
   }
 }
