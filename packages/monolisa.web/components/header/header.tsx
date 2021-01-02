@@ -1,10 +1,9 @@
 import { Fragment } from 'react'
 import headerStyles from './header.styles'
 import { css } from '@emotion/css'
-import { mq } from '..'
-import Shevy from 'shevyjs'
+import { mq, shevy } from '..'
 import defaultsDeep from 'lodash.defaultsdeep'
-import { HeaderKindType } from '.'
+import { headerKind, HeaderKindType } from '.'
 
 const Header: React.FunctionComponent<{
   text: string
@@ -27,33 +26,34 @@ const Header: React.FunctionComponent<{
     // [h1, h2, h3, h4, h5, h6]
     [18, 9, 5.6, 4.5, 3, 2.2],
   ]
-    .map(baseFontScale => {
-      return new Shevy({
-        baseFontSize: '10px',
+    .map(baseFontScale =>
+      shevy({
         baseFontScale,
-      })
-    })
-    .reduce((result, shevy) => {
-      return ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].reduce((type, key) => {
-        const { fontSize, lineHeight, marginBottom } = defaultsDeep(
-          result[key],
-          {
-            fontSize: [],
-            lineHeight: [],
-            marginBottom: [],
-          },
-        )
+      }),
+    )
+    .reduce(
+      (acc, shevy) =>
+        Object.keys(headerKind).reduce((join, key) => {
+          const { fontSize, lineHeight, marginBottom } = defaultsDeep(
+            acc[key],
+            {
+              fontSize: [],
+              lineHeight: [],
+              marginBottom: [],
+            },
+          )
 
-        return {
-          ...type,
-          [key]: {
-            fontSize: fontSize.concat(shevy[key].fontSize),
-            lineHeight: lineHeight.concat(shevy[key].lineHeight),
-            marginBottom: marginBottom.concat(shevy[key].marginBottom),
-          },
-        }
-      }, {})
-    }, {})
+          return {
+            ...join,
+            [key]: {
+              fontSize: fontSize.concat(shevy[key].fontSize),
+              lineHeight: lineHeight.concat(shevy[key].lineHeight),
+              marginBottom: marginBottom.concat(shevy[key].marginBottom),
+            },
+          }
+        }, {}),
+      {},
+    )
 
   const baseProps = {
     className: css(mq(query[kind])),
@@ -62,33 +62,16 @@ const Header: React.FunctionComponent<{
   return (
     <Fragment>
       <style jsx>{headerStyles}</style>
-      {(() => {
-        if (kind === 'h1') {
-          return <h1 {...baseProps}>{text}</h1>
-        }
-
-        if (kind === 'h2') {
-          return <h2 {...baseProps}>{text}</h2>
-        }
-
-        if (kind === 'h3') {
-          return <h3 {...baseProps}>{text}</h3>
-        }
-
-        if (kind === 'h4') {
-          return <h4 {...baseProps}>{text}</h4>
-        }
-
-        if (kind === 'h5') {
-          return <h5 {...baseProps}>{text}</h5>
-        }
-
-        if (kind === 'h6') {
-          return <h6 {...baseProps}>{text}</h6>
-        }
-
-        return <header {...baseProps}>{text}</header>
-      })()}
+      {
+        {
+          [headerKind.h1]: <h1 {...baseProps}>{text}</h1>,
+          [headerKind.h2]: <h2 {...baseProps}>{text}</h2>,
+          [headerKind.h3]: <h3 {...baseProps}>{text}</h3>,
+          [headerKind.h4]: <h4 {...baseProps}>{text}</h4>,
+          [headerKind.h5]: <h5 {...baseProps}>{text}</h5>,
+          [headerKind.h6]: <h6 {...baseProps}>{text}</h6>,
+        }[kind]
+      }
     </Fragment>
   )
 }
