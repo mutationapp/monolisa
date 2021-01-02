@@ -11,10 +11,20 @@ const Header: React.FunctionComponent<{
   kind: HeaderKindType
 }> = ({ kind, text }) => {
   const query = [
+    // min-width: 0px
+    // [h1, h2, h3, h4, h5, h6]
     [4.8, 3.6, 2.2, 1.8, 1.8, 1.4],
+    // min-width: 600px
+    // [h1, h2, h3, h4, h5, h6]
     [9.6, 4.8, 3.7, 2.4, 2.4, 1.6],
+    // min-width: 900px
+    // [h1, h2, h3, h4, h5, h6]
     [12.8, 6.4, 4, 3.2, 2.4, 1.8],
+    // min-width: 1200px
+    // [h1, h2, h3, h4, h5, h6]
     [14.4, 7.2, 4.5, 3.6, 2.4, 1.8],
+    // min-width: 1600px
+    // [h1, h2, h3, h4, h5, h6]
     [18, 9, 5.6, 4.5, 3, 2.2],
   ]
     .map(baseFontScale => {
