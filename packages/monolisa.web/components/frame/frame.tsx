@@ -17,6 +17,11 @@ const Frame: React.FunctionComponent<{
         subHead?: string
       }
   brand?: string
+  image?: {
+    src: string
+    alt: string
+    position: 'fit' | 'left' | 'right'
+  }
 }> = ({ children, heading, brand, ...rest }) => {
   const weight = rest.weight || 'fullBleed'
 

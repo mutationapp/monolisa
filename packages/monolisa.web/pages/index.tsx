@@ -16,7 +16,7 @@ const Index = () => {
           }}
           brand={'monolisa'}
           heading={{
-            kind: 'h1',
+            kind: 'h3',
             text: 'Frame Heading',
             subHead:
               'Labore non ut tempor reprehenderit excepteur est nostrud sit ad ad aliquip. Do cupidatat labore in qui. Ex ea aliquip proident irure ut cupidatat qui officia. Minim id nostrud culpa esse. Reprehenderit aliquip cillum ipsum mollit Lorem. Excepteur aliqua est nulla pariatur ea amet laborum quis labore. Do aliquip reprehenderit officia labore incididunt adipisicing labore anim ullamco sunt occaecat.',

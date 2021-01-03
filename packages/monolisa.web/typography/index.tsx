@@ -1,6 +1,9 @@
 import facepaint from 'facepaint'
 import Shevy from 'shevyjs'
 import { Options } from 'shevyjs/types'
+import { css } from '@emotion/css'
+
+import { HeaderKindType, headerTypography } from '../components/header'
 
 export const media = {
   'min-width: 0px': 'min-width: 0px',
@@ -94,4 +97,16 @@ export const scale = (typography: TypographyType) => (
 
   return result
 }
-export const render = (f: { (): React.ReactNode | undefined }) => f()
+
+export const headerRatio = { '1': 1, '1/3': 1 / 3, '2/3': 2 / 3 }
+
+export type headerRatioType = keyof typeof headerRatio
+
+const typography = (
+  of: HeaderKindType = 'h1',
+  ratio: headerRatioType = '1',
+) => {
+  return css(mq(scale(headerTypography)([of], headerRatio[ratio])[of]))
+}
+
+export default typography

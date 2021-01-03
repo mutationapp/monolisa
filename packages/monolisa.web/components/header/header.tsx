@@ -1,14 +1,13 @@
 import { Fragment } from 'react'
-import { css } from '@emotion/css'
-import { headerKinds, HeaderKindType, headerTypography } from '.'
-import { mq, scale } from '../../typography'
+import { headerKinds, HeaderKindType } from '.'
+import typography from '../../typography'
 
 const Header: React.FunctionComponent<{
   text: string
   kind: HeaderKindType
 }> = ({ kind, text }) => {
   const baseProps = {
-    className: css(mq(scale(headerTypography)(headerKinds, 1)[kind])),
+    className: typography(kind),
   }
 
   return (
