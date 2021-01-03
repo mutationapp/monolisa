@@ -6,7 +6,7 @@ import { Fragment } from 'react'
 import { Text } from '..'
 import { HeaderKindType } from '../header'
 
-// import Img from 'next/image'
+import Img from 'next/image'
 
 const Frame: React.FunctionComponent<{
   weight?: 'fullBleed' | 'regular' | 'medium' | 'bold'
@@ -110,9 +110,16 @@ const Frame: React.FunctionComponent<{
           padding: 20px;
         }
 
-        img {
+        img,
+        .img {
           position: absolute;
           width: 100%;
+          top: 0;
+          left: 0;
+        }
+
+        figure {
+          position: absolute;
           top: 0;
           left: 0;
         }
@@ -129,7 +136,19 @@ const Frame: React.FunctionComponent<{
               {render(() => {
                 if (!image) return
 
-                return <img src={image.src} alt={image.alt} />
+                return (
+                  (
+                    <figure>
+                      <Img
+                        width={'1600px'}
+                        height={'1600px'}
+                        src={image.src}
+                        alt={image.alt}
+                        className={'img'}
+                      />
+                    </figure>
+                  ) || <img src={image.src} alt={image.alt} />
+                )
               })}
               <div className={'wrapper'}>
                 {render(() => {
