@@ -4,6 +4,7 @@ import { FrameSpanType } from '.'
 import { Header, render } from '..'
 import { Fragment } from 'react'
 import { Text } from '..'
+import { HeaderKindType } from '../header'
 
 const Frame: React.FunctionComponent<{
   weight?: 'fullBleed' | 'regular' | 'medium' | 'bold'
@@ -11,16 +12,11 @@ const Frame: React.FunctionComponent<{
   heading?:
     | string
     | {
-        kind: 'h1'
+        kind: HeaderKindType
         text: string
         subHead?: string
       }
-  brand?:
-    | string
-    | {
-        kind: 'h1'
-        text: string
-      }
+  brand?: string
 }> = ({ children, heading, brand, ...rest }) => {
   const weight = rest.weight || 'fullBleed'
 
@@ -127,21 +123,21 @@ const Frame: React.FunctionComponent<{
 
                 const { subHead, kind } = heading
 
-                return <Text content={subHead} of={kind} />
+                if (!subHead) return
+
+                return <Text content={subHead} of={kind} ratio="1/3" />
               })}
 
               {children}
 
               {render(() => {
+                if (typeof heading !== 'object') return
                 if (typeof brand !== 'string') return
 
-                return <Header kind="h1" text={brand} />
-              })}
+                const { kind } = heading
+                if (!kind) return
 
-              {render(() => {
-                if (typeof brand !== 'object') return
-
-                return <Header kind={brand.kind} text={brand.text} />
+                return <Text content={brand} of={kind} ratio="2/3" />
               })}
             </Fragment>
           )
