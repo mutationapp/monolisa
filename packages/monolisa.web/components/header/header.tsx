@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { css } from '@emotion/css'
-import { mq, scale } from '..'
 import { headerKinds, HeaderKindType, headerTypography } from '.'
+import { mq, scale } from '../../typography'
 
 const Header: React.FunctionComponent<{
   text: string

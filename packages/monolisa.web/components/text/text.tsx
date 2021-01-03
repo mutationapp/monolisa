@@ -1,45 +1,26 @@
-import { HeaderKindType } from '../header'
+import { css } from '@emotion/css'
+import { mq, scale } from '../../typography'
+import { headerKinds, HeaderKindType, headerTypography } from '../header'
 
 const Text: React.FunctionComponent<{
   content: string
   of?: HeaderKindType
-}> = ({ content }) => {
+  ratio?: '1/3' | '2/3'
+}> = ({ content, ...rest }) => {
+  const of = rest.of || 'h1'
+  const ratio = rest.ratio || '1/3'
+
   return (
-    <div className="text">
-      <style jsx>{`
-        .text {
-          font-size: 1.6rem;
-          line-height: 2.4rem;
-        }
-
-        @media screen and (min-width: 600px) {
-          .text {
-            font-size: 1.8rem;
-            line-height: 2.7rem;
-          }
-        }
-
-        @media screen and (min-width: 900px) {
-          .text {
-            font-size: 1.8rem;
-            line-height: 2.7rem;
-          }
-        }
-
-        @media screen and (min-width: 1200px) {
-          .text {
-            font-size: 2rem;
-            line-height: 3rem;
-          }
-        }
-
-        @media screen and (min-width: 1600px) {
-          .text {
-            font-size: 2.5rem;
-            line-height: 3.7rem;
-          }
-        }
-      `}</style>
+    <div
+      className={`text ${css(
+        mq(
+          scale(headerTypography)(
+            [headerKinds.h1],
+            { '1/3': 1 / 3, '2/3': 2 / 3 }[ratio],
+          )[of],
+        ),
+      )}`}
+    >
       {content}
     </div>
   )

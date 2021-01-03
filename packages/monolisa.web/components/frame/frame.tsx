@@ -111,30 +111,37 @@ const Frame: React.FunctionComponent<{
           return (
             <Fragment>
               {render(() => {
-                if (typeof heading === 'string')
-                  return <Header kind="h1" text={heading} />
+                if (typeof heading !== 'string') return
+
+                return <Header kind="h1" text={heading} />
               })}
 
               {render(() => {
-                if (typeof heading === 'object')
-                  return <Header kind={heading.kind} text={heading.text} />
+                if (typeof heading !== 'object') return
+
+                return <Header kind={heading.kind} text={heading.text} />
               })}
 
               {render(() => {
-                if (typeof heading === 'object' && heading.subHead)
-                  return <Text content={heading.subHead} />
+                if (typeof heading !== 'object') return
+
+                const { subHead, kind } = heading
+
+                return <Text content={subHead} of={kind} />
               })}
 
               {children}
 
               {render(() => {
-                if (typeof brand === 'string')
-                  return <Header kind="h1" text={brand} />
+                if (typeof brand !== 'string') return
+
+                return <Header kind="h1" text={brand} />
               })}
 
               {render(() => {
-                if (typeof brand === 'object')
-                  return <Header kind={brand.kind} text={brand.text} />
+                if (typeof brand !== 'object') return
+
+                return <Header kind={brand.kind} text={brand.text} />
               })}
             </Fragment>
           )

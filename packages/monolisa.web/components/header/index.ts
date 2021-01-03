@@ -1,4 +1,4 @@
-import { TypographyType } from '..'
+import { TypographyType } from '../../typography'
 import Header from './header'
 
 export const headerKinds = {
