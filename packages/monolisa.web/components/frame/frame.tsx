@@ -6,6 +6,8 @@ import { Fragment } from 'react'
 import { Text } from '..'
 import { HeaderKindType } from '../header'
 
+// import Img from 'next/image'
+
 const Frame: React.FunctionComponent<{
   weight?: 'fullBleed' | 'regular' | 'medium' | 'bold'
   span?: FrameSpanType
@@ -20,9 +22,9 @@ const Frame: React.FunctionComponent<{
   image?: {
     src: string
     alt: string
-    position: 'fit' | 'left' | 'right'
+    position?: 'fit' | 'left' | 'right'
   }
-}> = ({ children, heading, brand, ...rest }) => {
+}> = ({ children, heading, brand, image, ...rest }) => {
   const weight = rest.weight || 'fullBleed'
 
   const span = defaultsDeep(rest.span, {
@@ -42,6 +44,8 @@ const Frame: React.FunctionComponent<{
           margin: 0 auto;
           height: 100%;
           display: grid;
+          position: relative;
+          overflow: hidden;
         }
 
         .frame-span {
@@ -105,6 +109,17 @@ const Frame: React.FunctionComponent<{
         .bold {
           padding: 20px;
         }
+
+        img {
+          position: absolute;
+          width: 100%;
+          top: 0;
+          left: 0;
+        }
+
+        .wrapper {
+          position: relative;
+        }
       `}</style>
 
       {(() => {
@@ -112,38 +127,45 @@ const Frame: React.FunctionComponent<{
           return (
             <Fragment>
               {render(() => {
-                if (typeof heading !== 'string') return
+                if (!image) return
 
-                return <Header kind="h1" text={heading} />
+                return <img src={image.src} alt={image.alt} />
               })}
+              <div className={'wrapper'}>
+                {render(() => {
+                  if (typeof heading !== 'string') return
 
-              {render(() => {
-                if (typeof heading !== 'object') return
+                  return <Header kind="h1" text={heading} />
+                })}
 
-                return <Header kind={heading.kind} text={heading.text} />
-              })}
+                {render(() => {
+                  if (typeof heading !== 'object') return
 
-              {render(() => {
-                if (typeof heading !== 'object') return
+                  return <Header kind={heading.kind} text={heading.text} />
+                })}
 
-                const { subHead, kind } = heading
+                {render(() => {
+                  if (typeof heading !== 'object') return
 
-                if (!subHead) return
+                  const { subHead, kind } = heading
 
-                return <Text content={subHead} of={kind} ratio="1/3" />
-              })}
+                  if (!subHead) return
 
-              {children}
+                  return <Text content={subHead} of={kind} ratio="1/3" />
+                })}
 
-              {render(() => {
-                if (typeof heading !== 'object') return
-                if (typeof brand !== 'string') return
+                {children}
 
-                const { kind } = heading
-                if (!kind) return
+                {render(() => {
+                  if (typeof heading !== 'object') return
+                  if (typeof brand !== 'string') return
 
-                return <Text content={brand} of={kind} ratio="2/3" />
-              })}
+                  const { kind } = heading
+                  if (!kind) return
+
+                  return <Text content={brand} of={kind} ratio="2/3" />
+                })}
+              </div>
             </Fragment>
           )
         }

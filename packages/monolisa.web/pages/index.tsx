@@ -15,6 +15,10 @@ const Index = () => {
             'min-width: 1600px': '16',
           }}
           brand={'monolisa'}
+          image={{
+            alt: 'test',
+            src: '/static/images/structure-light-led-movement-158826.jpeg',
+          }}
           heading={{
             kind: 'h3',
             text: 'Frame Heading',

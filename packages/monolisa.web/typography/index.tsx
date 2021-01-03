@@ -98,15 +98,14 @@ export const scale = (typography: TypographyType) => (
   return result
 }
 
-export const headerRatio = { '1': 1, '1/3': 1 / 3, '2/3': 2 / 3 }
-
-export type headerRatioType = keyof typeof headerRatio
+export const typographyRatio = { '1': 1, '1/3': 1 / 3, '2/3': 2 / 3 }
+export type typographyRatioType = keyof typeof typographyRatio
 
 const typography = (
-  of: HeaderKindType = 'h1',
-  ratio: headerRatioType = '1',
+  of: HeaderKindType | 'p' = 'h1',
+  ratio: typographyRatioType = '1',
 ) => {
-  return css(mq(scale(headerTypography)([of], headerRatio[ratio])[of]))
+  return css(mq(scale(headerTypography)([of], typographyRatio[ratio])[of]))
 }
 
 export default typography

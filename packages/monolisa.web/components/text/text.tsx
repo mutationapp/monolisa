@@ -1,10 +1,10 @@
-import typography, { headerRatioType } from '../../typography'
+import typography, { typographyRatioType } from '../../typography'
 import { HeaderKindType } from '../header'
 
 const Text: React.FunctionComponent<{
   content: string
   of?: HeaderKindType
-  ratio?: headerRatioType
+  ratio?: typographyRatioType
 }> = ({ content, ...rest }) => {
   const of = rest.of || 'h1'
   const ratio = rest.ratio || '1/3'
