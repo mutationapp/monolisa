@@ -25,33 +25,39 @@ export const shevy = options =>
     ...options,
   })
 
-export type TypographyType = [
-  // min-width: 0px
-  number[],
-  // min-width: 600px
-  number[],
-  // min-width: 900px
-  number[],
-  // min-width: 1200px
-  number[],
-  // min-width: 1600px
-  number[],
+type FontScaleType = [
+  // h1
+  number,
+  // h2
+  number,
+  // h3
+  number,
+  // h4
+  number,
+  // h5
+  number,
+  // h6
+  number,
 ]
 
-export const scale = (
-  typography: [
-    // min-width: 0px
-    number[],
-    // min-width: 600px
-    number[],
-    // min-width: 900px
-    number[],
-    // min-width: 1200px
-    number[],
-    // min-width: 1600px
-    number[],
-  ],
-) => (pluck: object, ratio: 1 | 0.5 | 1.5 = 1) =>
+// min-width
+export type TypographyType = [
+  // 0px
+  FontScaleType,
+  // 600px
+  FontScaleType,
+  // 900px
+  FontScaleType,
+  // 1200px
+  FontScaleType,
+  // 1600px
+  FontScaleType,
+]
+
+export const scale = (typography: TypographyType) => (
+  pluck: object,
+  ratio: 1 | 0.5 | 1.5 = 1,
+) =>
   typography
     .map(baseFontScale =>
       shevy({
