@@ -8,7 +8,7 @@ const Header: React.FunctionComponent<{
   kind: HeaderKindType
 }> = ({ kind, text }) => {
   const baseProps = {
-    className: css(mq(scale(headerTypography)(headerKinds)[kind])),
+    className: css(mq(scale(headerTypography)(headerKinds, 1)[kind])),
   }
 
   return (

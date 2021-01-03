@@ -6,7 +6,6 @@ import Frame from './frame'
 import Text from './text'
 import facepaint from 'facepaint'
 import Shevy from 'shevyjs'
-import defaultsDeep from 'lodash.defaultsdeep'
 
 export const mq = facepaint(
   [0, 600, 900, 1200].map(bp => `@media (min-width: ${bp}px)`),
@@ -52,31 +51,29 @@ export const scale = (
     // min-width: 1600px
     number[],
   ],
-) => (pluck: object) =>
+) => (pluck: object, ratio: 1 | 0.5 | 1.5 = 1) =>
   typography
     .map(baseFontScale =>
       shevy({
-        baseFontScale,
+        baseFontScale: baseFontScale.map(item => item * ratio),
       }),
     )
     .reduce(
       (acc, shevy) =>
         Object.keys(pluck).reduce((join, key) => {
-          const { fontSize, lineHeight, marginBottom } = defaultsDeep(
-            acc[key],
-            {
-              fontSize: [],
-              lineHeight: [],
-              marginBottom: [],
-            },
-          )
+          const fontSize = `${parseInt(
+            shevy[key].fontSize.replace('px', ''),
+          )}px`
+
+          const lineHeight = shevy[key].lineHeight
+          const marginBottom = shevy[key].marginBottom
 
           return {
             ...join,
             [key]: {
-              fontSize: fontSize.concat(shevy[key].fontSize),
-              lineHeight: lineHeight.concat(shevy[key].lineHeight),
-              marginBottom: marginBottom.concat(shevy[key].marginBottom),
+              fontSize,
+              lineHeight,
+              marginBottom,
             },
           }
         }, {}),
