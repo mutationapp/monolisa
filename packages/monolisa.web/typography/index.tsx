@@ -59,7 +59,7 @@ export const scale = (typography: TypographyType) => (
 ) => {
   const relative = ratio || 1
 
-  return typography
+  const result = typography
     .map(baseFontScale =>
       shevy({
         baseFontScale: baseFontScale.map(item => item * relative),
@@ -79,9 +79,11 @@ export const scale = (typography: TypographyType) => (
             return {
               ...join,
               [key]: {
-                fontSize,
-                lineHeight,
-                marginBottom,
+                fontSize: (acc[key]?.fontSize || []).concat(fontSize),
+                lineHeight: (acc[key]?.lineHeight || []).concat(lineHeight),
+                marginBottom: (acc[key]?.marginBottom || []).concat(
+                  marginBottom,
+                ),
               },
             }
           },
@@ -89,5 +91,7 @@ export const scale = (typography: TypographyType) => (
         ),
       {},
     )
+
+  return result
 }
 export const render = (f: { (): React.ReactNode | undefined }) => f()
