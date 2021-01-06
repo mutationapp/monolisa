@@ -229,7 +229,7 @@ const Frame: React.FunctionComponent<{
                   return <Header text={brand} kind={kind} ratio="2/3" />
                 })}
                 {render(() => {
-                  if (!cta?.length) {
+                  if (!heading || !cta?.length) {
                     return
                   }
 
