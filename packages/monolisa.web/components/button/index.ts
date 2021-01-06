@@ -1,6 +1,7 @@
 import Button from './button'
 import { linkType } from '../link'
 import { ReactNode } from 'react'
+import { HeaderKindType } from '../header'
 
 export type ButtonType =
   | 'secondary'
@@ -11,6 +12,7 @@ export type ButtonType =
   | 'warning'
 
 export type ButtonPropsType = {
+  of: HeaderKindType
   link?: linkType
   type?: ButtonType
   transparent?: boolean

@@ -56,7 +56,7 @@ export const shevy = (options: Partial<Options>) =>
     ...options,
   })
 
-export const scale = (typography: TypographyType) => (
+export const scale = (typography: TypographyType, addMarginBottom = true) => (
   pluck: object | string[],
   ratio?: number,
 ) => {
@@ -65,6 +65,7 @@ export const scale = (typography: TypographyType) => (
   const result = typography
     .map(baseFontScale =>
       shevy({
+        addMarginBottom,
         baseFontScale: baseFontScale.map(item => item * relative),
       }),
     )
@@ -104,8 +105,15 @@ export type typographyRatioType = keyof typeof typographyRatio
 const typography = (
   of: HeaderKindType | 'p' = 'h1',
   ratio: typographyRatioType = '1',
+  addMarginBottom?: boolean,
 ) => {
-  return css(mq(scale(headerTypography)([of], typographyRatio[ratio])[of]))
+  return css(
+    mq(
+      scale(headerTypography, addMarginBottom)([of], typographyRatio[ratio])[
+        of
+      ],
+    ),
+  )
 }
 
 export default typography

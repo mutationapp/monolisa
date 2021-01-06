@@ -4,13 +4,14 @@ import classNames from 'classnames'
 import { Spinner } from '..'
 import { forwardRef } from 'react'
 import { ButtonPropsType } from '.'
+import { Text } from '..'
 
 const Button: React.FunctionComponent<ButtonPropsType> = forwardRef<
   HTMLButtonElement,
   ButtonPropsType
 >(
   (
-    { link, type, processing, secondary, children, icon, onClick, ...rest },
+    { of, link, type, processing, secondary, children, icon, onClick, ...rest },
     ref,
   ) => {
     const size = rest.size || 'medium'
@@ -121,7 +122,14 @@ const Button: React.FunctionComponent<ButtonPropsType> = forwardRef<
         `}</style>
         {processing && <Spinner />}
         {icon && <span className="icon">{icon}</span>}
-        <span className="text">{children}</span>
+        <span className="text">
+          <Text
+            addMarginBottom={false}
+            content={children}
+            of={of}
+            ratio="1/3"
+          />
+        </span>
       </button>
     )
 

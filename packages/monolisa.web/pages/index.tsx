@@ -1,12 +1,14 @@
 import { Fragment } from 'react'
-import { Frame, Header } from '../components'
+import { Frame } from '../components'
 
 const Index = () => {
+  const kind = 'h3'
+
   return (
     <Fragment>
       <section>
         <Frame
-          weight="bold"
+          weight="fullBleed"
           span={{
             'min-width: 0px': '16',
             'min-width: 600px': '16',
@@ -19,14 +21,15 @@ const Index = () => {
             alt: 'test',
             src: '/static/images/structure-light-led-movement-158826.jpeg',
           }}
+          cta={[{ children: 'Play Video', of: kind }]}
           heading={{
-            kind: 'h3',
+            kind,
             text: 'Frame Heading',
             subHead:
               'Labore non ut tempor reprehenderit excepteur est nostrud sit ad ad aliquip. Do cupidatat labore in qui. Ex ea aliquip proident irure ut cupidatat qui officia. Minim id nostrud culpa esse. Reprehenderit aliquip cillum ipsum mollit Lorem. Excepteur aliqua est nulla pariatur ea amet laborum quis labore. Do aliquip reprehenderit officia labore incididunt adipisicing labore anim ullamco sunt occaecat.',
           }}
         ></Frame>
-        <Frame
+        {/* <Frame
           span={{
             'min-width: 0px': '16',
             'min-width: 600px': '16',
@@ -41,7 +44,7 @@ const Index = () => {
           <Header kind="h4" text={'H4 Title'} />
           <Header kind="h5" text={'H5 Title'} />
           <Header kind="h6" text={'H6 Title'} />
-        </Frame>
+        </Frame> */}
       </section>
     </Fragment>
   )

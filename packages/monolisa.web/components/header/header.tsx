@@ -1,13 +1,15 @@
 import { Fragment } from 'react'
 import { headerKinds, HeaderKindType } from '.'
-import typography from '../../typography'
+import typography, { typographyRatioType } from '../../typography'
 
 const Header: React.FunctionComponent<{
   text: string
   kind: HeaderKindType
-}> = ({ kind, text }) => {
+  ratio?: typographyRatioType
+  addMarginBottom?: boolean
+}> = ({ kind, text, ratio = '1', addMarginBottom = true }) => {
   const baseProps = {
-    className: typography(kind),
+    className: typography(kind, ratio, addMarginBottom),
   }
 
   return (

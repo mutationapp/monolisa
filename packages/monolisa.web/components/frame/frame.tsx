@@ -1,12 +1,15 @@
 import defaultsDeep from 'lodash.defaultsdeep'
 
 import { FrameSpanType } from '.'
-import { Header, render } from '..'
+import { Button, Header, render } from '..'
 import { Fragment } from 'react'
 import { Text } from '..'
 import { HeaderKindType } from '../header'
 
 import Img from 'next/image'
+import { mq } from '../../typography'
+import { css } from '@emotion/css'
+import { ButtonPropsType } from '../button'
 
 const Frame: React.FunctionComponent<{
   weight?: 'fullBleed' | 'regular' | 'medium' | 'bold'
@@ -19,14 +22,14 @@ const Frame: React.FunctionComponent<{
         subHead?: string
       }
   brand?: string
+  cta?: Array<ButtonPropsType & { children: string }>
   image?: {
     src: string
     alt: string
     position?: 'fit' | 'left' | 'right'
   }
-}> = ({ children, heading, brand, image, ...rest }) => {
+}> = ({ children, brand, image, cta, ...rest }) => {
   const weight = rest.weight || 'fullBleed'
-
   const span = defaultsDeep(rest.span, {
     'min-width: 0px': '16',
     'min-width: 900px': '16',
@@ -34,71 +37,108 @@ const Frame: React.FunctionComponent<{
     'min-width: 1600px': '16',
   }) as FrameSpanType
 
-  return (
-    <div className={`frame ${weight}`}>
-      <style jsx>{`
-        .frame {
-          width: calc(2vw - 4.8rem);
-          grid-template-columns: repeat(16, 1fr);
-          grid-column-gap: 2.4rem;
-          margin: 0 auto;
-          height: 100%;
-          display: grid;
-          position: relative;
-          overflow: hidden;
+  const heading =
+    typeof rest.heading === 'string'
+      ? {
+          kind: 'h1' as HeaderKindType,
+          text: rest.heading,
         }
+      : rest.heading
 
+  const preview = image
+    ? 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=='
+    : undefined
+
+  return (
+    <div
+      className={`frame ${weight} ${css(
+        mq({
+          width:
+            weight === 'fullBleed'
+              ? '100%'
+              : [
+                  'calc(2vw - 4.8rem)',
+                  'calc(100vw - 19.200000000000003rem)',
+                  'calc(100vw - 21.6rem)',
+                  'calc(100vw - 28.799999999999997rem)',
+                  'calc(100vw - 38.400000000000006rem)',
+                ],
+          gridTemplateColumns: [
+            'repeat(16, 1fr)',
+            'repeat(6, 1fr);',
+            'repeat(12, 1fr)',
+            'repeat(16, 1fr);',
+            'repeat(16, 1fr)',
+          ],
+          gridColumnGap: ['2.4rem', '3.2rem', '3.6rem', '4.8rem', ' 6.4rem;'],
+          margin: '0 auto',
+          height: '100%',
+          display: 'grid',
+          position: 'relative',
+          overflow: 'hidden',
+          background: preview ? `url(${preview})` : 'none',
+          '&:after': {
+            content: '""',
+            opacity: '0.5',
+            top: '0',
+            left: '0',
+            position: 'absolute',
+          },
+        }),
+      )}`}
+    >
+      <style jsx>{`
         .frame-span {
           grid-column: 1 / span ${span['min-width: 0px']};
         }
 
-        @media screen and (min-width: 600px) {
-          .frame {
-            width: calc(100vw - 19.200000000000003rem);
-            grid-template-columns: repeat(6, 1fr);
-            grid-column-gap: 3.2rem;
-          }
+        // @media screen and (min-width: 600px) {
+        //   .frame {
+        //     width: calc(100vw - 19.200000000000003rem);
+        //     grid-template-columns: repeat(6, 1fr);
+        //     grid-column-gap: 3.2rem;
+        //   }
 
-          .frame-span {
-            grid-column: 1 / span ${span['min-width: 600px']};
-          }
-        }
+        //   .frame-span {
+        //     grid-column: 1 / span ${span['min-width: 600px']};
+        //   }
+        // }
 
-        @media screen and (min-width: 900px) {
-          .frame {
-            width: calc(100vw - 21.6rem);
-            grid-template-columns: repeat(12, 1fr);
-            grid-column-gap: 3.6rem;
-          }
+        // @media screen and (min-width: 900px) {
+        //   .frame {
+        //     width: calc(100vw - 21.6rem);
+        //     grid-template-columns: repeat(12, 1fr);
+        //     grid-column-gap: 3.6rem;
+        //   }
 
-          .frame-span {
-            grid-column: 1 / span ${span['min-width: 900px']};
-          }
-        }
+        //   .frame-span {
+        //     grid-column: 1 / span ${span['min-width: 900px']};
+        //   }
+        // }
 
-        @media screen and (min-width: 1200px) {
-          .frame {
-            width: calc(100vw - 28.799999999999997rem);
-            grid-template-columns: repeat(16, 1fr);
-            grid-column-gap: 4.8rem;
-          }
+        // @media screen and (min-width: 1200px) {
+        //   .frame {
+        //     width: calc(100vw - 28.799999999999997rem);
+        //     grid-template-columns: repeat(16, 1fr);
+        //     grid-column-gap: 4.8rem;
+        //   }
 
-          .frame-span {
-            grid-column: 1 / span ${span['min-width: 1200px']};
-          }
-        }
+        //   .frame-span {
+        //     grid-column: 1 / span ${span['min-width: 1200px']};
+        //   }
+        // }
 
-        @media screen and (min-width: 1600px) {
-          .frame {
-            width: calc(100vw - 38.400000000000006rem);
-            grid-template-columns: repeat(16, 1fr);
-            grid-column-gap: 6.4rem;
-          }
+        // @media screen and (min-width: 1600px) {
+        //   .frame {
+        //     width: calc(100vw - 38.400000000000006rem);
+        //     grid-template-columns: repeat(16, 1fr);
+        //     grid-column-gap: 6.4rem;
+        //   }
 
-          .frame-span {
-            grid-column: 1 / span ${span['min-width: 1600px']};
-          }
-        }
+        //   .frame-span {
+        //     grid-column: 1 / span ${span['min-width: 1600px']};
+        //   }
+        // }
 
         .regular {
           padding: 10px;
@@ -145,18 +185,22 @@ const Frame: React.FunctionComponent<{
                         src={image.src}
                         alt={image.alt}
                         className={'img'}
+                        objectFit={'fill'}
+                        onLoad={() => {
+                          const item = document.getElementsByClassName(
+                            'frame',
+                          )[1] as HTMLElement | undefined
+
+                          if (!item) return
+
+                          item.style.background = 'none'
+                        }}
                       />
                     </figure>
                   ) || <img src={image.src} alt={image.alt} />
                 )
               })}
-              <div className={'wrapper'}>
-                {render(() => {
-                  if (typeof heading !== 'string') return
-
-                  return <Header kind="h1" text={heading} />
-                })}
-
+              <div className="wrapper">
                 {render(() => {
                   if (typeof heading !== 'object') return
 
@@ -182,7 +226,21 @@ const Frame: React.FunctionComponent<{
                   const { kind } = heading
                   if (!kind) return
 
-                  return <Text content={brand} of={kind} ratio="2/3" />
+                  return <Header text={brand} kind={kind} ratio="2/3" />
+                })}
+                {render(() => {
+                  if (!cta?.length) {
+                    return
+                  }
+
+                  return cta.map(action => {
+                    const { children } = action
+                    return (
+                      <Button of={heading.kind} key={children}>
+                        {children}
+                      </Button>
+                    )
+                  })
                 })}
               </div>
             </Fragment>
