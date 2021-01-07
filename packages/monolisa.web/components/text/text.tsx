@@ -9,10 +9,11 @@ const Text: React.FunctionComponent<{
   addMarginBottom?: boolean
 }> = ({ content, addMarginBottom, ...rest }) => {
   const of = rest.of || 'h1'
+
   const ratio = rest.ratio || '1/3'
 
   return (
-    <div className={`text ${typography(of, ratio, addMarginBottom)}`}>
+    <div className={`text ${typography({ of, ratio, addMarginBottom })}`}>
       {content}
     </div>
   )

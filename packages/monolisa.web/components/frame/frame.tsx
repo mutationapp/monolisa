@@ -48,7 +48,6 @@ const Frame: React.FunctionComponent<{
       : rest.heading
 
   const f = scale(headerTypography)({
-    pluck: [heading?.kind || 'h1'],
     ratio: 2 / 3,
   })?.[heading.kind]
 

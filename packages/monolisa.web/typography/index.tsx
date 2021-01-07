@@ -3,7 +3,11 @@ import Shevy from 'shevyjs'
 import { Options } from 'shevyjs/types'
 import { css } from '@emotion/css'
 
-import { HeaderKindType, headerTypography } from '../components/header'
+import {
+  headerKinds,
+  HeaderKindType,
+  headerTypography,
+} from '../components/header'
 
 export const media = {
   'min-width: 0px': 'min-width: 0px',
@@ -57,12 +61,11 @@ export const shevy = (options: Partial<Options>) =>
   })
 
 export const scale = (typography: TypographyType) => (payload: {
-  pluck: object | string[]
   ratio?: number
   addMarginBottom?: boolean
 }) => {
-  const { pluck, ratio, addMarginBottom } = payload
-
+  const { ratio, addMarginBottom } = payload
+  const pluck = Object.keys(headerKinds)
   const relative = ratio || 1
 
   const result = typography
@@ -106,15 +109,16 @@ export const typographyRatio = { '1': 1, '1/3': 1 / 3, '2/3': 2 / 3 }
 
 export type typographyRatioType = keyof typeof typographyRatio
 
-const typography = (
-  of: HeaderKindType | 'p' = 'h1',
-  ratio: typographyRatioType = '1',
-  addMarginBottom?: boolean,
-) => {
+const typography = (payload: {
+  of?: HeaderKindType
+  ratio?: typographyRatioType
+  addMarginBottom?: boolean
+}) => {
+  const { ratio = '1', addMarginBottom, of = 'h1' } = payload
+
   return css(
     mq(
       scale(headerTypography)({
-        pluck: [of],
         ratio: typographyRatio[ratio],
         addMarginBottom,
       })[of],

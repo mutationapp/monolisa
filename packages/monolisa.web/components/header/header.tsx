@@ -9,7 +9,7 @@ const Header: React.FunctionComponent<{
   addMarginBottom?: boolean
 }> = ({ kind, text, ratio = '1', addMarginBottom = true }) => {
   const baseProps = {
-    className: typography(kind, ratio, addMarginBottom),
+    className: typography({ of: kind, ratio, addMarginBottom }),
   }
 
   return (
