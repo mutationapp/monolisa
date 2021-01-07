@@ -99,7 +99,7 @@ export const scale = (typography: TypographyType) => (payload: {
   const result = typography
     .map(baseFontScale =>
       shevy({
-        addMarginBottom: overrides?.marginBottom > 0,
+        addMarginBottom: Boolean(overrides?.marginBottom),
         baseFontScale: baseFontScale.map(item => item * relative),
       }),
     )

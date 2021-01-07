@@ -299,7 +299,7 @@ const Frame: React.FunctionComponent<{
                 })}
               >
                 {render(() => {
-                  if (image?.position === 'fit') return null
+                  if (!image || image?.position === 'fit') return null
 
                   return (
                     <div className={css({ position: 'relative' })}>
