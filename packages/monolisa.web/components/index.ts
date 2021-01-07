@@ -5,6 +5,6 @@ import Header from './header'
 import Frame from './frame'
 import Text from './text'
 
-export const render = (f: { (): React.ReactNode | void }) => f()
+export const render = (f: { (): React.ReactNode | null }) => f()
 
 export { Text, Frame, Header, Button, DealWithIt, Spinner }

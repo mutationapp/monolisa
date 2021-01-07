@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import typography, {
+  getBit,
   headerKinds,
   HeaderKindType,
   typographyRatioType,
@@ -9,10 +10,21 @@ const Header: React.FunctionComponent<{
   text: string
   kind: HeaderKindType
   ratio?: typographyRatioType
-  addMarginBottom?: boolean
-}> = ({ kind, text, ratio = '1', addMarginBottom = true }) => {
+  marginBottom?: number | 'bit'
+}> = ({ kind, text, ratio = '1', ...rest }) => {
+  const marginBottom =
+    typeof rest.marginBottom === 'string'
+      ? getBit(kind).fontSize
+      : rest.marginBottom
+
   const baseProps = {
-    className: typography({ of: kind, ratio, addMarginBottom }),
+    className: typography({
+      of: kind,
+      ratio,
+      overrides: {
+        marginBottom,
+      },
+    }),
   }
 
   return (

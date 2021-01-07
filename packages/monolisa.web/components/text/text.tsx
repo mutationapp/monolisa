@@ -8,14 +8,22 @@ const Text: React.FunctionComponent<{
   content: string | ReactNode
   of?: HeaderKindType
   ratio?: typographyRatioType
-  addMarginBottom?: boolean
-}> = ({ content, addMarginBottom, ...rest }) => {
+  marginBottom?: number | 'bit'
+}> = ({ content, marginBottom, ...rest }) => {
   const of = rest.of || 'h1'
 
   const ratio = rest.ratio || '1/3'
 
   return (
-    <div className={`text ${typography({ of, ratio, addMarginBottom })}`}>
+    <div
+      className={`text ${typography({
+        of,
+        ratio,
+        overrides: {
+          marginBottom,
+        },
+      })}`}
+    >
       {content}
     </div>
   )

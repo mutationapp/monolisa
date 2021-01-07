@@ -90,16 +90,16 @@ export const shevy = (options: Partial<Options>) =>
 
 export const scale = (typography: TypographyType) => (payload: {
   ratio?: number
-  addMarginBottom?: boolean
+  overrides?: { marginBottom?: number }
 }) => {
-  const { ratio, addMarginBottom } = payload
+  const { ratio, overrides = { marginBottom: 0 } } = payload
   const pluck = Object.keys(headerKinds)
   const relative = ratio || 1
 
   const result = typography
     .map(baseFontScale =>
       shevy({
-        addMarginBottom,
+        addMarginBottom: overrides?.marginBottom > 0,
         baseFontScale: baseFontScale.map(item => item * relative),
       }),
     )
@@ -119,9 +119,10 @@ export const scale = (typography: TypographyType) => (payload: {
               [key]: {
                 fontSize: (acc[key]?.fontSize || []).concat(fontSize),
                 lineHeight: (acc[key]?.lineHeight || []).concat(lineHeight),
-                marginBottom: (acc[key]?.marginBottom || []).concat(
-                  marginBottom,
-                ),
+                marginBottom:
+                  marginBottom ||
+                  (acc[key]?.marginBottom || []).concat(marginBottom),
+                ...overrides,
               },
             }
           },
@@ -143,15 +144,21 @@ export type typographyRatioType = keyof typeof typographyRatio
 const typography = (payload: {
   of?: HeaderKindType
   ratio?: typographyRatioType
-  addMarginBottom?: boolean
+  overrides?: { marginBottom?: number | 'bit' }
 }) => {
-  const { ratio = '1', addMarginBottom, of = 'h1' } = payload
+  const { ratio = '1', overrides, of = 'h1' } = payload
 
   return css(
     mq(
       scale(currentTheme.headerTypography)({
         ratio: typographyRatio[ratio],
-        addMarginBottom,
+        overrides: {
+          ...overrides,
+          marginBottom:
+            typeof overrides?.marginBottom === 'string'
+              ? getBit(of).fontSize
+              : overrides?.marginBottom,
+        },
       })[of],
     ),
   )

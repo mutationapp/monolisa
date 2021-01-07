@@ -8,7 +8,7 @@ const Index = () => {
     <Fragment>
       <section>
         <Frame
-          weight="bold"
+          weight="fullBleed"
           span={{
             'min-width: 0px': '16',
             'min-width: 600px': '16',
@@ -19,6 +19,7 @@ const Index = () => {
           brand={'monolisa'}
           image={{
             alt: 'test',
+            position: 'left',
             src: '/static/images/structure-light-led-movement-158826.jpeg',
           }}
           cta={[{ children: 'Play Video', of: kind }]}

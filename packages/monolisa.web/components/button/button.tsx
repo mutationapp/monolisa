@@ -123,12 +123,7 @@ const Button: React.FunctionComponent<ButtonPropsType> = forwardRef<
         {processing && <Spinner />}
         {icon && <span className="icon">{icon}</span>}
         <span className="text">
-          <Text
-            addMarginBottom={false}
-            content={children}
-            of={of}
-            ratio="1/3"
-          />
+          <Text marginBottom={0} content={children} of={of} ratio="1/3" />
         </span>
       </button>
     )

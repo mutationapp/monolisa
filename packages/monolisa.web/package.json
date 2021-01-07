@@ -25,6 +25,7 @@
     "shevyjs": "^1.2.0"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.11",
     "@types/facepaint": "^1.2.1",
     "@types/js-cookie": "^2.2.6",
     "@types/react": "^17.0.0",
