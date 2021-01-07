@@ -1,7 +1,7 @@
 import Button from './button'
 import { linkType } from '../link'
 import { ReactNode } from 'react'
-import { HeaderKindType } from '../header'
+import { HeaderKindType } from '../../typography'
 
 export type ButtonType =
   | 'secondary'

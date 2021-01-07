@@ -1,6 +1,9 @@
 import { Fragment } from 'react'
-import { headerKinds, HeaderKindType } from '.'
-import typography, { typographyRatioType } from '../../typography'
+import typography, {
+  headerKinds,
+  HeaderKindType,
+  typographyRatioType,
+} from '../../typography'
 
 const Header: React.FunctionComponent<{
   text: string

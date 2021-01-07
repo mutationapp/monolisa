@@ -1,17 +1,19 @@
+import Img from 'next/image'
 import defaultsDeep from 'lodash.defaultsdeep'
 
-import { FrameSpanType } from '.'
+import { FrameSpanType, getHeading } from '.'
 import { Button, Header, render } from '..'
 import { Fragment } from 'react'
 import { Text } from '..'
-import { HeaderKindType, headerTypography } from '../header'
 
-import Img from 'next/image'
-import { mq, scale } from '../../typography'
+import { getBit, HeaderKindType, mq, repeat as rpt } from '../../typography'
 import { css } from '@emotion/css'
 import { ButtonPropsType } from '../button'
 
-const repeat = (fill = 1) => new Array(fill).fill('1fr').join(' ')
+const previews = {
+  '/static/images/structure-light-led-movement-158826.jpeg':
+    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+}
 
 const Frame: React.FunctionComponent<{
   weight?: 'fullBleed' | 'regular' | 'medium' | 'bold'
@@ -39,23 +41,20 @@ const Frame: React.FunctionComponent<{
     'min-width: 1600px': '16',
   }) as FrameSpanType
 
-  const heading =
-    typeof rest.heading === 'string'
-      ? {
-          kind: 'h1' as HeaderKindType,
-          text: rest.heading,
-        }
-      : rest.heading
+  const heading = getHeading(rest.heading)
+  const bit = getBit(heading.kind)
 
-  const f = scale(headerTypography)({
-    ratio: 2 / 3,
-  })?.[heading.kind]
+  const preview = image ? previews[image.src] : undefined
 
-  console.log(`🚀 ~ file: frame.tsx ~ line 51 ~ f`, f.fontSize)
+  const characterPerLine = [70, 40, 56, 65, 70]
+  // 70, 65, 56, 40, 70
+  const f = bit.fontSize.map(
+    (size, i) =>
+      characterPerLine[i] * (parseInt(size.replace('px', '')) / 1.618),
+  )
+  console.log(`🚀 ~ file: frame.tsx ~ line 53 ~ f`, heading.kind)
 
-  const preview = image
-    ? 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=='
-    : undefined
+  const repeat = rpt(16)
 
   return (
     <div
@@ -78,18 +77,14 @@ const Frame: React.FunctionComponent<{
           //   'repeat(16, 1fr);',
           //   'repeat(16, 1fr)',
           // ],
-          padding: f.fontSize,
-          grid: [
-            `". . . . . . . . . . . . . . . ." / ${repeat(16)}`,
-            `". . . . . . . . . . . . . . . ."  / ${repeat(16)}`,
-            `". . . . . . . . . . . . . . . ."  / ${repeat(16)}`,
-            `". . . . . . . . . . . . . . . ."  / ${repeat(16)}`,
-            `". . . . . . . . . . . . . . . ."  / ${repeat(16)}`,
-          ],
-          //           "hd hd hd hd   hd   hd   hd   hd   hd" minmax(100px, auto)
-          // "sd sd sd main main main main main main" minmax(100px, auto)
-          // "ft ft ft ft   ft   ft   ft   ft   ft" minmax(100px, auto)    / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr
-          // gridColumnGap: ['2.4rem', '3.2rem', '3.6rem', '4.8rem', ' 6.4rem;'],
+          maxWidth: f,
+          padding: bit.fontSize,
+          grid: Array(4).fill(`"${repeat('.')}" / ${repeat('1fr')}`),
+          // margin: bit.fontSize.map(
+          //   size =>
+          //     parseInt(size.replace('px', '')) *
+          //     { regular: 1, medium: 2, bold: 3, fullBleed: 0 }[weight],
+          // ),
           margin: '0 auto',
           height: '100%',
           display: 'grid',
@@ -105,11 +100,11 @@ const Frame: React.FunctionComponent<{
             position: 'absolute',
             top: '0',
             left: '0',
-            fontSize: f.fontSize,
-            lineHeight: f.fontSize,
+            fontSize: bit.fontSize,
+            lineHeight: bit.fontSize,
             margin: 0,
             zIndex: 2,
-            width: f.fontSize,
+            width: bit.fontSize,
             transform: 'rotate(90deg)',
           }),
         )}`}
@@ -169,15 +164,15 @@ const Frame: React.FunctionComponent<{
         //   }
         // }
 
-        .regular {
-          padding: 10px;
-        }
-        .medium {
-          padding: 20px;
-        }
-        .bold {
-          padding: 20px;
-        }
+        // .regular {
+        //   padding: 10px;
+        // }
+        // .medium {
+        //   padding: 20px;
+        // }
+        // .bold {
+        //   padding: 20px;
+        // }
 
         img,
         .img {

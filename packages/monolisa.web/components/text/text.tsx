@@ -1,6 +1,8 @@
 import { ReactNode } from 'react'
-import typography, { typographyRatioType } from '../../typography'
-import { HeaderKindType } from '../header'
+import typography, {
+  HeaderKindType,
+  typographyRatioType,
+} from '../../typography'
 
 const Text: React.FunctionComponent<{
   content: string | ReactNode

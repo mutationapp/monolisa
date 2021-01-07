@@ -8,7 +8,7 @@ const Index = () => {
     <Fragment>
       <section>
         <Frame
-          weight="fullBleed"
+          weight="bold"
           span={{
             'min-width: 0px': '16',
             'min-width: 600px': '16',
