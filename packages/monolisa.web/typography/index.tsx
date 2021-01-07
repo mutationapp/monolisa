@@ -56,10 +56,13 @@ export const shevy = (options: Partial<Options>) =>
     ...options,
   })
 
-export const scale = (typography: TypographyType, addMarginBottom = true) => (
-  pluck: object | string[],
-  ratio?: number,
-) => {
+export const scale = (typography: TypographyType) => (payload: {
+  pluck: object | string[]
+  ratio?: number
+  addMarginBottom?: boolean
+}) => {
+  const { pluck, ratio, addMarginBottom } = payload
+
   const relative = ratio || 1
 
   const result = typography
@@ -100,6 +103,7 @@ export const scale = (typography: TypographyType, addMarginBottom = true) => (
 }
 
 export const typographyRatio = { '1': 1, '1/3': 1 / 3, '2/3': 2 / 3 }
+
 export type typographyRatioType = keyof typeof typographyRatio
 
 const typography = (
@@ -109,9 +113,11 @@ const typography = (
 ) => {
   return css(
     mq(
-      scale(headerTypography, addMarginBottom)([of], typographyRatio[ratio])[
-        of
-      ],
+      scale(headerTypography)({
+        pluck: [of],
+        ratio: typographyRatio[ratio],
+        addMarginBottom,
+      })[of],
     ),
   )
 }

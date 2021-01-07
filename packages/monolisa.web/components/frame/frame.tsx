@@ -4,17 +4,19 @@ import { FrameSpanType } from '.'
 import { Button, Header, render } from '..'
 import { Fragment } from 'react'
 import { Text } from '..'
-import { HeaderKindType } from '../header'
+import { HeaderKindType, headerTypography } from '../header'
 
 import Img from 'next/image'
-import { mq } from '../../typography'
+import { mq, scale } from '../../typography'
 import { css } from '@emotion/css'
 import { ButtonPropsType } from '../button'
+
+const repeat = (fill = 1) => new Array(fill).fill('1fr').join(' ')
 
 const Frame: React.FunctionComponent<{
   weight?: 'fullBleed' | 'regular' | 'medium' | 'bold'
   span?: FrameSpanType
-  heading?:
+  heading:
     | string
     | {
         kind: HeaderKindType
@@ -45,6 +47,13 @@ const Frame: React.FunctionComponent<{
         }
       : rest.heading
 
+  const f = scale(headerTypography)({
+    pluck: [heading?.kind || 'h1'],
+    ratio: 2 / 3,
+  })?.[heading.kind]
+
+  console.log(`🚀 ~ file: frame.tsx ~ line 51 ~ f`, f.fontSize)
+
   const preview = image
     ? 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=='
     : undefined
@@ -53,40 +62,61 @@ const Frame: React.FunctionComponent<{
     <div
       className={`frame ${weight} ${css(
         mq({
-          width:
-            weight === 'fullBleed'
-              ? '100%'
-              : [
-                  'calc(2vw - 4.8rem)',
-                  'calc(100vw - 19.200000000000003rem)',
-                  'calc(100vw - 21.6rem)',
-                  'calc(100vw - 28.799999999999997rem)',
-                  'calc(100vw - 38.400000000000006rem)',
-                ],
-          gridTemplateColumns: [
-            'repeat(16, 1fr)',
-            'repeat(6, 1fr);',
-            'repeat(12, 1fr)',
-            'repeat(16, 1fr);',
-            'repeat(16, 1fr)',
+          // width:
+          //   weight === 'fullBleed'
+          //     ? '100%'
+          //     : [
+          //         'calc(2vw - 4.8rem)',
+          //         'calc(100vw - 19.200000000000003rem)',
+          //         'calc(100vw - 21.6rem)',
+          //         'calc(100vw - 28.799999999999997rem)',
+          //         'calc(100vw - 38.400000000000006rem)',
+          //       ],
+          // gridTemplateColumns: [
+          //   'repeat(16, 1fr)',
+          //   'repeat(6, 1fr);',
+          //   'repeat(12, 1fr)',
+          //   'repeat(16, 1fr);',
+          //   'repeat(16, 1fr)',
+          // ],
+          padding: f.fontSize,
+          grid: [
+            `". . . . . . . . . . . . . . . ." / ${repeat(16)}`,
+            `". . . . . . . . . . . . . . . ."  / ${repeat(16)}`,
+            `". . . . . . . . . . . . . . . ."  / ${repeat(16)}`,
+            `". . . . . . . . . . . . . . . ."  / ${repeat(16)}`,
+            `". . . . . . . . . . . . . . . ."  / ${repeat(16)}`,
           ],
-          gridColumnGap: ['2.4rem', '3.2rem', '3.6rem', '4.8rem', ' 6.4rem;'],
+          //           "hd hd hd hd   hd   hd   hd   hd   hd" minmax(100px, auto)
+          // "sd sd sd main main main main main main" minmax(100px, auto)
+          // "ft ft ft ft   ft   ft   ft   ft   ft" minmax(100px, auto)    / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr
+          // gridColumnGap: ['2.4rem', '3.2rem', '3.6rem', '4.8rem', ' 6.4rem;'],
           margin: '0 auto',
           height: '100%',
           display: 'grid',
           position: 'relative',
           overflow: 'hidden',
           background: preview ? `url(${preview})` : 'none',
-          '&:after': {
-            content: '""',
-            opacity: '0.5',
-            top: '0',
-            left: '0',
-            position: 'absolute',
-          },
         }),
       )}`}
     >
+      <h3
+        className={`frame ${weight} ${css(
+          mq({
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            fontSize: f.fontSize,
+            lineHeight: f.fontSize,
+            margin: 0,
+            zIndex: 2,
+            width: f.fontSize,
+            transform: 'rotate(90deg)',
+          }),
+        )}`}
+      >
+        U
+      </h3>
       <style jsx>{`
         .frame-span {
           grid-column: 1 / span ${span['min-width: 0px']};
