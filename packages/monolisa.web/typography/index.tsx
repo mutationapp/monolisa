@@ -54,14 +54,22 @@ export type TypographyType =
     ]
 const themes = {
   move: {
-    characterPerLine: [70, 40, 56, 65, 70],
+    media: {
+      '0': 70,
+      '600': 40,
+      // '768': 50,
+      '900': 56,
+      '1200': 65,
+      '1600': 70,
+    },
     headerTypography: [
-      [4.8, 3.6, 2.2, 1.8, 1.8, 1.4],
-      [9.6, 4.8, 3.7, 2.4, 2.4, 1.6],
-      [12.8, 6.4, 4, 3.2, 2.4, 1.8],
-      [14.4, 7.2, 4.5, 3.6, 2.4, 1.8],
+      // [4.8, 3.6, 2.2, 1.8, 1.8, 1.4],
+      // [9.6, 4.8, 3.7, 2.4, 2.4, 1.6],
+      // [12.8, 6.4, 4, 3.2, 2.4, 1.8],
+      // [14.4, 7.2, 4.5, 3.6, 2.4, 1.8],
       [18, 9, 5.6, 4.5, 3, 2.2],
     ] as TypographyType,
+    baseFontSize: '10px',
   },
 }
 
@@ -69,23 +77,54 @@ export type MediaType = keyof typeof media
 
 const currentTheme = themes.move
 
+const characterPerLine = Object.values(currentTheme.media)
+const queries = Object.keys(currentTheme.media).map(x => parseInt(x))
+const breakpoints = queries.filter(Boolean)
+
+export const shevy = (options: Partial<Options>) =>
+  new Shevy({
+    baseFontSize: currentTheme.baseFontSize,
+    ...options,
+  })
+const { headerTypography } = currentTheme
+
+const f = characterPerLine.reduce(() => {
+  if (headerTypography.length > 1) {
+    if (characterPerLine.length !== headerTypography.length)
+      throw new Error(`Calculated matrix length does not match`)
+
+    return headerTypography
+  }
+
+  const [vector] = currentTheme.headerTypography
+
+  const result = characterPerLine.map((y, j, arr) => {
+    const max = arr.reduce((a, b) => {
+      return Math.max(a, b)
+    })
+
+    const currentCharacterPerLine = characterPerLine[j]
+
+    return vector.map(x => x * (currentCharacterPerLine / max))
+  })
+
+  return result
+}, []) as TypographyType
+
 export const getBit = (kind: HeaderKindType = 'h1') =>
-  scale(currentTheme.headerTypography)({
+  scale(f)({
     ratio: 2 / 3,
   })?.[kind]
 
-// 70, 65, 56, 40, 70
+export const getFontSize = (x: number, cpl: number) => {
+  return 1.618 * (x / cpl)
+}
+
 export const getWidth = fontSize =>
   fontSize.map((size, i) => {
     const num = parseInt(size.replace('px', ''))
 
-    return currentTheme.characterPerLine[i] * (num / 1.618)
-  })
-
-export const shevy = (options: Partial<Options>) =>
-  new Shevy({
-    baseFontSize: '10px',
-    ...options,
+    return characterPerLine[i] * (num / 1.618)
   })
 
 export const scale = (typography: TypographyType) => (payload: {
@@ -150,7 +189,7 @@ const typography = (payload: {
 
   return css(
     mq(
-      scale(currentTheme.headerTypography)({
+      scale(f)({
         ratio: typographyRatio[ratio],
         overrides: {
           ...overrides,
@@ -165,9 +204,9 @@ const typography = (payload: {
 }
 
 export const mq = facepaint(
-  getWidth(getBit('h3').fontSize)
-    .splice(1)
-    .map(bp => `@media (min-width: ${bp}px)`),
+  // getWidth(getBit('h3').fontSize)
+  //   .splice(1)
+  breakpoints.map(bp => `@media (min-width: ${bp}px)`),
 )
 
 export default typography

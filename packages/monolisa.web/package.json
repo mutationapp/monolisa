@@ -9,7 +9,9 @@
     "build": "next build",
     "start": "next start -- -p ${PORT:-2381}",
     "prestart": "lerna run build",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "SKIP_PREFLIGHT_CHECK=true start-storybook -p 6006",
+    "build-storybook": "SKIP_PREFLIGHT_CHECK=true build-storybook"
   },
   "dependencies": {
     "@emotion/core": "^11.0.0",
@@ -25,10 +27,16 @@
     "shevyjs": "^1.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@storybook/addon-actions": "^6.1.11",
+    "@storybook/addon-essentials": "^6.1.11",
+    "@storybook/addon-links": "^6.1.11",
+    "@storybook/react": "^6.1.11",
     "@types/classnames": "^2.2.11",
     "@types/facepaint": "^1.2.1",
     "@types/js-cookie": "^2.2.6",
     "@types/react": "^17.0.0",
-    "@types/shevyjs": "^1.1.0"
+    "@types/shevyjs": "^1.1.0",
+    "babel-loader": "^8.2.2"
   }
 }
