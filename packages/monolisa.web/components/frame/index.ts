@@ -1,4 +1,5 @@
 import { HeaderKindType, MediaType } from '../../typography'
+import { ButtonPropsType } from '../button'
 import Frame from './frame'
 
 export type FrameSpanType = {
@@ -24,6 +25,26 @@ export const getHeading = (
         text: heading,
       } as FrameHeadingType)
     : heading
+}
+
+export type FramePropsType = {
+  weight?: 'fullBleed' | 'regular' | 'medium' | 'bold'
+  span?: FrameSpanType
+  heading:
+    | string
+    | {
+        kind: HeaderKindType
+        text: string
+        subHead?: string
+      }
+  brand?: string
+  cta?: Array<ButtonPropsType & { children: string }>
+  image?: {
+    src: string
+    alt: string
+    position?: 'fit' | 'left' | 'right'
+    unoptimized?: boolean
+  }
 }
 
 export default Frame

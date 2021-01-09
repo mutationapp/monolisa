@@ -11,12 +11,13 @@
     "packages/*"
   ],
   "scripts": {
-    "lint": "eslint 'packages/**/*.{ts,tsx,js,jsx}'",
+    "lint": "echo eslint does not work:",
     "lint:fix": "yarn lint --fix",
     "cwd": "yarn --cwd",
     "cwd:web": "yarn cwd packages/monolisa.web",
     "dev": "yarn cwd:web dev",
     "start": "yarn cwd:${APP:-web} start",
+    "storybook": "yarn cwd:${APP:-web} storybook",
     "clean:dist": "rm -rf packages/**/dist*",
     "build": "lerna run build",
     "prestart": "yarn build",
@@ -38,21 +39,21 @@
     "@stryker-mutator/jest-runner": "^4.3.1",
     "@stryker-mutator/typescript": "^4.0.0",
     "@types/enzyme": "^3.10.8",
-    "@types/jest": "^26.0.19",
+    "@types/jest": "^26.0.20",
     "@types/lodash.defaultsdeep": "^4.6.6",
-    "@typescript-eslint/eslint-plugin": "^4.11.1",
-    "@typescript-eslint/parser": "^4.11.1",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
     "babel-plugin-module-resolver": "^4.1.0",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.1",
-    "eslint": "^7.16.0",
+    "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
-    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
-    "husky": "^4.3.6",
+    "husky": "^4.3.7",
     "jest": "^26.6.3",
     "lerna": "^3.22.1",
     "lint-staged": "^10.5.3",
@@ -74,6 +75,7 @@
     ]
   },
   "dependencies": {
+    "babel-preset-react-app": "^10.0.0",
     "next-transpile-modules": "^6.0.0"
   }
 }

@@ -1,6 +1,6 @@
-import css from 'styled-jsx/css'
+import { css } from '@emotion/react'
 
-export default css.global`
+export default css`
   /* Box sizing rules */
   *,
   *::before,

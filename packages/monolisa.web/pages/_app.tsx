@@ -2,8 +2,9 @@ import React, { Fragment } from 'react'
 import App from 'next/app'
 import Cookies from 'js-cookie'
 
-import { resetStyles, htmlStyles, nprogressStyles } from '../styles'
 import { ThemeContextProvider, themeType } from '../contexts/themeContext'
+import { css, Global } from '@emotion/react'
+import { getBaseStyles } from '../components/styles'
 
 class MyApp extends App {
   render() {
@@ -12,15 +13,11 @@ class MyApp extends App {
 
     return (
       <Fragment>
-        <style jsx global>
-          {resetStyles}
-        </style>
-        <style jsx global>
-          {htmlStyles}
-        </style>
-        <style jsx global>
-          {nprogressStyles}
-        </style>
+        <Global
+          styles={css`
+            ${getBaseStyles()}
+          `}
+        />
         <ThemeContextProvider theme={theme}>
           <Component {...pageProps} />
         </ThemeContextProvider>

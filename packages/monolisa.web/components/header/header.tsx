@@ -1,21 +1,13 @@
 import { Fragment } from 'react'
-import typography, {
-  getBit,
-  headerKinds,
-  HeaderKindType,
-  typographyRatioType,
-} from '../../typography'
+import typography, { getBit, headerKinds } from '../../typography'
+import { HeaderType } from '.'
 
-const Header: React.FunctionComponent<{
-  text: string
-  kind: HeaderKindType
-  ratio?: typographyRatioType
-  marginBottom?: number | 'bit'
-}> = ({ kind, text, ratio = '1', ...rest }) => {
+const Header: HeaderType = ({ text, ...rest }) => {
+  const kind = rest.kind || 'h1'
+  const ratio = rest.ratio || '1'
+
   const marginBottom =
-    typeof rest.marginBottom === 'string'
-      ? getBit(kind).fontSize
-      : rest.marginBottom
+    rest.marginBottom === 'bit' ? getBit(kind).fontSize : rest.marginBottom
 
   const baseProps = {
     className: typography({
@@ -37,7 +29,7 @@ const Header: React.FunctionComponent<{
           [headerKinds.h4]: <h4 {...baseProps}>{text}</h4>,
           [headerKinds.h5]: <h5 {...baseProps}>{text}</h5>,
           [headerKinds.h6]: <h6 {...baseProps}>{text}</h6>,
-        }[kind]
+        }[kind.toString()]
       }
     </Fragment>
   )

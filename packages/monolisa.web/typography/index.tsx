@@ -52,15 +52,15 @@ export type TypographyType =
       // 1600px
       FontScaleType,
     ]
+
 const themes = {
   move: {
     media: {
-      '0': 70,
-      '600': 40,
-      // '768': 50,
-      '900': 56,
-      '1200': 65,
       '1600': 70,
+      '1200': 65,
+      '900': 56,
+      '600': 40,
+      '0': 70,
     },
     headerTypography: [
       // [4.8, 3.6, 2.2, 1.8, 1.8, 1.4],
@@ -129,7 +129,7 @@ export const getWidth = fontSize =>
 
 export const scale = (typography: TypographyType) => (payload: {
   ratio?: number
-  overrides?: { marginBottom?: number }
+  overrides?: { marginBottom?: number; fontFamily?: string }
 }) => {
   const { ratio, overrides = { marginBottom: 0 } } = payload
   const pluck = Object.keys(headerKinds)
@@ -183,7 +183,7 @@ export type typographyRatioType = keyof typeof typographyRatio
 const typography = (payload: {
   of?: HeaderKindType
   ratio?: typographyRatioType
-  overrides?: { marginBottom?: number | 'bit' }
+  overrides?: { marginBottom?: number | 'bit'; fontFamily?: string }
 }) => {
   const { ratio = '1', overrides, of = 'h1' } = payload
 

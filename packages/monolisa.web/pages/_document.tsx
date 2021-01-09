@@ -1,28 +1,36 @@
-import Document, { Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
 import Cookies from 'js-cookie'
 
+import { extractCritical } from '@emotion/server'
+
 export default class MyDocument extends Document {
+  static getInitialProps({ renderPage }) {
+    const page = renderPage()
+    const styles = extractCritical(page.html)
+    return { ...page, ...styles }
+  }
+
   render() {
     const theme = Cookies.get('theme')
 
     return (
-      <html lang="en" className={theme || 'dark'}>
+      <Html className={theme || 'dark'}>
         <Head>
+          <style
+            data-emotion-css={this.props['ids'].join(' ')}
+            dangerouslySetInnerHTML={{ __html: this.props['css'] }}
+          />
           <link
             rel="shortcut icon"
             href="/static/favicon.ico"
             type="image/x-icon"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,600;1,400;1,600&display=swap"
-            rel="stylesheet"
           />
         </Head>
         <body>
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     )
   }
 }
