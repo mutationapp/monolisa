@@ -27,8 +27,17 @@ export const getHeading = (
     : heading
 }
 
+export const frameWeights = {
+  fullBleed: 'fullBleed',
+  regular: 'regular',
+  medium: 'medium',
+  bold: 'bold',
+}
+
+export type FrameWeightType = keyof typeof frameWeights
+
 export type FramePropsType = {
-  weight?: 'fullBleed' | 'regular' | 'medium' | 'bold'
+  weight?: FrameWeightType
   span?: FrameSpanType
   heading:
     | string
