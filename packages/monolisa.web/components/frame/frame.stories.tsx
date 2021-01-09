@@ -2,7 +2,6 @@ import React from 'react'
 import Frame from '.'
 import PropTypes, { InferProps } from 'prop-types'
 
-import { Button } from '../../stories/Button'
 import Header from '../header'
 import { getBaseStyles } from '../styles'
 

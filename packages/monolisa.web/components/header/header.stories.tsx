@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { Button } from '../../stories/Button'
 import { headerKinds } from '../../typography'
 import { getBaseStyles } from '../styles'
 import Header from '.'
