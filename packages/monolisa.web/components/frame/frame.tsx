@@ -56,6 +56,7 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
         height: '100vh',
         display: 'flex',
         alignItems: 'center',
+        backgroundColor: 'var(--shade-1)',
       })}
     >
       <div
@@ -201,10 +202,10 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
                         return
                       }
 
-                      return cta.map(action => {
+                      return cta.map((action, i) => {
                         const { children } = action
                         return (
-                          <Button of={heading.kind} key={children}>
+                          <Button {...{ ...action, of: heading.kind, key: i }}>
                             {children}
                           </Button>
                         )

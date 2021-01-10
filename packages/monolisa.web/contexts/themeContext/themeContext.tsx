@@ -26,7 +26,9 @@ export const ThemeContextProvider: React.FunctionComponent<{
 
   const on = ['resize', 'load']
 
-  const [containerWidth, setContainerWidth] = useState<number>(undefined)
+  const [containerWidth, setContainerWidth] = useState<number | undefined>(
+    undefined,
+  )
 
   const handleResize = () => {
     setContainerWidth(window.innerWidth)
@@ -73,7 +75,7 @@ export const ThemeContextProvider: React.FunctionComponent<{
       })
     : undefined
 
-  const current = queries.indexOf(minWidth)
+  const current = queries.indexOf(minWidth as number)
 
   const uFrame = (kind?: HeaderKindType) => {
     const x = Object.keys(headerKinds).reduce((acc, item) => {

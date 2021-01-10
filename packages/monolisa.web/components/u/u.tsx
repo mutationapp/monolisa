@@ -10,7 +10,7 @@ import createPixelGIF from './createPixelGif'
 
 const U: React.FunctionComponent<{
   kind: HeaderKindType
-  weight?: [string | null, string | null, string | null]
+  weight?: [string | null, string | null, string | null] | [string]
   frames?: [string | null, string | null, string | null, string | null]
 }> = ({ kind, ...rest }) => {
   const frames = rest.frames || ['.', '.', '.', '.']
@@ -18,13 +18,11 @@ const U: React.FunctionComponent<{
 
   const [id, setId] = useState<number>()
 
-  const [innerWidth, setInnerWidth] = useState<number>()
+  const [innerWidth, setInnerWidth] = useState<number>(1600)
 
   const [offsets, setOffsets] = useState<{
     [key: string]: { top: number; left: number }
   }>()
-
-  const [minWidth, setMinWidth] = useState<number>()
 
   const setOffset = (key: string, payload: { top: number; left: number }) => {
     if (JSON.stringify(offsets?.[key]) === JSON.stringify(payload)) return
@@ -46,8 +44,6 @@ const U: React.FunctionComponent<{
 
     on.forEach(x => window.addEventListener(x, handleResize))
 
-    // setOffset(defaultsDeep({ screen: window.document?.offsetTop }, offset))
-
     setInnerWidth(window.innerWidth)
     return () => {
       on.forEach(x => window.removeEventListener(x, handleResize))
@@ -58,11 +54,9 @@ const U: React.FunctionComponent<{
     return Math.abs(b - innerWidth) < Math.abs(a - innerWidth) ? b : a
   })
 
-  // setMinWidth(match)
-
   const getSrc = (payload: number) => {
     const number = payload || Math.random()
-    const vector = parseInt((number * id * 0.1).toString())
+    const vector = parseInt((number * 0.1).toString())
 
     return createPixelGIF('#' + ((vector * 0xffffff) << 0).toString(16))()
   }
@@ -73,7 +67,7 @@ const U: React.FunctionComponent<{
   const currentFontSize = bit.fontSize[index]
   const currentFontSizeNumber = parseInt(currentFontSize.replace('px', ''))
 
-  if (true) {
+  if (!!'true') {
     return null
   }
 
@@ -85,7 +79,7 @@ const U: React.FunctionComponent<{
 
         return (
           <Fragment key={frameIndex}>
-            {weights.map((weight, weightIndex) => {
+            {(weights as string[]).map((weight, weightIndex) => {
               const wightPage = weightIndex + 1
               const weightKey = `${id}:${weightIndex}:${frameIndex}`
               const inputRef = createRef<HTMLDivElement>()
