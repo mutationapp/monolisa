@@ -78,7 +78,7 @@ export type MediaType = keyof typeof media
 const currentTheme = themes.move
 
 const characterPerLine = Object.values(currentTheme.media)
-const queries = Object.keys(currentTheme.media).map(x => parseInt(x))
+export const queries = Object.keys(currentTheme.media).map(x => parseInt(x))
 const breakpoints = queries.filter(Boolean)
 
 export const shevy = (options: Partial<Options>) =>

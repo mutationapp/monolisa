@@ -54,6 +54,7 @@ export type FramePropsType = {
     position?: 'fit' | 'left' | 'right'
     unoptimized?: boolean
   }
+  grid?: string
 }
 
 export default Frame

@@ -1,12 +1,14 @@
 import { FramePropsType, getHeading } from '.'
-import { Button, Header, render, Img } from '..'
+import { Button, Header, render, Img, U } from '..'
 import { Fragment } from 'react'
 import { Text } from '..'
 import PropTypes from 'prop-types'
 
-import { getBit, getWidth, mq, repeat as rpt } from '../../typography'
+import { getBit, getWidth, mq, queries, repeat as rpt } from '../../typography'
 import { css } from '@emotion/css'
 import classNames from 'classnames'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 const previews = {
   [`/static/images/structure-light-led-movement-158826.jpeg`]: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
@@ -24,6 +26,7 @@ export const FramePropTypes = {
 const Frame: React.FunctionComponent<FramePropsType> = ({
   children,
   brand,
+  grid,
   image,
   cta,
   ...rest
@@ -99,9 +102,11 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
           mq({
             maxWidth,
             padding: bit.fontSize,
-            grid: Array(4).fill(
-              `"${rpt(8)('content')} ${rpt(8)('image')}" / ${repeat('1fr')}`,
-            ),
+            grid:
+              grid ||
+              Array(4).fill(
+                `"${rpt(8)('content')} ${rpt(8)('image')}" / ${repeat('1fr')}`,
+              ),
             // margin: bit.fontSize.map(
             //   size =>
             //     parseInt(size.replace('px', '')) *
@@ -116,6 +121,7 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
           }),
         )}`}
       >
+        <U kind={heading.kind} />
         {(() => {
           const renderChildren = () => {
             return (
@@ -241,12 +247,6 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
                 })}
               </div>
             </Fragment>
-          )
-
-          return rest.span ? (
-            <div className="frame-span">{renderChildren()}</div>
-          ) : (
-            renderChildren()
           )
         })()}
       </div>
