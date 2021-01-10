@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Fragment } from 'react'
 import { Frame, render } from '../components'
+import { ArrowIcon } from '../components/icons'
 import { frameWeights, FrameWeightType } from '../components/frame'
 import { useThemeContext } from '../hooks'
-import { headerKinds, HeaderKindType } from '../typography'
 
 const Index = () => {
   const { uFrame } = useThemeContext()
@@ -36,10 +36,11 @@ const Index = () => {
                       children: {
                         medium: 'bold',
                         bold: 'regular',
-                        regular: 'fullBleed',
+                        regular: 'medium',
                         fullBleed: 'regular',
                       }[weight],
                       of: kind,
+                      icon: <ArrowIcon />,
                       onClick: e => {
                         console.log(
                           `🚀 ~ file: index.tsx ~ line 39 ~ {render ~ e`,
@@ -49,7 +50,7 @@ const Index = () => {
                           {
                             medium: 'bold',
                             bold: 'regular',
-                            regular: 'fullBleed',
+                            regular: 'medium',
                             fullBleed: 'regular',
                           }[weight] as FrameWeightType,
                         )
