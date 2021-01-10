@@ -5,12 +5,14 @@ import { getBit, HeaderKindType, mq, queries } from '../../typography'
 const U: React.FunctionComponent<{
   kind: HeaderKindType
 }> = ({ kind }) => {
-  const [innerWidth, setInnerWidth] = useState(() => {
+  const [innerWidth, setInnerWidth] = useState<number>(() => {
+    const defaultsTo = 1600
+
     if (!process.browser) {
-      return 1600
+      return defaultsTo
     }
 
-    if (typeof window == null) return window.innerWidth
+    return window.innerWidth || defaultsTo
   })
 
   const handleResize = () => {
