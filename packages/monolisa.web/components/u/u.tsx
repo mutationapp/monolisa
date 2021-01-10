@@ -1,11 +1,9 @@
 import { css } from '@emotion/css'
 import defaultsDeep from 'lodash.defaultsdeep'
 import { createRef } from 'react'
-import { useMemo } from 'react'
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { render } from '..'
 import { getBit, HeaderKindType, mq, queries } from '../../typography'
-import { FrameWeightType } from '../frame'
 import createPixelGIF from './createPixelGif'
 
 const U: React.FunctionComponent<{
