@@ -88,7 +88,7 @@ export const shevy = (options: Partial<Options>) =>
   })
 const { headerTypography } = currentTheme
 
-const f = characterPerLine.reduce(() => {
+export const vectors = characterPerLine.reduce(() => {
   if (headerTypography.length > 1) {
     if (characterPerLine.length !== headerTypography.length)
       throw new Error(`Calculated matrix length does not match`)
@@ -112,7 +112,7 @@ const f = characterPerLine.reduce(() => {
 }, []) as TypographyType
 
 export const getBit = (kind: HeaderKindType = 'h1') =>
-  scale(f)({
+  scale(vectors)({
     ratio: 2 / 3,
   })?.[kind]
 
@@ -189,7 +189,7 @@ const typography = (payload: {
 
   return css(
     mq(
-      scale(f)({
+      scale(vectors)({
         ratio: typographyRatio[ratio],
         overrides: {
           ...overrides,

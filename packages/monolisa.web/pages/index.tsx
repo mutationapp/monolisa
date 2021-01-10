@@ -1,52 +1,43 @@
 import { Fragment } from 'react'
 import { Frame } from '../components'
+import { useThemeContext } from '../hooks'
+import { headerKinds, HeaderKindType } from '../typography'
 
 const Index = () => {
-  const kind = 'h3'
+  const { uFrame } = useThemeContext()
 
   return (
     <Fragment>
-      <section>
-        <Frame
-          weight="fullBleed"
-          span={{
-            'min-width: 0px': '16',
-            'min-width: 600px': '16',
-            'min-width: 900px': '16',
-            'min-width: 1200px': '16',
-            'min-width: 1600px': '16',
-          }}
-          brand={'monolisa'}
-          image={{
-            alt: 'test',
-            position: 'left',
-            src: '/static/images/structure-light-led-movement-158826.jpeg',
-          }}
-          cta={[{ children: 'Play Video', of: kind }]}
-          heading={{
-            kind,
-            text: 'Frame Heading',
-            subHead:
-              'Labore non ut tempor reprehenderit excepteur est nostrud sit ad ad aliquip. Do cupidatat labore in qui. Ex ea aliquip proident irure ut cupidatat qui officia. Minim id nostrud culpa esse. Reprehenderit aliquip cillum ipsum mollit Lorem. Excepteur aliqua est nulla pariatur ea amet laborum quis labore. Do aliquip reprehenderit officia labore incididunt adipisicing labore anim ullamco sunt occaecat.',
-          }}
-        ></Frame>
-        {/* <Frame
-          span={{
-            'min-width: 0px': '16',
-            'min-width: 600px': '16',
-            'min-width: 900px': '16',
-            'min-width: 1200px': '16',
-            'min-width: 1600px': '16',
-          }}
-        >
-          <Header kind="h1" text={'H1 Title'} />
-          <Header kind="h2" text={'H2 Title'} />
-          <Header kind="h3" text={'H3 Title'} />
-          <Header kind="h4" text={'H4 Title'} />
-          <Header kind="h5" text={'H5 Title'} />
-          <Header kind="h6" text={'H6 Title'} />
-        </Frame> */}
-      </section>
+      {['h3'].map(headerKind => {
+        const kind = headerKind as HeaderKindType
+
+        const { bit, fontSize, ...rest } = uFrame(kind)
+        return (
+          <Fragment key={kind}>
+            <section>
+              <Frame
+                weight="medium"
+                brand={`U=${bit}`}
+                image={{
+                  alt: 'test',
+                  position: 'left',
+                  src:
+                    '/static/images/structure-light-led-movement-158826.jpeg',
+                }}
+                // cta={[{ children: 'Play Video', of: kind }]}
+                heading={{
+                  kind,
+                  text: `${kind.toUpperCase()} font-size: ${
+                    rest[kind]?.fontSize
+                  }`,
+                  subHead:
+                    'Labore non ut tempor reprehenderit excepteur est nostrud sit ad ad aliquip. Do cupidatat labore in qui. Ex ea aliquip proident irure ut cupidatat qui officia. Minim id nostrud culpa esse. Reprehenderit aliquip cillum ipsum mollit Lorem. Excepteur aliqua est nulla pariatur ea amet laborum quis labore. Do aliquip reprehenderit officia labore incididunt adipisicing labore anim ullamco sunt occaecat.',
+                }}
+              ></Frame>
+            </section>
+          </Fragment>
+        )
+      })}
     </Fragment>
   )
 }

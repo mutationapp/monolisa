@@ -51,11 +51,6 @@ console.log(
   )}" / ${repeat(16)('1fr')}`,
 )
 
-console.log(
-  `🚀 ~ file: frame.stories.tsx ~ line 20 ~ Frame.propTypes`,
-  Frame.propTypes,
-)
-
 export default {
   title: 'Example/Frames',
   component: Frame,

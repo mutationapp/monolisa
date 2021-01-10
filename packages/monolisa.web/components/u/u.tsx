@@ -1,29 +1,56 @@
 import { css } from '@emotion/css'
-import { Fragment, useEffect, useState } from 'react'
+import defaultsDeep from 'lodash.defaultsdeep'
+import { createRef } from 'react'
+import { useMemo } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
+import { render } from '..'
 import { getBit, HeaderKindType, mq, queries } from '../../typography'
+import { FrameWeightType } from '../frame'
+import createPixelGIF from './createPixelGif'
 
 const U: React.FunctionComponent<{
   kind: HeaderKindType
-}> = ({ kind }) => {
-  const [innerWidth, setInnerWidth] = useState<number>(() => {
-    const defaultsTo = 1600
+  weight?: [string | null, string | null, string | null]
+  frames?: [string | null, string | null, string | null, string | null]
+}> = ({ kind, ...rest }) => {
+  const frames = rest.frames || ['.', '.', '.', '.']
+  const weights = rest.weight || ['.']
 
-    if (!process.browser) {
-      return defaultsTo
-    }
+  const [id, setId] = useState<number>()
 
-    return window.innerWidth || defaultsTo
-  })
+  const [innerWidth, setInnerWidth] = useState<number>()
+
+  const [offsets, setOffsets] = useState<{
+    [key: string]: { top: number; left: number }
+  }>()
+
+  const [minWidth, setMinWidth] = useState<number>()
+
+  const setOffset = (key: string, payload: { top: number; left: number }) => {
+    if (JSON.stringify(offsets?.[key]) === JSON.stringify(payload)) return
+    setOffsets(defaultsDeep({ [key]: payload }, offsets))
+  }
 
   const handleResize = () => {
     setInnerWidth(window.innerWidth)
   }
 
-  useEffect(() => {
-    window.addEventListener('resize', handleResize)
+  const on = ['resize', 'load']
 
+  useEffect(() => {
+    if (!process.browser) {
+      return
+    }
+
+    setId(Math.random())
+
+    on.forEach(x => window.addEventListener(x, handleResize))
+
+    // setOffset(defaultsDeep({ screen: window.document?.offsetTop }, offset))
+
+    setInnerWidth(window.innerWidth)
     return () => {
-      window.removeEventListener('resize', handleResize)
+      on.forEach(x => window.removeEventListener(x, handleResize))
     }
   }, [innerWidth])
 
@@ -31,83 +58,159 @@ const U: React.FunctionComponent<{
     return Math.abs(b - innerWidth) < Math.abs(a - innerWidth) ? b : a
   })
 
+  // setMinWidth(match)
+
+  const getSrc = (payload: number) => {
+    const number = payload || Math.random()
+    const vector = parseInt((number * id * 0.1).toString())
+
+    return createPixelGIF('#' + ((vector * 0xffffff) << 0).toString(16))()
+  }
+
   const index = queries.indexOf(match)
   const bit = getBit(kind)
 
+  const currentFontSize = bit.fontSize[index]
+  const currentFontSizeNumber = parseInt(currentFontSize.replace('px', ''))
+
+  if (true) {
+    return null
+  }
+
   return (
-    <Fragment>
-      {[1, 2, 3, 4].map(x => {
-        const flip = x === 2 || x === 3
+    <Fragment key={id}>
+      {frames.map((item, frameIndex) => {
+        const framePage = frameIndex + 1
+        const flip = frameIndex === 1 || framePage === 2
 
         return (
-          <div
-            key={x}
-            className={css(
-              mq({
-                // transform: 'rotate(0deg)',
-                position: 'absolute',
-                top: x < 3 ? 0 : 'inherit',
-                bottom: x > 2 ? 0 : 'inherit',
-                left: flip ? 'inherit' : 0,
-                right: flip ? 0 : 'inherit',
-              }),
-            )}
-          >
-            <div
-              className={css(
-                mq({
-                  position: 'relative',
-                  fontSize: bit.fontSize,
-                  lineHeight: bit.fontSize,
-                  textAlign: 'center',
-                  color: '#f59794',
-                  // transform: 'rotate(90deg)',
-                }),
-              )}
-            >
-              <span
-                className={css(
-                  mq({
-                    textAlign: 'center',
-                    width: bit.fontSize,
-                    writingMode: 'vertical-rl',
-                  }),
-                )}
-              >
-                <span
-                  className={css(
-                    mq({
-                      textAlign: 'center',
-                      width: bit.fontSize,
-                      writingMode: 'vertical-rl',
-                      transform: flip ? 'scale(-1, 1)' : 0,
-                      position: 'absolute',
-                      top: '5px',
-                    }),
-                  )}
-                >
-                  U
-                </span>
-              </span>
-              <span
-                className={css(
-                  mq({
-                    display: 'block',
-                    fontSize: bit.fontSize.map(
-                      x => parseInt(x.replace('px', '')) / 4,
-                    ),
-                    lineHeight: '1em',
+          <Fragment key={frameIndex}>
+            {weights.map((weight, weightIndex) => {
+              const wightPage = weightIndex + 1
+              const weightKey = `${id}:${weightIndex}:${frameIndex}`
+              const inputRef = createRef<HTMLDivElement>()
+              const offSetKey = `${wightPage}${framePage}`
 
-                    marginTop: -3,
-                    width: bit.fontSize,
-                    textAlign: 'center',
-                  }),
-                )}
-              >
-                {bit.fontSize[index]}
-              </span>
-            </div>
-          </div>
+              const frame = offsets?.[weightKey] || 'inherit'
+
+              return (
+                <Fragment key={`${id}:offset:${offSetKey}`}>
+                  {render(() => {
+                    if (!frame || !weight) return
+
+                    return (
+                      <div
+                        key={weightKey}
+                        ref={inputRef}
+                        onLoad={e => {
+                          setOffset(offSetKey, {
+                            top: e.currentTarget.offsetTop,
+                            left: e.currentTarget.offsetLeft,
+                          })
+                        }}
+                        className={css(
+                          mq({
+                            position: 'absolute',
+                            top: framePage < 3 ? 0 : 'inherit',
+                            bottom:
+                              framePage > 2
+                                ? 1 * currentFontSizeNumber
+                                : 'inherit',
+                            left: flip
+                              ? 'inherit'
+                              : weightIndex * currentFontSizeNumber,
+                            right: flip ? 0 : 'inherit',
+                          }),
+                        )}
+                      >
+                        <img
+                          className={css({
+                            // position: 'absolute',
+                            // opacity: '0',
+                          })}
+                          ref={createRef()}
+                          key={`${weightKey}:img`}
+                          width="10px"
+                          height="10px"
+                          // className={css({ opacity: 0 })}
+                          {...{
+                            src: getSrc(parseInt(offSetKey)),
+                            alt: 'px',
+                          }}
+                        />
+                        <div
+                          className={css(
+                            mq({
+                              // position: 'absolute',
+                            }),
+                          )}
+                        >
+                          <div
+                            className={css(
+                              mq({
+                                position: 'fixed',
+                                top: offsets?.[weightKey] || 'inherit',
+                                left:
+                                  offsets?.[
+                                    `${frameIndex + 1}${weightIndex + 1}`
+                                  ]?.left || 'inherit',
+                                fontSize: bit.fontSize,
+                                lineHeight: bit.fontSize,
+                                textAlign: 'center',
+                                color: '#f59794',
+                              }),
+                            )}
+                          >
+                            <span
+                              className={css(
+                                mq({
+                                  textAlign: 'center',
+                                  width: bit.fontSize,
+                                  writingMode: 'vertical-rl',
+                                }),
+                              )}
+                            >
+                              <span
+                                className={css(
+                                  mq({
+                                    textAlign: 'center',
+                                    width: bit.fontSize,
+                                    writingMode: 'vertical-rl',
+                                    transform: flip ? 'scale(-1, 1)' : 0,
+                                    position: 'absolute',
+                                    top: '5px',
+                                  }),
+                                )}
+                              >
+                                U
+                              </span>
+                            </span>
+                            {/* <span
+                              className={css(
+                                mq({
+                                  display: 'block',
+                                  fontSize: bit.fontSize.map(
+                                    x => parseInt(x.replace('px', '')) / 4,
+                                  ),
+                                  lineHeight: '1em',
+
+                                  marginTop: -3,
+                                  width: bit.fontSize,
+                                  textAlign: 'center',
+                                }),
+                              )}
+                            >
+                              {currentFontSize}
+                            </span> */}
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </Fragment>
+              )
+            })}
+          </Fragment>
         )
       })}
     </Fragment>
