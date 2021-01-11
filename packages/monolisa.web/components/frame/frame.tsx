@@ -2,6 +2,7 @@ import { FramePropsType, getHeading } from '.'
 import { Button, Header, render, Img, U } from '..'
 import { Fragment, useState } from 'react'
 import { Text } from '..'
+import { useRecoilValue } from 'recoil'
 
 import { getBit, getWidth, mq, repeat as rpt } from '../../typography'
 import { css } from '@emotion/css'
@@ -9,7 +10,6 @@ import classNames from 'classnames'
 
 import { Flipper, Flipped } from 'react-flip-toolkit'
 import { useThemeContext } from '../../hooks'
-import { useEffect } from 'react'
 
 const previews = {
   [`/static/images/structure-light-led-movement-158826.jpeg`]: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
@@ -25,10 +25,17 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
 }) => {
   const weight = rest.weight || 'fullBleed'
   const heading = getHeading(rest.heading)
-  const kind = heading.kind
   const bit = getBit(heading.kind)
+  const [fullScreen, setFullScreen] = useState(false)
+  const toggleFullScreen = () => setFullScreen(prevState => !prevState)
 
-  const { containerWidth } = useThemeContext()
+  const state = useThemeContext()
+
+  // if (!state) return null
+
+  const { containerWidth, minWidth, uFrame } = state
+
+  const frame = uFrame
 
   const preview = image ? previews[image.src] : undefined
 
@@ -45,6 +52,22 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
             { regular: 1, medium: 2, bold: 3, fullBleed: 0 }[weight],
         )
 
+  // return (
+  //   <Flipper flipKey={containerWidth}>
+  //     <Flipped flipId="flip">
+  //       <div
+  //         className={classNames(
+  //           containerWidth ? css({ color: 'red' }) : css({ color: 'blue' }),
+  //           'flip',
+  //         )}
+  //         onClick={toggleFullScreen}
+  //       >
+  //         saassa
+  //       </div>
+  //     </Flipped>
+  //   </Flipper>
+  // )
+
   return (
     <Flipper
       className={css({
@@ -54,40 +77,47 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
       })}
       flipKey={containerWidth}
     >
-      <Flipped flipId="square">
+      <Flipped flipId={'flip'}>
         <div
-          className={css({
-            height: '100vh',
-            display: 'flex',
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            width: '100vw',
+          className={classNames(
+            css({
+              height: '100vh',
+              display: 'flex',
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              width: '100vw',
 
-            transform: 'translate(-50%, 50%)',
-            backgroundColor: 'var(--shade-1)',
-            ...{
+              // backgroundColor: 'var(--shade-1)',
               ...{
-                loaded: {
-                  transform: 'translate(-50%, -50%)',
-                },
-              }[containerWidth ? 'loaded' : 'loading'],
-            },
-          })}
+                ...{
+                  loaded: {
+                    transform: 'translate(-50%, -50%)',
+                  },
+                  loading: {
+                    transform: 'translate(-50%, 0%)',
+                  },
+                }[containerWidth ? 'loaded' : 'loading'],
+              },
+            }),
+            'flip',
+          )}
         >
           <div
             className={css(
               mq({
                 position: 'relative',
                 overflow: 'hidden',
-                paddingLeft: margin,
-                paddingRight: margin,
-                paddingBottom: margin,
-                backgroundColor: 'var(--shade-1)',
+                margin: `0 auto`,
+
+                // paddingLeft: margin,
+                // paddingRight: margin,
+                // paddingBottom: margin,
+                // backgroundColor: 'var(--shade-1)',
               }),
             )}
           >
-            <U kind={heading.kind} />
+            {/* <U kind={heading.kind} /> */}
             {render(() => {
               if (image?.position !== 'fit') return
 
@@ -127,10 +157,11 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
               className={`${css(
                 mq({
                   // boxShadow: '0 0 0 0.2px #f59794',
-                  maxWidth,
+                  width: frame.width,
+                  // maxWidth,
                   padding: bit.fontSize,
                   grid:
-                    grid ||
+                    // grid ||
                     Array(4).fill(
                       `"${rpt(8)('content')} ${rpt(8)('image')}" / ${repeat(
                         '1fr',
@@ -141,7 +172,7 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
                   //     parseInt(size.replace('px', '')) *
                   //     { regular: 1, medium: 2, bold: 3, fullBleed: 0 }[weight],
                   // ),
-                  margin: '0 auto',
+                  margin: `0 auto`,
                   height: '100%',
                   display: 'grid',
                   columnGap: bit.fontSize,
@@ -217,11 +248,6 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
                           if (!heading || !cta?.length) {
                             return
                           }
-
-                          console.log(
-                            `🚀 ~ file: frame.tsx ~ line 207 ~ {render ~ bit`,
-                            bit,
-                          )
 
                           return (
                             <div className={css({ display: 'flex', gap: bit })}>

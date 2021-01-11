@@ -17,7 +17,8 @@ const Index = () => {
       {render(() => {
         const kind = 'h3'
 
-        const { bit, fontSize, ...rest } = uFrame(kind)
+        const { bit, fontSize, ...rest } = uFrame
+
         return (
           <Fragment key={kind}>
             <section>

@@ -67,12 +67,43 @@ const fonts: {
   [key: string]: fontType
 } = {
   move: {
+    // media: {
+    //   '1600': 70,
+    //   // '1440': 66,
+    //   '1200': 65,
+    //   // '1080': 60,
+    //   '900': 56,
+    //   '600': 40,
+    //   '0': 70,
+    // },
     media: {
-      '1600': 70,
-      '1200': 65,
-      '900': 56,
-      '600': 40,
-      '0': 70,
+      // Chromebook Pixel 2560 x 1700
+      '2560': 90,
+      // Pixel C
+      '1800': 90,
+      // Nexus 9, iPad Third & Fourth Generation, iPad Air 1 & 2, iPad Mini 2 & 3
+      '1536': 89,
+      // ...
+      '1440': 80,
+      // iPhone XS Max
+      '1242': 70,
+      // Nexus 7 (2013)
+      '1200': 70,
+      // iPhone XS, iPhone X
+      '1125': 65,
+      //...
+      '1080': 60,
+      // iPhone XR
+      '828': 50,
+      // iPad Mini
+      '768': 50,
+      // iPhone 8, iPhone 7, iPhone 6
+      '750': 50,
+      // iPhone 5, iPod Touch
+      '640': 45,
+      '360': 40,
+      '240': 35,
+      '0': 30,
     },
     headerTypography: [
       // [4.8, 3.6, 2.2, 1.8, 1.8, 1.4],

@@ -28,6 +28,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-flip-toolkit": "^7.0.13",
+    "recoil": "^0.1.2",
     "shevyjs": "^1.2.0"
   },
   "devDependencies": {
@@ -40,6 +41,7 @@
     "@types/facepaint": "^1.2.1",
     "@types/js-cookie": "^2.2.6",
     "@types/react": "^17.0.0",
+    "@types/recoil": "^0.0.1",
     "@types/shevyjs": "^1.1.0",
     "babel-loader": "^8.2.2"
   }
