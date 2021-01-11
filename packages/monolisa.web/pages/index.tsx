@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Fragment } from 'react'
 import { Frame, render } from '../components'
-import { ArrowIcon } from '../components/icons'
+import { ArrowIcon, LinkIcon } from '../components/icons'
 import { frameWeights, FrameWeightType } from '../components/frame'
 import { useThemeContext } from '../hooks'
 
@@ -42,10 +42,6 @@ const Index = () => {
                       of: kind,
                       icon: <ArrowIcon />,
                       onClick: e => {
-                        console.log(
-                          `🚀 ~ file: index.tsx ~ line 39 ~ {render ~ e`,
-                          e,
-                        )
                         setWeight(
                           {
                             medium: 'bold',
@@ -54,6 +50,14 @@ const Index = () => {
                             fullBleed: 'regular',
                           }[weight] as FrameWeightType,
                         )
+                      },
+                    },
+                    {
+                      of: kind,
+                      children: 'composition-layout',
+                      icon: <LinkIcon />,
+                      link: {
+                        href: 'https://brand.uber.com/guide#composition-layout',
                       },
                     },
                   ],

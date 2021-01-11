@@ -1,10 +1,7 @@
-import { HeaderKindType, MediaType } from '../../typography'
+import { HeaderKindType } from '../../typography'
 import { ButtonPropsType } from '../button'
 import Frame from './frame'
 
-export type FrameSpanType = {
-  [key in MediaType]: '12' | '16'
-}
 
 export type FrameHeadingType = {
   kind: HeaderKindType
@@ -38,7 +35,6 @@ export type FrameWeightType = keyof typeof frameWeights
 
 export type FramePropsType = {
   weight?: FrameWeightType
-  span?: FrameSpanType
   heading:
     | string
     | {

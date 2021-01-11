@@ -3,13 +3,15 @@ import Shevy from 'shevyjs'
 import { Options } from 'shevyjs/types'
 import { css } from '@emotion/css'
 
-export const media = {
-  'min-width: 0px': 'min-width: 0px',
-  'min-width: 600px': 'min-width: 600px',
-  'min-width: 900px': 'min-width: 900px',
-  'min-width: 1200px': 'min-width: 1200px',
-  'min-width: 1600px': 'min-width: 1600px',
-}
+import config from '../monolisa.config'
+
+// export const media = {
+//   'min-width: 0px': 'min-width: 0px',
+//   'min-width: 600px': 'min-width: 600px',
+//   'min-width: 900px': 'min-width: 900px',
+//   'min-width: 1200px': 'min-width: 1200px',
+//   'min-width: 1600px': 'min-width: 1600px',
+// }
 
 export type FontScaleType = [
   // h1
@@ -53,7 +55,17 @@ export type TypographyType =
       FontScaleType,
     ]
 
-const themes = {
+export type fontType = {
+  media: {
+    [minWidth: string]: number
+  }
+  headerTypography: TypographyType
+  baseFontSize: string
+}
+
+const fonts: {
+  [key: string]: fontType
+} = {
   move: {
     media: {
       '1600': 70,
@@ -73,9 +85,9 @@ const themes = {
   },
 }
 
-export type MediaType = keyof typeof media
+// export type MediaType = keyof typeof media
 
-const currentTheme = themes.move
+const currentTheme = fonts.move
 
 const characterPerLine = Object.values(currentTheme.media)
 export const queries = Object.keys(currentTheme.media).map(x => parseInt(x))

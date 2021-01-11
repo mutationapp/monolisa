@@ -76,6 +76,7 @@
   },
   "dependencies": {
     "babel-preset-react-app": "^10.0.0",
+    "dedent": "^0.7.0",
     "next-transpile-modules": "^6.0.0"
   }
 }

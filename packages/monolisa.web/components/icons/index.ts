@@ -1,4 +1,5 @@
 import ArrowIcon from './arrow.icon'
+import LinkIcon from './link.icon'
 
 export type IconDirectionType = 'up' | 'right' | 'down' | 'left'
 export type IconAlignType = 'left' | 'right' | 'justify'
@@ -14,4 +15,4 @@ export type IconType = React.FunctionComponent<{
   align?: IconAlignType
 }>
 
-export { ArrowIcon }
+export { ArrowIcon, LinkIcon }
