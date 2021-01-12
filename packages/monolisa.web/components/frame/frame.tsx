@@ -204,7 +204,7 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
 
                                   return (
                                     <Header
-                                      // marginBottom={bit}
+                                      marginBottom={`${bit}px`}
                                       kind={heading.kind}
                                       text={heading.text}
                                     />
