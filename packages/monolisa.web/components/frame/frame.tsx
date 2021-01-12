@@ -69,7 +69,11 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
               className={css({
                 width: minWidth,
                 height: '5vh',
-                ...{ ...{ up: { position: 'absolute', bottom: 0 } }[rise] },
+                ...{
+                  ...{ up: { position: 'absolute', bottom: 0 } }[
+                    rise || 'leftRight'
+                  ],
+                },
               })}
             >
               <div

@@ -46,20 +46,14 @@ const useThemeContext = () => {
         })
       : undefined
 
-    const currentIndex = minWidth
-      ? queries.indexOf(minWidth as number)
-      : undefined
-
-    const frame = currentIndex >= 0 ? queries[currentIndex] : undefined
+    // const currentIndex = minWidth
+    //   ? queries.indexOf(minWidth as number)
+    //   : undefined
 
     const current = queries.indexOf(minWidth as number)
     const bit =
       parseInt(getBit('h3')?.fontSize[current]?.replace('px', '')) || 0
 
-    // console.log(
-    //   `🚀 ~ file: useThemeContext.tsx ~ line 54 ~ useEffect ~ frame`,
-    //   { frame, currentIndex, containerWidth, minWidth, bit },
-    // )
     const withHeaderKinds = Object.keys(headerKinds).reduce((acc, item) => {
       return {
         ...acc,
@@ -73,9 +67,12 @@ const useThemeContext = () => {
         fontSize: getBit('h1')?.fontSize,
         ...withHeaderKinds,
         containerWidth,
-        minWidth: Math.min(containerWidth, minWidth) - bit * 4,
+        minWidth:
+          minWidth && containerWidth && bit
+            ? Math.min(containerWidth, minWidth) - bit * 4
+            : undefined,
         width:
-          minWidth && containerWidth && containerWidth < minWidth
+          minWidth && containerWidth < minWidth
             ? queries[current - 1]
             : minWidth,
       }
