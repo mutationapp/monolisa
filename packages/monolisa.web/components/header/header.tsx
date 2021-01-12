@@ -1,10 +1,12 @@
 import { Fragment } from 'react'
 import typography, { getBit, headerKinds } from '../../typography'
 import { HeaderType } from '.'
+import { useThemeContext } from '../../hooks'
 
 const Header: HeaderType = ({ text, ...rest }) => {
   const kind = rest.kind || 'h1'
   const ratio = rest.ratio || '1'
+  // const { uFrame } = useThemeContext()
 
   const marginBottom =
     rest.marginBottom === 'bit' ? getBit(kind).fontSize : rest.marginBottom

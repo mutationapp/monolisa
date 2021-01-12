@@ -16,6 +16,8 @@ export type themeContextType = {
       fontSize: number
     }
     width?: number
+    containerWidth?: number
+    minWidth?: number
   }
 }
 

@@ -40,14 +40,26 @@ const useThemeContext = () => {
 
     const minWidth = containerWidth
       ? queries.reduce((a, b) => {
-          return Math.abs(b - containerWidth) < Math.abs(a - containerWidth)
-            ? b
-            : a
+          return Math.abs(b - containerWidth) > Math.abs(a - containerWidth)
+            ? a
+            : b
         })
       : undefined
 
-    const current = queries.indexOf(minWidth as number)
+    const currentIndex = minWidth
+      ? queries.indexOf(minWidth as number)
+      : undefined
 
+    const frame = currentIndex >= 0 ? queries[currentIndex] : undefined
+
+    const current = queries.indexOf(minWidth as number)
+    const bit =
+      parseInt(getBit('h3')?.fontSize[current]?.replace('px', '')) || 0
+
+    // console.log(
+    //   `🚀 ~ file: useThemeContext.tsx ~ line 54 ~ useEffect ~ frame`,
+    //   { frame, currentIndex, containerWidth, minWidth, bit },
+    // )
     const withHeaderKinds = Object.keys(headerKinds).reduce((acc, item) => {
       return {
         ...acc,
@@ -56,13 +68,12 @@ const useThemeContext = () => {
     }, {})
 
     const uFrame = (() => {
-      const bit =
-        parseInt(getBit('h3')?.fontSize[current]?.replace('px', '')) || 0
-
       return {
         bit,
         fontSize: getBit('h1')?.fontSize,
         ...withHeaderKinds,
+        containerWidth,
+        minWidth: Math.min(containerWidth, minWidth) - bit * 4,
         width:
           minWidth && containerWidth && containerWidth < minWidth
             ? queries[current - 1]
@@ -70,19 +81,14 @@ const useThemeContext = () => {
       }
     })()
 
-    const value = {
+    setState({
+      ...state,
       theme,
       setTheme,
       toggleTheme,
       containerWidth,
       minWidth,
       uFrame,
-    }
-
-    setState({
-      ...state,
-      ...value,
-      containerWidth,
     })
 
     on.forEach(x => window.addEventListener(x, handleLoad))
