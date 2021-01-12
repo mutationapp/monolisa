@@ -21,6 +21,7 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
   grid,
   image,
   cta,
+  frames,
   ...rest
 }) => {
   const weight = rest.weight || 'fullBleed'
@@ -41,159 +42,147 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
       }, 300)
   }, [rise])
 
-  const { uFrame } = state
-
-  const frame = uFrame
-
-  const { containerWidth, minWidth, bit } = uFrame
-
-  const preview = image ? previews[image.src] : undefined
-  const repeat = rpt(16)
-
   return (
-    <Flipper
-      flipKey={{ rise, containerWidth }}
-      className={css({
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: rise ? 'inherit' : 'flex-start',
-        position: 'relative',
-      })}
-    >
-      <Flipped flipId="flip">
-        {render(() => {
-          return (
-            <div
-              className={css({
-                width: minWidth,
-                height: '5vh',
-                ...{
-                  ...{ up: { position: 'absolute', bottom: 0 } }[
-                    rise || 'leftRight'
-                  ],
-                },
-              })}
-            >
-              <div
-                className={classNames(
-                  'flip',
-                  css({
-                    width: minWidth,
-                    height: '3vh',
-                    cursor: 'pointer',
-                    backgroundColor: 'var(--foreground)',
-                  }),
-                )}
-              ></div>
-              {render(() => {
-                if (rise !== 'up') return null
+    <Fragment>
+      {render(() => {
+        const { uFrame } = state
 
+        const frame = uFrame
+
+        const { containerWidth, minWidth, bit } = uFrame
+
+        const preview = image ? previews[image.src] : undefined
+        const repeat = rpt(16)
+
+        return (
+          <Flipper
+            flipKey={{ rise, containerWidth }}
+            className={css({
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: rise ? 'inherit' : 'flex-start',
+              position: 'relative',
+            })}
+          >
+            <Flipped flipId="flip">
+              {render(() => {
                 return (
                   <div
-                    className={css(
-                      mq({
-                        position: 'relative',
-                        overflow: 'hidden',
-                        margin: `0 auto`,
-
-                        // paddingLeft: margin,
-                        // paddingRight: margin,
-                        // paddingBottom: margin,
-                        // backgroundColor: 'var(--shade-1)',
-                      }),
-                    )}
+                    className={css({
+                      width: minWidth,
+                      height: '5vh',
+                      ...{
+                        ...{ up: { position: 'absolute', bottom: 0 } }[
+                          rise || 'leftRight'
+                        ],
+                      },
+                    })}
                   >
-                    {/* <U kind={heading.kind} /> */}
                     <div
-                      className={css({
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        padding: bit,
-                        marginBottom: bit,
-                        borderBottom: `1px dashed var(--foreground)`,
-                      })}
-                    >
-                      <Header kind="h3" text="[...monolisa]" />
-                    </div>
+                      className={classNames(
+                        'flip',
+                        css({
+                          width: minWidth,
+                          height: '3vh',
+                          cursor: 'pointer',
+                          backgroundColor: 'var(--foreground)',
+                        }),
+                      )}
+                    ></div>
                     {render(() => {
-                      if (image?.position !== 'fit') return
+                      if (rise !== 'up') return null
 
                       return (
-                        <figure
-                          className={classNames(
-                            css({
-                              position: 'absolute',
-                              top: '0',
-                              left: '0',
-                              background: preview ? `url(${preview})` : 'none',
+                        <div
+                          className={css(
+                            mq({
+                              position: 'relative',
+                              overflow: 'hidden',
+                              margin: `0 auto`,
+
+                              // paddingLeft: margin,
+                              // paddingRight: margin,
+                              // paddingBottom: margin,
+                              // backgroundColor: 'var(--shade-1)',
                             }),
                           )}
                         >
-                          <Img
-                            width={'2000px'}
-                            height={'2000px'}
-                            src={image.src}
-                            alt={image.alt}
-                            className={'img'}
-                            objectFit={'fill'}
-                            unoptimized={image.unoptimized}
-                            onLoad={() => {
-                              const item = document.getElementsByClassName(
-                                'frame',
-                              )[1] as HTMLElement | undefined
+                          {/* <U kind={heading.kind} /> */}
+                          <div
+                            className={css({
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              padding: bit,
+                              marginBottom: bit,
+                              borderBottom: `1px dashed var(--foreground)`,
+                            })}
+                          >
+                            <Header kind="h3" text="[...monolisa]" />
+                          </div>
+                          {render(() => {
+                            if (image?.position !== 'fit') return
 
-                              if (!item) return
+                            return (
+                              <figure
+                                className={classNames(
+                                  css({
+                                    position: 'absolute',
+                                    top: '0',
+                                    left: '0',
+                                    background: preview
+                                      ? `url(${preview})`
+                                      : 'none',
+                                  }),
+                                )}
+                              >
+                                <Img
+                                  width={'2000px'}
+                                  height={'2000px'}
+                                  src={image.src}
+                                  alt={image.alt}
+                                  className={'img'}
+                                  objectFit={'fill'}
+                                  unoptimized={image.unoptimized}
+                                  onLoad={() => {
+                                    const item = document.getElementsByClassName(
+                                      'frame',
+                                    )[1] as HTMLElement | undefined
 
-                              item.style.background = 'none'
-                            }}
-                          />
-                        </figure>
-                      )
-                    })}
-                    <div
-                      className={`${css(
-                        mq({
-                          // boxShadow: '0 0 0 0.2px #f59794',
-                          width: frame.width,
-                          // maxWidth,
-                          padding: bit,
-                          grid:
-                            // grid ||
-                            Array(4).fill(
-                              `"${rpt(8)('content')} ${rpt(8)(
-                                'image',
-                              )}" / ${repeat('1fr')}`,
-                            ),
-                          // margin: bit.fontSize.map(
-                          //   size =>
-                          //     parseInt(size.replace('px', '')) *
-                          //     { regular: 1, medium: 2, bold: 3, fullBleed: 0 }[weight],
-                          // ),
-                          margin: `0 auto`,
-                          height: '100%',
-                          display: 'grid',
-                          columnGap: bit,
-                          position: 'relative',
-                          overflow: 'hidden',
-                        }),
-                      )}`}
-                    >
-                      <U
-                        kind={heading.kind}
-                        frames={[null, null, '.', '.']}
-                        weight={
-                          {
-                            regular: ['.', null, null],
-                            medium: ['.', '.', null],
-                            bold: ['.', '.', '.'],
-                          }[weight]
-                        }
-                      />
-                      {(() => {
-                        const renderChildren = () => {
-                          return (
-                            <Fragment>
+                                    if (!item) return
+
+                                    item.style.background = 'none'
+                                  }}
+                                />
+                              </figure>
+                            )
+                          })}
+                          <div
+                            className={`${css(
+                              mq({
+                                width: frame.width,
+                                padding: bit,
+                                grid:
+                                  // grid ||
+                                  Array(4).fill(
+                                    `"${rpt(8)('content')} ${rpt(8)(
+                                      'image',
+                                    )}" / ${repeat('1fr')}`,
+                                  ),
+                                margin: `0 auto`,
+                                height: '100%',
+                                display: 'grid',
+                                columnGap: bit,
+                                position: 'relative',
+                                overflow: 'hidden',
+                              }),
+                            )}`}
+                          >
+                            <div
+                              className={css({
+                                gridArea: 'content',
+                              })}
+                            >
                               <div>
                                 {render(() => {
                                   if (typeof heading !== 'object') return
@@ -272,18 +261,6 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
                                   )
                                 })}
                               </div>
-                            </Fragment>
-                          )
-                        }
-
-                        return (
-                          <Fragment>
-                            <div
-                              className={css({
-                                gridArea: 'content',
-                              })}
-                            >
-                              {renderChildren()}
                             </div>
                             <div
                               className={css({
@@ -336,18 +313,18 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
                                 )
                               })}
                             </div>
-                          </Fragment>
-                        )
-                      })()}
-                    </div>
+                          </div>
+                        </div>
+                      )
+                    })}
                   </div>
                 )
               })}
-            </div>
-          )
-        })}
-      </Flipped>
-    </Flipper>
+            </Flipped>
+          </Flipper>
+        )
+      })}
+    </Fragment>
   )
 }
 

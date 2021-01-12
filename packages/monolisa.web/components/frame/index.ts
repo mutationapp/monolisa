@@ -2,7 +2,6 @@ import { HeaderKindType } from '../../typography'
 import { ButtonPropsType } from '../button'
 import Frame from './frame'
 
-
 export type FrameHeadingType = {
   kind: HeaderKindType
   text: string
@@ -51,6 +50,7 @@ export type FramePropsType = {
     unoptimized?: boolean
   }
   grid?: string
+  frames?: FramePropsType[]
 }
 
 export default Frame
