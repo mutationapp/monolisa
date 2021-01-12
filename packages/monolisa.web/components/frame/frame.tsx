@@ -35,12 +35,12 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
     !rise &&
       setTimeout(() => {
         setRise('leftRight')
-      }, 600)
+      }, 400)
 
     rise === 'leftRight' &&
       setTimeout(() => {
         setRise('up')
-      }, 400)
+      }, 300)
   }, [rise])
 
   const { uFrame } = state
