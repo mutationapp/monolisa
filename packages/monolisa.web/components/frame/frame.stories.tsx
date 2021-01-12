@@ -108,7 +108,7 @@ const Template = args => {
             image: {
               alt: 'test',
               position: 'left',
-              src: '/static/images/structure-light-led-movement-158826.jpeg',
+              src: '/static/images/ponyo.png',
               unoptimized: true,
             },
             cta: [{ children: 'Play Video', of: kind }],

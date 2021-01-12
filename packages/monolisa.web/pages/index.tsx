@@ -29,8 +29,7 @@ const Index = () => {
                   image: {
                     alt: 'test',
                     position: 'left',
-                    src:
-                      '/static/images/structure-light-led-movement-158826.jpeg',
+                    src: '/static/images/ponyo.png',
                   },
                   cta: [
                     {

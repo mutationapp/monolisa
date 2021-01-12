@@ -33,7 +33,6 @@ export const frameWeights = {
 export type FrameWeightType = keyof typeof frameWeights
 
 export type FramePropsType = {
-  weight?: FrameWeightType
   heading:
     | string
     | {
@@ -49,6 +48,27 @@ export type FramePropsType = {
     position?: 'fit' | 'left' | 'right'
     unoptimized?: boolean
   }
+  // grid?: string
+  // frames?: FramePropsType[]
+}
+
+export type FrameListPropsType = {
+  weight?: FrameWeightType
+  // heading:
+  //   | string
+  //   | {
+  //       kind: HeaderKindType
+  //       text: string
+  //       subHead?: string
+  //     }
+  // brand?: string
+  // cta?: Array<ButtonPropsType & { children: string }>
+  // image?: {
+  //   src: string
+  //   alt: string
+  //   position?: 'fit' | 'left' | 'right'
+  //   unoptimized?: boolean
+  // }
   grid?: string
   frames?: FramePropsType[]
 }

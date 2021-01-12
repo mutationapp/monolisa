@@ -58,6 +58,7 @@ export default () => `
     font-family: 'Uber Move Text Regular';
     font-style: normal;
     font-weight: normal;
+    font-display: swap;
     src: url('/static/fonts/move/uberMoveText.regular.woff');
   }
 
@@ -65,6 +66,7 @@ export default () => `
     font-family: 'Uber Move Text Medium';
     font-style: normal;
     font-weight: normal;
+    font-display: swap;
     src: url('/static/fonts/move/uberMoveText.medium.woff');
   }
 
@@ -72,6 +74,7 @@ export default () => `
     font-family: 'Uber Move Regular';
     font-style: normal;
     font-weight: normal;
+    font-display: swap;
     src: url('/static/fonts/move/uberMove.regular.woff');
   }
 
@@ -79,6 +82,7 @@ export default () => `
     font-family: 'Uber Move Medium';
     font-style: normal;
     font-weight: normal;
+    font-display: swap;
     src: url('/static/fonts/move/uberMove.medium.woff');
   }
 

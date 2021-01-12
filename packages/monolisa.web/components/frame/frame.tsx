@@ -1,4 +1,4 @@
-import { FramePropsType, getHeading } from '.'
+import { FrameListPropsType, getHeading } from '.'
 import { Button, Header, render, Img, U } from '..'
 import { Fragment, useState } from 'react'
 import { Text } from '..'
@@ -12,15 +12,15 @@ import { useThemeContext } from '../../hooks'
 import { useEffect } from 'react'
 
 const previews = {
-  [`/static/images/structure-light-led-movement-158826.jpeg`]: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+  [`/static/images/ponyo.png`]: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
 }
 
-const Frame: React.FunctionComponent<FramePropsType> = ({
+const Frame: React.FunctionComponent<FrameListPropsType> = ({
   children,
-  brand,
+  // brand,
   grid,
-  image,
-  cta,
+  // image,
+  // cta,
   frames,
   ...rest
 }) => {
@@ -65,261 +65,257 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
             })}
           >
             <Flipped flipId="flip">
-              {render(() => {
-                return (
-                  <div
-                    className={css({
+              <div
+                className={css({
+                  width: minWidth,
+                  height: '5vh',
+                  ...{
+                    ...{ up: { position: 'absolute', bottom: 0 } }[
+                      rise || 'leftRight'
+                    ],
+                  },
+                })}
+              >
+                <div
+                  className={classNames(
+                    'flip',
+                    css({
                       width: minWidth,
-                      height: '5vh',
-                      ...{
-                        ...{ up: { position: 'absolute', bottom: 0 } }[
-                          rise || 'leftRight'
-                        ],
-                      },
-                    })}
-                  >
+                      height: '3vh',
+                      cursor: 'pointer',
+                      backgroundColor: 'var(--foreground)',
+                    }),
+                  )}
+                ></div>
+                {render(() => {
+                  if (rise !== 'up') return null
+
+                  return (
                     <div
-                      className={classNames(
-                        'flip',
-                        css({
-                          width: minWidth,
-                          height: '3vh',
-                          cursor: 'pointer',
-                          backgroundColor: 'var(--foreground)',
+                      className={css(
+                        mq({
+                          position: 'relative',
+                          overflow: 'hidden',
+                          margin: `0 auto`,
+
+                          // paddingLeft: margin,
+                          // paddingRight: margin,
+                          // paddingBottom: margin,
+                          // backgroundColor: 'var(--shade-1)',
                         }),
                       )}
-                    ></div>
-                    {render(() => {
-                      if (rise !== 'up') return null
+                    >
+                      {/* <U kind={heading.kind} /> */}
+                      <div
+                        className={css({
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          padding: bit,
+                          marginBottom: bit,
+                          borderBottom: `1px dashed var(--foreground)`,
+                        })}
+                      >
+                        <Header kind="h3" text="[...monolisa]" />
+                      </div>
+                      {render(() => {
+                        if (image?.position !== 'fit') return
 
-                      return (
-                        <div
-                          className={css(
-                            mq({
-                              position: 'relative',
-                              overflow: 'hidden',
-                              margin: `0 auto`,
-
-                              // paddingLeft: margin,
-                              // paddingRight: margin,
-                              // paddingBottom: margin,
-                              // backgroundColor: 'var(--shade-1)',
-                            }),
-                          )}
-                        >
-                          {/* <U kind={heading.kind} /> */}
-                          <div
-                            className={css({
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              padding: bit,
-                              marginBottom: bit,
-                              borderBottom: `1px dashed var(--foreground)`,
-                            })}
-                          >
-                            <Header kind="h3" text="[...monolisa]" />
-                          </div>
-                          {render(() => {
-                            if (image?.position !== 'fit') return
-
-                            return (
-                              <figure
-                                className={classNames(
-                                  css({
-                                    position: 'absolute',
-                                    top: '0',
-                                    left: '0',
-                                    background: preview
-                                      ? `url(${preview})`
-                                      : 'none',
-                                  }),
-                                )}
-                              >
-                                <Img
-                                  width={'2000px'}
-                                  height={'2000px'}
-                                  src={image.src}
-                                  alt={image.alt}
-                                  className={'img'}
-                                  objectFit={'fill'}
-                                  unoptimized={image.unoptimized}
-                                  onLoad={() => {
-                                    const item = document.getElementsByClassName(
-                                      'frame',
-                                    )[1] as HTMLElement | undefined
-
-                                    if (!item) return
-
-                                    item.style.background = 'none'
-                                  }}
-                                />
-                              </figure>
-                            )
-                          })}
-                          <div
-                            className={`${css(
-                              mq({
-                                width: frame.width,
-                                padding: bit,
-                                grid:
-                                  // grid ||
-                                  Array(4).fill(
-                                    `"${rpt(8)('content')} ${rpt(8)(
-                                      'image',
-                                    )}" / ${repeat('1fr')}`,
-                                  ),
-                                margin: `0 auto`,
-                                height: '100%',
-                                display: 'grid',
-                                columnGap: bit,
-                                position: 'relative',
-                                overflow: 'hidden',
+                        return (
+                          <figure
+                            className={classNames(
+                              css({
+                                position: 'absolute',
+                                top: '0',
+                                left: '0',
+                                background: preview
+                                  ? `url(${preview})`
+                                  : 'none',
                               }),
-                            )}`}
+                            )}
                           >
-                            <div
-                              className={css({
-                                gridArea: 'content',
-                              })}
-                            >
-                              <div>
-                                {render(() => {
-                                  if (typeof heading !== 'object') return
+                            <Img
+                              width={'3000px'}
+                              height={'1500px'}
+                              src={image.src}
+                              alt={image.alt}
+                              className={'img'}
+                              objectFit={'fill'}
+                              unoptimized={image.unoptimized}
+                              onLoad={() => {
+                                const item = document.getElementsByClassName(
+                                  'frame',
+                                )[1] as HTMLElement | undefined
 
-                                  return (
-                                    <Header
-                                      marginBottom={`${bit}px`}
-                                      kind={heading.kind}
-                                      text={heading.text}
-                                    />
-                                  )
-                                })}
+                                if (!item) return
 
-                                {render(() => {
-                                  if (typeof heading !== 'object') return
+                                item.style.background = 'none'
+                              }}
+                            />
+                          </figure>
+                        )
+                      })}
+                      <div
+                        className={`${css(
+                          mq({
+                            width: frame.width,
+                            padding: bit,
+                            grid:
+                              // grid ||
+                              Array(4).fill(
+                                `"${rpt(8)('content')} ${rpt(8)(
+                                  'image',
+                                )}" / ${repeat('1fr')}`,
+                              ),
+                            margin: `0 auto`,
+                            height: '100%',
+                            display: 'grid',
+                            columnGap: bit,
+                            position: 'relative',
+                            overflow: 'hidden',
+                          }),
+                        )}`}
+                      >
+                        <div
+                          className={css({
+                            gridArea: 'content',
+                          })}
+                        >
+                          <div>
+                            {render(() => {
+                              if (typeof heading !== 'object') return
 
-                                  const { subHead, kind } = heading
+                              return (
+                                <Header
+                                  marginBottom={`${bit}px`}
+                                  kind={heading.kind}
+                                  text={heading.text}
+                                />
+                              )
+                            })}
 
-                                  if (!subHead) return
+                            {render(() => {
+                              if (typeof heading !== 'object') return
 
-                                  return (
-                                    <Text
-                                      content={subHead}
-                                      of={kind}
-                                      ratio="1/3"
-                                      marginBottom="bit"
-                                    />
-                                  )
-                                })}
+                              const { subHead, kind } = heading
 
-                                {children}
+                              if (!subHead) return
 
-                                {render(() => {
-                                  if (typeof heading !== 'object') return
-                                  if (typeof brand !== 'string') return
+                              return (
+                                <Text
+                                  content={subHead}
+                                  of={kind}
+                                  ratio="1/3"
+                                  marginBottom="bit"
+                                />
+                              )
+                            })}
 
-                                  const { kind } = heading
-                                  if (!kind) return
+                            {children}
 
-                                  return (
-                                    <Header
-                                      text={brand}
-                                      kind={kind}
-                                      marginBottom="bit"
-                                      ratio="2/3"
-                                    />
-                                  )
-                                })}
-                                {render(() => {
-                                  if (!heading || !cta?.length) {
-                                    return
-                                  }
+                            {render(() => {
+                              if (typeof heading !== 'object') return
+                              if (typeof brand !== 'string') return
 
-                                  return (
-                                    <div
-                                      className={css({
-                                        display: 'flex',
-                                        gap: bit,
-                                      })}
-                                    >
-                                      {cta.map((action, i) => {
-                                        const { children } = action
-                                        return (
-                                          <Button
-                                            {...{
-                                              ...action,
-                                              of: heading.kind,
-                                              key: i,
-                                            }}
-                                          >
-                                            {children}
-                                          </Button>
-                                        )
-                                      })}
-                                    </div>
-                                  )
-                                })}
-                              </div>
-                            </div>
-                            <div
-                              className={css({
-                                gridArea: 'image',
-                                overflow: 'hidden',
-                              })}
-                            >
-                              {render(() => {
-                                if (!image || image?.position === 'fit')
-                                  return null
+                              const { kind } = heading
+                              if (!kind) return
 
-                                return (
-                                  <div
-                                    className={css({
-                                      position: 'relative',
-                                    })}
-                                  >
-                                    <figure
-                                      className={classNames(
-                                        css({
-                                          position: 'absolute',
-                                          top: '0',
-                                          left: '0',
-                                          background: preview
-                                            ? `url(${preview})`
-                                            : 'none',
-                                        }),
-                                      )}
-                                    >
-                                      <Img
-                                        width={'2000px'}
-                                        height={'2000px'}
-                                        src={image.src}
-                                        alt={image.alt}
-                                        className={'img'}
-                                        objectFit={'fill'}
-                                        unoptimized={image.unoptimized}
-                                        onLoad={() => {
-                                          const item = document.getElementsByClassName(
-                                            'frame',
-                                          )[1] as HTMLElement | undefined
+                              return (
+                                <Header
+                                  text={brand}
+                                  kind={kind}
+                                  marginBottom="bit"
+                                  ratio="2/3"
+                                />
+                              )
+                            })}
 
-                                          if (!item) return
+                            {render(() => {
+                              if (!heading || !cta?.length) {
+                                return
+                              }
 
-                                          item.style.background = 'none'
+                              return (
+                                <div
+                                  className={css({
+                                    display: 'flex',
+                                    gap: bit,
+                                  })}
+                                >
+                                  {cta.map((action, i) => {
+                                    const { children } = action
+                                    return (
+                                      <Button
+                                        {...{
+                                          ...action,
+                                          of: heading.kind,
+                                          key: i,
                                         }}
-                                      />
-                                    </figure>
-                                  </div>
-                                )
-                              })}
-                            </div>
+                                      >
+                                        {children}
+                                      </Button>
+                                    )
+                                  })}
+                                </div>
+                              )
+                            })}
                           </div>
                         </div>
-                      )
-                    })}
-                  </div>
-                )
-              })}
+                        <div
+                          className={css({
+                            gridArea: 'image',
+                            overflow: 'hidden',
+                          })}
+                        >
+                          {render(() => {
+                            if (!image || image?.position === 'fit') return null
+
+                            return (
+                              <div
+                                className={css({
+                                  position: 'relative',
+                                })}
+                              >
+                                <figure
+                                  className={classNames(
+                                    css({
+                                      position: 'absolute',
+                                      top: '0',
+                                      left: '0',
+                                      background: preview
+                                        ? `url(${preview})`
+                                        : 'none',
+                                    }),
+                                  )}
+                                >
+                                  <Img
+                                    width={'2000px'}
+                                    height={'2000px'}
+                                    src={image.src}
+                                    alt={image.alt}
+                                    className={'img'}
+                                    objectFit={'fill'}
+                                    unoptimized={image.unoptimized}
+                                    onLoad={() => {
+                                      const item = document.getElementsByClassName(
+                                        'frame',
+                                      )[1] as HTMLElement | undefined
+
+                                      if (!item) return
+
+                                      item.style.background = 'none'
+                                    }}
+                                  />
+                                </figure>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
             </Flipped>
           </Flipper>
         )
