@@ -72,7 +72,7 @@ const useThemeContext = () => {
             ? Math.min(containerWidth, minWidth) - bit * 4
             : undefined,
         width:
-          minWidth && containerWidth < minWidth
+          minWidth && containerWidth && containerWidth < minWidth
             ? queries[current - 1]
             : minWidth,
       }
