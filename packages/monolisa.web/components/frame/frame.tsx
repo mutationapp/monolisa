@@ -25,8 +25,6 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
 }) => {
   const weight = rest.weight || 'fullBleed'
   const heading = getHeading(rest.heading)
-  // const bit = getBit(heading.kind)
-  const [fullScreen, setFullScreen] = useState(false)
   const [rise, setRise] = useState<'leftRight' | 'up' | 'loaded' | undefined>()
 
   const state = useThemeContext()
@@ -112,10 +110,8 @@ const Frame: React.FunctionComponent<FramePropsType> = ({
                         alignItems: 'center',
                         justifyContent: 'center',
                         padding: bit,
-                        // marginTop: bit,
                         marginBottom: bit,
-                        borderBottom: `2px solid var(--foreground)`,
-                        borderTop: `2px solid var(--foreground)`,
+                        borderBottom: `1px dashed var(--foreground)`,
                       })}
                     >
                       <Header kind="h3" text="[...monolisa]" />
