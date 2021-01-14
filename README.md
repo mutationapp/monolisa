@@ -20,7 +20,7 @@ Project follows <strong>Functional Programming</strong> saga with a highly scala
 - https://www.youtube.com/watch?v=SsV8-xExLwA
 
 
+It will be free forever and amazing. You can invest from "bc1q2sm7vfef94h8u04qghpqmejcwfacj7k456ghk6". Lets pay the bills!
+
 
 <sub>*Uber doesn't have a cross platform open source component library but Google has quite a lot. In anyway I am not going to use them, all components going to be cooked in the repo. But you can integrate any component library including your company in your clone. Just Fork to play with it</sub><br /><br />
-
-It will be free forever and amazing. You can invest from "bc1q2sm7vfef94h8u04qghpqmejcwfacj7k456ghk6". Lets pay the bills!
