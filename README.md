@@ -3,7 +3,7 @@ An [uFrame](https://brand.uber.com/guide#composition-the-u-frame) grid generator
 
 ## ♥️ 
 - https://www.typescriptlang.org
-- https://developer.mozilla.org/en-US/docs/Web/CSS/grid
+- https://css-tricks.com/snippets/css/complete-guide-grid
 - https://nextjs.org
 - https://reactnative.dev
 - https://reactjs.org
