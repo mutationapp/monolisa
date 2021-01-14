@@ -23,4 +23,4 @@ Project follows <strong>Functional Programming</strong> saga with a highly scala
 It will be free forever and amazing. You can invest from "bc1q2sm7vfef94h8u04qghpqmejcwfacj7k456ghk6". Lets pay the bills!
 
 
-<sub>*Uber doesn't have a cross platform open source component library or app stor but Google has. Monolisa will follow a different approach. All components going to be cooked in the repo. You can create your own [uFrame](https://brand.uber.com/guide#composition-the-u-frame) app store by forking the rpo</sub><br /><br />
+<sub>*Uber doesn't have a cross platform open source component library or app store but Google has. Monolisa will follow a different approach. You can create your own [uFrame](https://brand.uber.com/guide#composition-the-u-frame) app store by forking she</sub>
