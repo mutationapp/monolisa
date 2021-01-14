@@ -20,4 +20,4 @@ Project follows functional programming best practiced and includes very high bar
 - https://www.youtube.com/watch?v=SsV8-xExLwA
 
 
-It will be amazing. Please consider to donate to bc1q2sm7vfef94h8u04qghpqmejcwfacj7k456ghk6
+It will be amazing. Please consider to donate "bc1q2sm7vfef94h8u04qghpqmejcwfacj7k456ghk6"
