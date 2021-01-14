@@ -1,8 +1,9 @@
 # Monolisa
-An [uFrame](https://brand.uber.com/guide#composition-the-u-frame) generator for creating automated layouts for any device(🐡) in ease. <br /> Project is going to combine best practices from [Uber Design](https://brand.uber.com) and Google [Material](https://material.io).
+An [uFrame](https://brand.uber.com/guide#composition-the-u-frame) grid generator for creating automated layouts for any device(🐡) in ease. <br /> Project is going to combine best practices from [Uber Design](https://brand.uber.com) and [Google Material](https://material.io).
 
 ## ♥️ 
 - https://www.typescriptlang.org
+- https://developer.mozilla.org/en-US/docs/Web/CSS/grid
 - https://nextjs.org
 - https://reactnative.dev
 - https://reactjs.org
