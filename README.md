@@ -21,6 +21,6 @@ Project follows functional programming best practices including very high bar fo
 
 
 
-<sub>*As far as I know Uber doesn't have a cross platform component library but Google has quite a lot. We are not going to use them, all components going to be cooked in the repo. But you can integrate any component library including your company in your clone. Just Fork to play with it</sub><br /><br />
+<sub>*Uber doesn't have a cross platform open source component library but Google has quite a lot. In anyway I am not going to use them, all components going to be cooked in the repo. But you can integrate any component library including your company in your clone. Just Fork to play with it</sub><br /><br />
 
 It will be amazing. Please consider to donate "bc1q2sm7vfef94h8u04qghpqmejcwfacj7k456ghk6"
