@@ -1,14 +1,13 @@
 # Monolisa
-A super framework for creating automated layouts in ease. Repo will include an implementation of https://brand.uber.com/guide as an example.
+An [uFrame](https://brand.uber.com/guide#composition-the-u-frame) generator for creating automated layouts for any device(🐡) in ease. <br /> Project is going to combine best practices from [Uber Design](https://brand.uber.com) and Google [Material](https://material.io).
 
 ## ♥️ 
 - https://www.typescriptlang.org
-- https://reactjs.org
 - https://nextjs.org
-- https://brand.uber.com
+- https://reactnative.dev
+- https://reactjs.org
 - https://emotion.sh
-- https://storybook.js.org
-- https://www.storyblok.com
+- https://recoiljs.org
 
 
 #### Inspiration
