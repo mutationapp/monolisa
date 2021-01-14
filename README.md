@@ -1,7 +1,7 @@
 # Monolisa
-An high performant [uFrame](https://brand.uber.com/guide#composition-the-u-frame) grid generator for creating automated layouts for any device in ease 🤯. <br /> 
-Repo is going to combine best practices from [Uber Design](https://brand.uber.com) and [Google Material](https://material.io).<br /> 
-Project follows functional programming best practiced and includes very high bar for mutation and performance testing on cross platform. It will cost for anything including dicthing react and nextjs for web in favor of RX and lit-html.
+An high performant [uFrame](https://brand.uber.com/guide#composition-the-u-frame) grid generator for creating automated layouts for any device in ease 🤯. <br /><br /> 
+Repo is going to combine best practices from [Uber Design](https://brand.uber.com) and [Google Material](https://material.io).<br /><br />
+Project follows functional programming best practices including very high bar for [mutation](mutation.app), [e2e](https://www.cypress.io), [property](https://github.com/dubzzz/fast-check) and [performance](https://clinicjs.org) testing on cross platform.
 
 
 ## ♥️ 
