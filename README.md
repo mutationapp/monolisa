@@ -3,9 +3,6 @@ A high performant, first in kind, [uFrame](https://brand.uber.com/guide#composit
 Repo is going to combine best design* practices from [Uber Design](https://brand.uber.com) and [Google Material](https://material.io).<br /><br />
 She is a continuation of <strong>Functional Programming</strong> saga with a highly scalable Monorepo and fits Domain Driven Design principles. <br /><br />She has a vey high bar in [mutation](https://mutation.app), [e2e](https://www.cypress.io), [property](https://github.com/dubzzz/fast-check) and [performance](https://clinicjs.org) testing cross platform.<br />
 
-## No adds without user interaction
-
-
 ## ♥️ 
 - https://www.typescriptlang.org
 - https://css-tricks.com/snippets/css/complete-guide-grid
