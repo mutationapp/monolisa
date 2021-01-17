@@ -5,7 +5,7 @@ Repo is going to combine best design* practices from [Uber Design](https://brand
 She is a continuation of <strong>Functional Programming</strong> saga with a highly scalable Monorepo, fits Domain Driven Design principles. <br /><br />She has a vey high bar in [mutation](https://mutation.app), [e2e](https://www.cypress.io), [property](https://github.com/dubzzz/fast-check) and [performance](https://clinicjs.org) testing cross platform.<br />
 
 ## ♥️ 
-- [mutationapp]https://github.com/mutationapp
+- [mutationapp](https://github.com/mutationapp)
 - [typescript](https://www.typescriptlang.org)
 - [grid](https://css-tricks.com/snippets/css/complete-guide-grid)
 - [nextjs](https://nextjs.org)
