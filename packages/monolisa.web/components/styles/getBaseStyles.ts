@@ -1,6 +1,6 @@
 // https://github.com/zeit/styled-jsx#global-styles
 
-export default () => `
+const getBaseStyles = () => `
   // ---RESET---
 
   /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -198,3 +198,5 @@ export default () => `
     background: var(--selection);
   }
 `
+
+export default getBaseStyles
