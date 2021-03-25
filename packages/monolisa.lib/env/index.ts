@@ -18,7 +18,7 @@ type envType = {
   GITHUB_APP_PRIVATEKEY: string
   MUTATE_APP_URL: string
   MUTATE_API_URL: string
-  monolisa_ENV: monolisaEnvType
+  MONOLISA_ENV: monolisaEnvType
   monolisa_PRIVATE_KEY: string
   monolisa_PUBLIC_KEY: string
   [key: string]: string | undefined
@@ -36,7 +36,7 @@ export const getEnv: () => envType = () => {
     GITHUB_CLIENT_SECRET,
     GITHUB_APP_ID,
     GITHUB_APP_PRIVATEKEY,
-    monolisa_ENV = 'development',
+    MONOLISA_ENV = 'development',
   } = process.env
 
   const defaults = {
@@ -46,7 +46,7 @@ export const getEnv: () => envType = () => {
     GITHUB_CLIENT_SECRET,
     GITHUB_APP_ID,
     GITHUB_APP_PRIVATEKEY,
-    monolisa_ENV,
+    MONOLISA_ENV,
   } as envType
 
   const nil = onlyNil(defaults)

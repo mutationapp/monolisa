@@ -5,10 +5,10 @@
  * description of configuration variables and their potential values.
  */
 
-const { NEWRELIC_LICENSE_KEY, monolisa_ENV } = process.env
+const { NEWRELIC_LICENSE_KEY, MONOLISA_ENV } = process.env
 
 exports.config = {
-  // agent_enabled: monolisa_ENV === 'production',
+  // agent_enabled: MONOLISA_ENV === 'production',
   /**
    * Array of application names.
    */
@@ -16,7 +16,7 @@ exports.config = {
   /**
    * Your New Relic license key.
    */
-  license_key: monolisa_ENV === 'production' ? NEWRELIC_LICENSE_KEY : '',
+  license_key: MONOLISA_ENV === 'production' ? NEWRELIC_LICENSE_KEY : '',
   /**
    * This setting controls distributed tracing.
    * Distributed tracing lets you see the path that a request takes through your

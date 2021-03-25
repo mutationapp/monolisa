@@ -1,6 +1,6 @@
 import featureToggles from './feature.toggles'
 
-const monolisa_ENV = process.env.monolisa_ENV as string
+const MONOLISA_ENV = process.env.MONOLISA_ENV as string
 
 export type featureTogglesResponseType = 'on' | 'off'
 
@@ -19,7 +19,7 @@ export const isFeature: (toggles: {
 ) => {
   const toggles = payload instanceof Array ? payload : [payload]
 
-  const env = features[monolisa_ENV] ? monolisa_ENV : 'all'
+  const env = features[MONOLISA_ENV] ? MONOLISA_ENV : 'all'
 
   return toggles.some(toggle =>
     Object.entries(toggle).every(

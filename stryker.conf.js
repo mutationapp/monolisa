@@ -8,8 +8,6 @@ const { files, mutate, page } = getmonolisaCandidates({
   MUTATE_STRATEGY: 'changed',
 })
 
-console.log(`mutate`, files, mutate)
-
 module.exports = {
   files: files.length
     ? [

@@ -1,6 +1,6 @@
 import { getEnv } from 'monolisa.lib/env'
 
-const { GITHUB_CLIENT_ID, monolisa_ENV, GITHUB_APP_NAME } = getEnv()
+const { GITHUB_CLIENT_ID, MONOLISA_ENV, GITHUB_APP_NAME } = getEnv()
 
 /*
   Setting a custom build directory
@@ -12,12 +12,12 @@ const { GITHUB_CLIENT_ID, monolisa_ENV, GITHUB_APP_NAME } = getEnv()
 export default {
   env: {
     GITHUB_CLIENT_ID,
-    monolisa_ENV,
+    MONOLISA_ENV,
     GITHUB_APP_NAME,
   },
   publicRuntimeConfig: {
     GITHUB_CLIENT_ID,
-    monolisa_ENV,
+    MONOLISA_ENV,
     GITHUB_APP_NAME,
   },
   // webpack: (config, { defaultLoaders }) => {

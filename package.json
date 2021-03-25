@@ -30,7 +30,7 @@
     "mutate": "mutate",
     "migrate:reset": "yarn cwd:data migrate:reset",
     "spec": "yarn cwd:data migrate:reset && yarn cwd:api spec",
-    "start": "echo Starting with APP_ENV:$APP_ENV, NODE_ENV:$NODE_ENV, monolisa_ENV:$monolisa_ENV && if-env APP_ENV=api && yarn cwd:api start || yarn cwd:web start",
+    "start": "echo Starting with APP_ENV:$APP_ENV, NODE_ENV:$NODE_ENV, MONOLISA_ENV:$MONOLISA_ENV && if-env APP_ENV=api && yarn cwd:api start || yarn cwd:web start",
     "start:api": "yarn cwd:api start",
     "stryker": "stryker run",
     "test:update": "lerna run test -- -u",

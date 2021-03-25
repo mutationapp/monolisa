@@ -2,6 +2,38 @@
 import { css } from 'styled-jsx/css'
 
 export default css.global`
+  @font-face {
+    font-family: 'Uber Move Text Regular';
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url('/fonts/move/uberMoveText.regular.woff');
+  }
+
+  @font-face {
+    font-family: 'Uber Move Text Medium';
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url('/fonts/move/uberMoveText.medium.woff');
+  }
+
+  @font-face {
+    font-family: 'Uber Move Regular';
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url('/fonts/move/uberMove.regular.woff');
+  }
+
+  @font-face {
+    font-family: 'Uber Move Medium';
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url('/fonts/move/uberMove.medium.woff');
+  }
+
   /* https://themer.dev/ */
   :root {
     --foreground: #000;
@@ -35,6 +67,11 @@ export default css.global`
 
     --shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
     --portal-opacity: 0.25;
+
+    --font-header-regular: 'Uber Move Regular';
+    --font-header-medium: 'Uber Move Medium';
+    --font-text-regular: 'Uber Move Text Regular';
+    --font-text-medium: 'Uber Move Text Medium';
   }
 
   html.dark {
@@ -71,6 +108,7 @@ export default css.global`
   body {
     color: var(--foreground);
     font-family: var(--font-mono);
+    font-family: var(--font-text-regular);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     height: 100vh;
@@ -88,6 +126,7 @@ export default css.global`
   h4,
   h5,
   h6 {
+    font-family: var(--font-header-medium);
   }
 
   a {

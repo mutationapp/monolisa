@@ -8,10 +8,10 @@ import { getEnv } from 'monolisa.lib/env'
 const prefix = '__web__:'
 const year = 60 * 60 * 24 * 365
 
-const { monolisa_ENV } = getEnv()
+const { MONOLISA_ENV } = getEnv()
 const cache: cacheType = handler => async (request, response, next) => {
   // Remove me
-  if (monolisa_ENV === 'development') return next()
+  if (MONOLISA_ENV === 'development') return next()
 
   if (!(await storage.isConnected())) {
     return next()

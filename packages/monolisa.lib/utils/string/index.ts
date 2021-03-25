@@ -45,7 +45,6 @@ export const toJSON = (text?: string, throws?: boolean) => {
   try {
     return JSON.parse(text.trim())
   } catch (error) {
-    console.log(`toJSON -> error`, error, text.trim())
     if (throws) throw error
   }
 }
