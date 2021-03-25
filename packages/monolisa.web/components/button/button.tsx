@@ -4,22 +4,21 @@ import classNames from 'classnames'
 import { Spinner } from '..'
 import { forwardRef } from 'react'
 import { ButtonPropsType } from '.'
-import { Text } from '..'
 
 const Button: React.FunctionComponent<ButtonPropsType> = forwardRef<
   HTMLButtonElement,
   ButtonPropsType
 >(
   (
-    { of, link, type, processing, secondary, children, icon, onClick, ...rest },
+    { link, type, processing, secondary, children, icon, onClick, ...props },
     ref,
   ) => {
-    const size = rest.size || 'medium'
-    const disabled = rest.disabled || processing || false
+    const size = props.size || 'medium'
+    const disabled = props.disabled || processing || false
 
     const buttonType = type || 'primary'
 
-    const className = classNames(size, rest.className, buttonType, {
+    const className = classNames(size, props.className, buttonType, {
       secondary: Boolean(secondary),
       disabled: Boolean(disabled),
       processing: Boolean(processing),
@@ -29,7 +28,7 @@ const Button: React.FunctionComponent<ButtonPropsType> = forwardRef<
     const button = (
       <button
         ref={ref}
-        {...rest}
+        {...props}
         disabled={disabled}
         className={className}
         onClick={e => {
@@ -122,9 +121,7 @@ const Button: React.FunctionComponent<ButtonPropsType> = forwardRef<
         `}</style>
         {processing && <Spinner />}
         {icon && <span className="icon">{icon}</span>}
-        <span className="text">
-          <Text marginBottom={0} content={children} of={of} ratio="1/3" />
-        </span>
+        <span className="text">{children}</span>
       </button>
     )
 

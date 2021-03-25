@@ -1,0 +1,17 @@
+{
+  "name": "monolisa.storage",
+  "version": "1.0.0",
+  "main": "dist",
+  "scripts": {
+    "build": "yarn run babel src -d --out-dir dist --extensions '.ts'"
+  },
+  "devDependencies": {
+    "@types/redis": "^2.8.28"
+  },
+  "dependencies": {
+    "handy-redis": "^2.1.0",
+    "monolisa.lib": "1.0.0",
+    "redis": "^3.0.2",
+    "redis-json": "^4.3.0"
+  }
+}

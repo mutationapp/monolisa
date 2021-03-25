@@ -1,0 +1,20 @@
+{
+  "name": "monolisa.model",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "main": "dist",
+  "types": "index",
+  "scripts": {
+    "build": "yarn run babel src -d --out-dir dist --extensions '.ts'",
+    "test": "jest"
+  },
+  "dependencies": {
+    "deepdash": "^5.3.2",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.0"
+  }
+}

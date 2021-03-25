@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Builds the query for: { f: 1, g: '2', k: false, j: true } 1`] = `"f=1&g=2&j=true"`;
+
+exports[`Builds the query for: {} 1`] = `""`;
+
+exports[`Builds the query for: undefined 1`] = `undefined`;
+
+exports[`Removes leading slash for:  1`] = `""`;
+
+exports[`Removes leading slash for: /path/to/me/ 1`] = `"path/to/me/"`;
+
+exports[`Removes leading slash for: clean 1`] = `"clean"`;
+
+exports[`Removes leading slash for: relative/ 1`] = `"relative/"`;
+
+exports[`Removes leading slash for: undefined 1`] = `undefined`;
+
+exports[`Returns parent path for: /parent/me/ 1`] = `"/parent"`;
+
+exports[`Returns parent path for: clean 1`] = `""`;
+
+exports[`Returns parent path for: relative/me 1`] = `"relative"`;
+
+exports[`Returns parent path for: undefined 1`] = `undefined`;
+
+exports[`addLeadingSlash: / 1`] = `"/"`;
+
+exports[`addLeadingSlash: // 1`] = `"/"`;
+
+exports[`addLeadingSlash: nope 1`] = `"/nope"`;
+
+exports[`appendQuery: { url: '?foo=bar&bar=foo', query: { baz: 'baz' } } 1`] = `"?foo=bar&bar=foo&baz=baz"`;
+
+exports[`getParentPathUntil: { path: 'foo/bar/baz', until: 'bar' } 1`] = `"foo/bar"`;
+
+exports[`getParentPathUntil: { path: 'oops', until: 'foo' } 1`] = `"oops"`;
+
+exports[`parseQuery:  1`] = `Object {}`;
+
+exports[`parseQuery: monolisa.app?foo=bar&bar=foo 1`] = `
+Object {
+  "bar": "foo",
+  "foo": "bar",
+}
+`;
+
+exports[`parseQuery: monolisa.lab? 1`] = `Object {}`;
+
+exports[`removeQuery:  1`] = `""`;
+
+exports[`removeQuery: monolisa.app?foo=bar&bar=foo 1`] = `"monolisa.app"`;
+
+exports[`removeQuery: monolisa.lab? 1`] = `"monolisa.lab"`;
+
+exports[`removeTrailingSlashes: / 1`] = `""`;
+
+exports[`removeTrailingSlashes: // 1`] = `""`;
+
+exports[`removeTrailingSlashes: http://foo.bar/ 1`] = `"foo.bar"`;
+
+exports[`removeTrailingSlashes: http://localhost:3000 1`] = `"localhost"`;
+
+exports[`removeTrailingSlashes: http://monolisa.app 1`] = `"monolisa.app"`;
+
+exports[`removeTrailingSlashes: nope 1`] = `"nope"`;
+
+exports[`removeTrailingSlashes: undefined 1`] = `undefined`;
+
+exports[`removeTrailingSlashes: undefined 2`] = `undefined`;

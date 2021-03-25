@@ -1,0 +1,19 @@
+{
+  "name": "monolisa.integration",
+  "version": "1.0.0",
+  "main": "dist",
+  "types": "index",
+  "scripts": {
+    "build": "yarn run babel src -d --out-dir dist --extensions '.ts'"
+  },
+  "dependencies": {
+    "@octokit/auth-app": "^2.10.5",
+    "@octokit/rest": "^18.0.12",
+    "monolisa.model": "1.0.0",
+    "monolisa.storage": "1.0.0"
+  },
+  "devDependencies": {
+    "@octokit/types": "^6.1.2",
+    "type-fest": "^0.20.2"
+  }
+}

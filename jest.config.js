@@ -1,3 +1,5 @@
+// https://github.com/zeit/next.js/tree/canary/examples/with-jest
+
 const { INIT_CWD } = process.env
 
 const jestDir = `${INIT_CWD}`

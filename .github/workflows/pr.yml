@@ -24,7 +24,7 @@ jobs:
         run: yarn stryker
       - name: Mutate
         env:
-          MUTATE_API_URL: 'https://api.mutation.app'
+          MUTATE_API_URL: 'https://api.monolisa.app'
           MUTATE_REPOSITORY_TOKEN: ${{secrets.MUTATE_REPOSITORY_TOKEN}}
           MUTATE_PULL_NUMBER: ${{github.event.pull_request.number}}
           MUTATE_PULL_OWNER: ${{github.event.pull_request.user.login}}

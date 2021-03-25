@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders 1`] = `
+<span
+  className="avatar"
+  data-initial=""
+>
+  <style
+    jsx={true}
+  >
+    
+        .avatar &gt; :global(img) {
+          border-radius: 50%;
+        }
+
+        .avatar {
+          width: 30px;
+          height: 30px;
+          line-height: 30px;
+          font-size: 15px;
+          display: inline-flex;
+          border-radius: 50%;
+          text-align: center;
+          background-color: var(--foreground);
+          color: var(--background);
+          align-items: center;
+          justify-content: center;
+        }
+        .avatar:after {
+          content: attr(data-initial);
+        }
+
+        .processing {
+          margin: 0 auto;
+        }
+      
+  </style>
+  <Spinner />
+</span>
+`;
+
+exports[`Renders 2`] = `
+<span
+  className="avatar"
+  data-initial="A"
+>
+  <style
+    jsx={true}
+  >
+    
+        .avatar &gt; :global(img) {
+          border-radius: 50%;
+        }
+
+        .avatar {
+          width: 30px;
+          height: 30px;
+          line-height: 30px;
+          font-size: 15px;
+          display: inline-flex;
+          border-radius: 50%;
+          text-align: center;
+          background-color: var(--foreground);
+          color: var(--background);
+          align-items: center;
+          justify-content: center;
+        }
+        .avatar:after {
+          content: attr(data-initial);
+        }
+
+        .processing {
+          margin: 0 auto;
+        }
+      
+  </style>
+</span>
+`;

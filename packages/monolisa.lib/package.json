@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "dist",
   "types": "index",
-  "license": "Apache-2.0",
   "scripts": {
-    "build": "yarn run babel src -d --out-dir dist --extensions '.ts'",
-    "test": "jest"
+    "build": "yarn run babel . -d --out-dir dist --extensions '.ts'",
+    "test": "jest --testRegex '(test)\\.[jt]sx?$'"
   }
 }

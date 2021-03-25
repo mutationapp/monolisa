@@ -4,7 +4,6 @@ export type setCookieType = (
   value: string,
   options?: Cookies.CookieAttributes,
 ) => void
-
 export type useCookieType = (
   key: string,
   initialValue?: string,

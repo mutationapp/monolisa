@@ -5,4 +5,5 @@ export const blank = {
   rel: 'noreferrer',
 }
 
+// https://blog.logrocket.com/dealing-with-links-in-next-js/
 export type linkType = string | LinkProps
