@@ -12,6 +12,6 @@
     "handy-redis": "^2.1.0",
     "monolisa.lib": "1.0.0",
     "redis": "^3.0.2",
-    "redis-json": "^4.3.0"
+    "redis-json": "^5.0.0"
   }
 }
