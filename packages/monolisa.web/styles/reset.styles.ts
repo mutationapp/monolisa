@@ -1,6 +1,6 @@
-import css from 'styled-jsx/css'
+import { css } from 'styled-jsx/css'
 
-export default css.css.global`
+export default css.global`
   /* Box sizing rules */
   *,
   *::before,

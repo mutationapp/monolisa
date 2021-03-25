@@ -16,6 +16,8 @@
     "test": "echo skipping for now"
   },
   "dependencies": {
+    "@emotion/css": "^11.1.3",
+    "@emotion/react": "^11.1.5",
     "@next/bundle-analyzer": "^10.0.3",
     "body-parser": "^1.19.0",
     "classnames": "^2.2.6",
