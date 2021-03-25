@@ -160,7 +160,7 @@ const Repositories = () => {
             {listings.map(tweet => {
               const { company: user } = tweet
               return (
-                <Box key={tweet.id}>
+                <Box shadow key={tweet.id}>
                   <div
                     className={css({
                       position: 'relative',
