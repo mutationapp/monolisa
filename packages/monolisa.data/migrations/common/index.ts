@@ -4,7 +4,6 @@ export const tables = {
   users: 'users',
   integrations: 'integrations',
   repositories: 'repositories',
-  projects: 'projects',
   pullRequests: 'pullRequests',
   reports: 'reports',
   imports: 'imports',

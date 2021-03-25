@@ -119,7 +119,6 @@ export const down = async (knex: Knex) => {
     .dropTableIfExists(tables.imports)
     .dropTableIfExists(tables.reports)
     .dropTableIfExists(tables.pullRequests)
-    .dropTableIfExists(tables.projects)
     .dropTableIfExists(tables.repositories)
     .dropTableIfExists(tables.installations)
     .dropTableIfExists(tables.integrations)

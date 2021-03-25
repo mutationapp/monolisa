@@ -32,6 +32,7 @@ import Loading from './loading'
 import Error from './error'
 import NewRelic from './newRelic'
 import Setup from './setup'
+import Markdown from './markdown'
 
 import { FileNameTree } from './file'
 import RouteTabs, { RepositoryRouteTabs, AppRouteTabs } from './routeTabs'
@@ -67,6 +68,7 @@ export {
   Loading,
   Logo,
   Modal,
+  Markdown,
   Navigation,
   NewRelic,
   Portal,

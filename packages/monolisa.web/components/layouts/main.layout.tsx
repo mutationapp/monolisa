@@ -149,7 +149,6 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
         return (
           <Heading>
             <h1>{title}</h1>
-
             {run(() => {
               if (back === false) {
                 return
@@ -199,7 +198,6 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
                 </div>
               )
             })}
-
             {run(() => {
               if (!subtitle) {
                 return
