@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { useLoading, useProfile } from '../../hooks'
 import { Fragment } from 'react'
-import { UnlockIcon, LockIcon } from '../../components/icons'
+import { UnlockIcon, LockIcon, BookmarkIcon } from '../../components/icons'
 import { DashboardLayout } from '../../components/layouts'
 import { UserInfoHeading } from '../../components/dashboard/heading'
 import { isLoading } from '../../hooks/fetcher'
@@ -194,7 +194,20 @@ const Repositories = () => {
                     </div>
                     <ul className={css({ display: 'flex', gap: '10px' })}>
                       <li>
-                        <a>🌟 14</a>
+                        <a
+                          className={css({
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          })}
+                        >
+                          <BookmarkIcon
+                            className={css({
+                              marginRight: 5,
+                            })}
+                          />{' '}
+                          14
+                        </a>
                       </li>
                       <li>
                         <a>💬 Send a message</a>
