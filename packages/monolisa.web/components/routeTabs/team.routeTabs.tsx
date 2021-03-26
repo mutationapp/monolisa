@@ -20,8 +20,8 @@ const TeamRouteTabs = () => {
       tabs={[
         {
           icon: <BookIcon />,
-          children: 'Repositories',
-          value: 'repositories',
+          children: 'Jobs',
+          value: 'jobs',
           ...buildTeamUrl('repositories'),
         },
         {

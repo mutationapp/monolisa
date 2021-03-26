@@ -49,7 +49,7 @@ const AppRouteTabs = () => {
       tabs={[
         {
           icon: <BookIcon />,
-          children: 'Job Board',
+          children: 'Jobs',
           value: 'jobBoard',
           ...buildUrl('repositories'),
         },
