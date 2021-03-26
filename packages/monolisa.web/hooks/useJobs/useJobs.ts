@@ -1,8 +1,8 @@
 import { repositoryType } from 'monolisa.model'
-import { useRepositoriesType } from '.'
+import { useJobsType } from '.'
 import { useSWR } from '..'
 
-const useJobs: useRepositoriesType = ({ fetcher }) => () => {
+const useJobs: useJobsType = ({ fetcher }) => () => {
   const response = useSWR<{
     repositories: repositoryType[]
   }>(`/api/jobs`, fetcher)
