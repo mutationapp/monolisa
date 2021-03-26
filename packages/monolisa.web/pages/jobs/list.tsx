@@ -134,7 +134,7 @@ const Repositories = () => {
                   user.id === member?.id && (
                     <div>
                       💡 Start to{' '}
-                      <Link href="/repositories/import">
+                      <Link href="/jobs/import">
                         <a>add</a>
                       </Link>{' '}
                       repositories.

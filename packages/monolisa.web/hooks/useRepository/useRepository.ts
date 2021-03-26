@@ -2,7 +2,7 @@ import { useRepositoryType } from '.'
 import { reportResponseType } from '../../server/shared'
 import { useSWR } from '..'
 
-const useRepository: useRepositoryType = ({ fetcher }) => ({
+const useJob: useRepositoryType = ({ fetcher }) => ({
   owner,
   repo,
   pullNumber,
@@ -11,7 +11,7 @@ const useRepository: useRepositoryType = ({ fetcher }) => ({
   const pullPath = pullNumber ? `/${pullNumber}` : ''
 
   const response = useSWR<reportResponseType>(
-    `/api/repositories/${provider}/${owner}/${repo}${pullPath}`,
+    `/api/jobs/${provider}/${owner}/${repo}${pullPath}`,
     fetcher,
   )
 
@@ -23,4 +23,4 @@ const useRepository: useRepositoryType = ({ fetcher }) => ({
   }
 }
 
-export default useRepository
+export default useJob

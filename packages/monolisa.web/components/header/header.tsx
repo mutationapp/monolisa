@@ -169,7 +169,7 @@ const Header = () => {
                                   }
                                   className="breadcrumb"
                                 >
-                                  teams
+                                  companies
                                 </a>
                                 {spacer}
                                 <span className="breadcrumb repo">

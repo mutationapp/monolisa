@@ -17,7 +17,7 @@ import {
   useLoading,
   useAppContext,
 } from '../../hooks'
-import useRepository from '../../hooks/useRepository'
+import useJob from '../../hooks/useRepository'
 
 const RepositoryDangerZone = () => {
   const { team } = useAppContext()
@@ -30,7 +30,7 @@ const RepositoryDangerZone = () => {
   const { query } = repositoryRoute
   const { repo, owner, provider } = query
 
-  const { data, error: apiError } = useRepository({
+  const { data, error: apiError } = useJob({
     provider,
     owner,
     repo,
@@ -118,12 +118,9 @@ const RepositoryDangerZone = () => {
               onConfirm: async () => {
                 setState({ deleting: true })
                 try {
-                  await fetcher(
-                    `/api/repositories/${provider}/${owner}/${repo}`,
-                    {
-                      method: 'DELETE',
-                    },
-                  )
+                  await fetcher(`/api/jobs/${provider}/${owner}/${repo}`, {
+                    method: 'DELETE',
+                  })
 
                   setState({ deleted: true })
                 } catch (error) {

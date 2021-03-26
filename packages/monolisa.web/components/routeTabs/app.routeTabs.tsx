@@ -34,8 +34,8 @@ const AppRouteTabs = () => {
           },
           {
             icon: <GridIcon />,
-            children: 'Teams',
-            value: 'teams',
+            children: 'Companies',
+            value: 'companies',
             ...buildUrl('teams'),
           },
         ]}
@@ -54,10 +54,10 @@ const AppRouteTabs = () => {
           ...buildUrl('repositories'),
         },
         {
-          icon: <UserIcon />,
-          children: 'Account',
-          value: 'account',
-          ...buildUrl('account'),
+          icon: <GridIcon />,
+          children: 'Companies',
+          value: 'companies',
+          ...buildUrl('teams'),
         },
         {
           icon: <InstallationIcon />,
@@ -66,10 +66,10 @@ const AppRouteTabs = () => {
           ...buildUrl('installations'),
         },
         {
-          icon: <GridIcon />,
-          children: 'Teams',
-          value: 'teams',
-          ...buildUrl('teams'),
+          icon: <UserIcon />,
+          children: 'Account',
+          value: 'account',
+          ...buildUrl('account'),
         },
       ]}
     />

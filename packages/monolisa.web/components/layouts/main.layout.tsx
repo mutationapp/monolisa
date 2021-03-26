@@ -158,7 +158,7 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
                 typeof back === 'object'
                   ? back
                   : (() => {
-                      const area = 'repositories'
+                      const area = 'jobs'
 
                       if (buildTeamUrl) {
                         return { area, ...buildTeamUrl('repositories') }
@@ -167,7 +167,7 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
                       if (user) {
                         return {
                           area,
-                          href: '/repositories',
+                          href: '/jobs',
                           as: `/${user.slug}`,
                         }
                       }
@@ -175,7 +175,7 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
                       if (member) {
                         return {
                           area,
-                          href: '/repositories',
+                          href: '/jobs',
                           as: `/${member.slug}`,
                         }
                       }

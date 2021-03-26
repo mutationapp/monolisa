@@ -1,4 +1,3 @@
-import useBlob from './useBlob'
 import useCookie from './useCookie'
 import useInstallation from './useInstallation'
 import useLoading from './useLoading'
@@ -18,7 +17,6 @@ import useLogin from './useLogin'
 
 export {
   useAppContext,
-  useBlob,
   useCookie,
   useFeatureToggleContext,
   useInstallation,

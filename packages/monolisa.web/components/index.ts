@@ -38,19 +38,17 @@ import { FileNameTree } from './file'
 import RouteTabs, { RepositoryRouteTabs, AppRouteTabs } from './routeTabs'
 
 import {
-  CommitTree,
   RepositoryHeader,
   IntegrationLink,
   RepositoryDangerZone,
   RepositoryToken,
-} from './repository'
+} from './jobs'
 
 export {
   AppRouteTabs,
   Avatar,
   Box,
   Button,
-  CommitTree,
   Error,
   FieldSet,
   FieldSets,

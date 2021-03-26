@@ -67,7 +67,7 @@ const loginRoute: routeBaseType = ({ server, app, auth }) => {
       try {
         const withError = (error: string) => {
           installationCookie.set({ teamSlug: undefined })
-          return response.redirect('/repositories?error=' + error)
+          return response.redirect('/jobs?error=' + error)
         }
 
         const provider = 'github'

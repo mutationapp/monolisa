@@ -5,7 +5,7 @@ import { useSWR } from '..'
 const useRepositories: useRepositoriesType = ({ fetcher }) => () => {
   const response = useSWR<{
     repositories: repositoryType[]
-  }>(`/api/repositories`, fetcher)
+  }>(`/api/jobs`, fetcher)
 
   const { data, error } = response
 

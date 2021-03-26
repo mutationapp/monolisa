@@ -1,10 +1,8 @@
-import { CommitTree } from '.'
-import { run } from 'monolisa.lib'
 import { buildRepositoryUrlPayloadType } from '../../server/shared'
 
 const RepositoryHeader: React.FunctionComponent<
   { name: string; mergeCommitSha?: string } & buildRepositoryUrlPayloadType
-> = ({ provider, name, pullNumber, mergeCommitSha, owner, repo }) => {
+> = ({ name }) => {
   return (
     <section className="title">
       <style jsx>{`
@@ -18,22 +16,7 @@ const RepositoryHeader: React.FunctionComponent<
           font-size: 0.875rem;
         }
       `}</style>
-      {name}
-      {run(() => {
-        if (!pullNumber) {
-          return
-        }
-        return (
-          <CommitTree
-            className="commitTree"
-            provider={provider}
-            pullNumber={pullNumber}
-            mergeCommitSha={mergeCommitSha}
-            owner={owner}
-            repo={repo}
-          />
-        )
-      })}
+      {name}?
     </section>
   )
 }

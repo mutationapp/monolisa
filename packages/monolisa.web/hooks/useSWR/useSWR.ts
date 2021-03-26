@@ -1,12 +1,12 @@
-import vercelSWR, { keyInterface } from 'swr'
+import vercelSWR, { Key } from 'swr'
 import { ApiError } from 'monolisa.lib/error'
-import { fetcherFn, ConfigInterface } from 'swr/dist/types'
+import { Fetcher, SWRConfiguration } from 'swr/dist/types'
 import { clientType } from '.'
 
 const useSWR = <T>(
-  key: keyInterface,
-  fn?: fetcherFn<T>,
-  config?: ConfigInterface<T, ApiError>,
+  key: Key,
+  fn?: Fetcher<T>,
+  config?: SWRConfiguration<T, ApiError>,
   client: clientType[] = ['browser'],
 ) => {
   return vercelSWR<T, ApiError>(
@@ -17,7 +17,7 @@ const useSWR = <T>(
       }
 
       return client.some(p => p === 'server') ? fn : undefined
-    })(),
+    })() || null,
     {
       shouldRetryOnError: false,
       revalidateOnReconnect: false,

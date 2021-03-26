@@ -92,7 +92,7 @@ const Import = () => {
         selectedProvider: provider,
       })
 
-      const response = await fetcher<{ token: string }>('/api/repositories', {
+      const response = await fetcher<{ token: string }>('/api/jobs', {
         method: 'PATCH',
         body: JSON.stringify({
           repository: name,

@@ -61,7 +61,7 @@ export const getReportPathTitle: (
 export const buildRepositoryUrl: buildRepositoryUrlType = initial => pathType => {
   if (!initial) {
     return {
-      href: '/repositories',
+      href: '/jobs',
     }
   }
 
@@ -90,7 +90,7 @@ export const buildRepositoryUrl: buildRepositoryUrlType = initial => pathType =>
 
   return {
     as: `${providerPath}${repoPath}${pullPath}${innerPath}${relative}${query}`,
-    href: `/repositories/${pathType === 'blob' ? 'file' : 'item'}?${queries}`,
+    href: `/jobs/${pathType === 'blob' ? 'file' : 'item'}?${queries}`,
   }
 }
 
@@ -99,7 +99,7 @@ export const buildApiUrl = (initial?: buildRepositoryUrlPayloadType) => (
 ) => {
   const { as, href } = buildRepositoryUrl(initial)(pathType)
 
-  return (as || href).replace('/github/', '/api/repositories/')
+  return (as || href).replace('/github/', '/api/jobs/')
 }
 
 export const buildProviderUrl = (initial?: buildProviderUrlPayloadType) => (

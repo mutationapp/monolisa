@@ -69,7 +69,7 @@ import { NextServer } from 'next/dist/server/next'
   }
 
   ;[
-    { routes: ['/rules', '/tyler', '/setup', '/:slug/repositories'] },
+    { routes: ['/rules', '/tyler', '/setup', '/:slug/jobs'] },
     {
       routes: ['/:slug/account', '/:slug/import'],
       authorize: true,
@@ -83,10 +83,10 @@ import { NextServer } from 'next/dist/server/next'
     { routes: ['/:slug'] },
   ].forEach(({ routes, authorize, redirect }) => {
     const map = {
-      '/:slug': `/repositories`,
+      '/:slug': `/jobs`,
       '/:slug/account': `/account`,
-      '/:slug/repositories': `/repositories`,
-      '/:slug/import': `/repositories/import`,
+      '/:slug/jobs': `/jobs`,
+      '/:slug/import': `/jobs/import`,
     }
 
     routes.forEach(route => {

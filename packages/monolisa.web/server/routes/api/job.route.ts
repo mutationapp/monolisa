@@ -27,7 +27,7 @@ import { getRepository } from 'monolisa.data'
 
 import { decrypt } from 'monolisa.lib/rsa'
 
-const rootPath = '/api/repositories'
+const rootPath = '/api/jobs'
 const withRepoPath = rootPath + '/:provider(github)/:owner/:repo'
 
 const repositoryRoute: apiRouteType = ({ server, auth }) => {

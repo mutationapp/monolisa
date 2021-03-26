@@ -59,7 +59,7 @@ const useRepositoryRoute: useRepositoryRouteType = () => {
 
   const buildSectionUrl: (section: string) => buildUrlType = section => ({
     as: `${overview.as}/${section}`,
-    href: `/repositories/${section}?${buildQuery({
+    href: `/jobs/${section}?${buildQuery({
       owner,
       repo,
       provider,

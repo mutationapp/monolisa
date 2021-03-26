@@ -1,5 +1,5 @@
 import fetcher, { useFetchType } from '../fetcher'
-import useRepository from './useRepository'
+import useJob from './useRepository'
 import { reportResponseType } from '../../server/shared'
 import { integrationProviderType } from 'monolisa.model'
 
@@ -12,4 +12,4 @@ export type useRepositoryType = (inject: {
   pullNumber?: string
 }) => useFetchType<reportResponseType>
 
-export default useRepository({ fetcher })
+export default useJob({ fetcher })

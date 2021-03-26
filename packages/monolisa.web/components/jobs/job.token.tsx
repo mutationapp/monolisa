@@ -46,7 +46,7 @@ const RepositoryToken = () => {
   useEffect(() => {
     ;(async () => {
       try {
-        const response = await fetcher<{ token: string }>('/api/repositories', {
+        const response = await fetcher<{ token: string }>('/api/jobs', {
           method: 'PATCH',
           body: JSON.stringify({
             repository: query.repo,
@@ -133,7 +133,7 @@ const RepositoryToken = () => {
 
                         try {
                           const data = await fetcher<{ token: string }>(
-                            '/api/repositories',
+                            '/api/jobs',
                             {
                               method: 'PATCH',
                               body: JSON.stringify({

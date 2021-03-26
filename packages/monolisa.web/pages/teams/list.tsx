@@ -153,7 +153,7 @@ const Teams = () => {
                         }}
                         size="small"
                       >
-                        {'Go to team'}
+                        {'Company Profile'}
                       </Button>
                     </div>
                   )
