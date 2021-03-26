@@ -63,11 +63,11 @@ const Teams = () => {
 
   return (
     <DashboardLayout
-      pageTitle={member ? `${user?.slug} : Teams` : 'Teams'}
-      title={member ? 'Managed companies' : 'Public teams'}
+      pageTitle={'Companies'}
+      title={'Companies'}
       subtitle={
         user && !member
-          ? 'User teams are private, here are some public teams from monolisa.app'
+          ? 'User companies are private, here are some public teams from monolisa.app'
           : ''
       }
       pull
@@ -103,7 +103,7 @@ const Teams = () => {
             shadow
             push
             header={{
-              children: 'Teams',
+              children: 'Companies',
               icon: <GridIcon />,
               button: {
                 size: 'small',
@@ -123,7 +123,7 @@ const Teams = () => {
               }
               return `${
                 teams?.length
-                  ? `${teams.length} teams listed.`
+                  ? `${teams.length} companies listed.`
                   : 'Nothing here yet.'
               } Go through navigation to create company.`
             })}
