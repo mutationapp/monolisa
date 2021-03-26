@@ -32,8 +32,8 @@ const NewTeam = () => {
   return (
     <DashboardLayout
       pull
-      pageTitle="Create team"
-      title="Create team"
+      pageTitle="Create company"
+      title="Create company"
       back={{ area: 'teams', href: '/teams' }}
       aside={<TeamNavigation />}
     >
