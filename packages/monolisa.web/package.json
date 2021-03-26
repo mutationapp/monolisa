@@ -48,7 +48,7 @@
     "react-vis": "^1.11.7",
     "shevyjs": "^1.2.0",
     "styled-jsx": "^3.3.2",
-    "swr": "^0.3.11"
+    "swr": "^0.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
