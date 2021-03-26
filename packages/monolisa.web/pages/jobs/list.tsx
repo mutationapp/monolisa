@@ -4,14 +4,13 @@ import Link from 'next/link'
 
 import { useLoading, useProfile } from '../../hooks'
 import { Fragment } from 'react'
-import { UnlockIcon, LockIcon, BookmarkIcon } from '../../components/icons'
+import { UnlockIcon, LockIcon } from '../../components/icons'
 import { DashboardLayout } from '../../components/layouts'
 import { UserInfoHeading } from '../../components/dashboard/heading'
 import { isLoading } from '../../hooks/fetcher'
 import { run, dealWithIt, nothingHereYet } from 'monolisa.lib'
 import Error from '../_error'
 import listingsMock from '../../mock/listings'
-import { formatRelative, subDays } from 'date-fns'
 
 export type companyType = {
   slug: string
@@ -33,13 +32,14 @@ import {
   Spinner,
   Installation,
   Markdown,
+  Button,
 } from '../../components'
 import { LoginNotification } from '../../components/notifications'
 import { css, t } from '../../styles/typography'
 
 const Repositories = () => {
   const { user, member } = useAppContext()
-  const [listings] = React.useState<listingType[]>(listingsMock)
+  const [jobs] = React.useState<listingType[]>(listingsMock)
 
   if (!user) {
     return <Error statusCode={401} />
@@ -157,10 +157,41 @@ const Repositories = () => {
               gap: '15px',
             })}
           >
-            {listings.map(job => {
-              const { company: user } = job
+            {jobs.map(job => {
+              const { company } = job
+
               return (
-                <Box shadow key={job.id}>
+                <Box
+                  shadow
+                  key={job.id}
+                  footer={
+                    <div
+                      className={css({
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '100%',
+                      })}
+                    >
+                      <div className={css({ flex: 1 })}>
+                        @
+                        <Link {...{ href: `/teams/mutationapp` }}>
+                          <a
+                            className={css({
+                              marginLeft: 2,
+                            })}
+                          >
+                            {company.slug}
+                          </a>
+                        </Link>
+                        , 23.10.1984
+                      </div>
+                      <Button link={{ ...{ href: `/jobs/${job.id}` } }}>
+                        Job Details
+                      </Button>
+                    </div>
+                  }
+                >
                   <div
                     className={css({
                       position: 'relative',
@@ -171,45 +202,9 @@ const Repositories = () => {
                     {/* <CompanyProfile {...{ listing: tweet }} /> */}
                   </div>
                   <section>
-                    <header
-                      className={css({
-                        color: 'var(--shade-7)',
-                        fontSize: '0.825rem',
-                        marginBottom: '10px',
-                        fontFamily: 'var(--font-header-medium)',
-                      })}
-                    >
-                      @{user.slug}{' '}
-                      <Link {...{ href: `/jobs/${job.id}` }}>
-                        <a>
-                          {formatRelative(
-                            subDays(job.createdDate, 3),
-                            new Date(),
-                          )}
-                        </a>
-                      </Link>
-                    </header>
                     <div style={t.content} className="tweet-details-content">
                       <Markdown>{job.content}</Markdown>
                     </div>
-                    <ul className={css({ display: 'flex', gap: '10px' })}>
-                      <li>
-                        <a
-                          className={css({
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          })}
-                        >
-                          <BookmarkIcon
-                            className={css({
-                              marginRight: 5,
-                            })}
-                          />{' '}
-                          14
-                        </a>
-                      </li>
-                    </ul>
                   </section>
                 </Box>
               )
