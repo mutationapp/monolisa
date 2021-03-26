@@ -1,5 +1,5 @@
 import fetcher, { useFetchType } from '../fetcher'
-import useJob from './useRepository'
+import useJob from './useJob'
 import { jobResponseType } from '../../server/shared'
 import { integrationProviderType } from 'monolisa.model'
 

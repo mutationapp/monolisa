@@ -17,7 +17,7 @@ import {
   useLoading,
   useAppContext,
 } from '../../hooks'
-import useJob from '../../hooks/useRepository'
+import useJob from '../../hooks/useJob'
 
 const RepositoryDangerZone = () => {
   const { team } = useAppContext()
