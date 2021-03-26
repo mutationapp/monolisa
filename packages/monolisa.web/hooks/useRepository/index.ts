@@ -1,15 +1,14 @@
 import fetcher, { useFetchType } from '../fetcher'
 import useJob from './useRepository'
-import { reportResponseType } from '../../server/shared'
+import { jobResponseType } from '../../server/shared'
 import { integrationProviderType } from 'monolisa.model'
 
-export type useRepositoryType = (inject: {
+export type useJobType = (inject: {
   fetcher: typeof fetcher
 }) => (payload: {
   provider: integrationProviderType
   repo: string
   owner: string
-  pullNumber?: string
-}) => useFetchType<reportResponseType>
+}) => useFetchType<jobResponseType>
 
 export default useJob({ fetcher })

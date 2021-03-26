@@ -105,9 +105,8 @@ export type buildRepositoryUrlType = (
 
 export type buildReportCurriedType = (pathType?: urlPathType) => buildUrlType
 
-export type reportResponseType = {
+export type jobResponseType = {
   installation: installationType
-  pullRequest?: pullRequestType
   repository: repoType
 }
 
