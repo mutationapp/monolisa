@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 import RouteTabs from './routeTabs'
 import AppRouteTabs from './app.routeTabs'
-import RepositoryRouteTabs from './repository.routeTabs'
+import RepositoryRouteTabs from './job.routeTabs'
 import TeamRouteTabs from './team.routeTabs'
 
 export type RouteTabsType = (options: {
