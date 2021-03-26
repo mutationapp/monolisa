@@ -64,7 +64,7 @@ const Teams = () => {
   return (
     <DashboardLayout
       pageTitle={member ? `${user?.slug} : Teams` : 'Teams'}
-      title={member ? 'Your teams' : 'Public teams'}
+      title={member ? 'Managed companies' : 'Public teams'}
       subtitle={
         user && !member
           ? 'User teams are private, here are some public teams from monolisa.app'
