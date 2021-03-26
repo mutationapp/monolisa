@@ -13,7 +13,7 @@ const withTeamAuth = WrappedComponent => {
     }
 
     if (!isOwner(teamMember)) {
-      return <Redirect {...getTeamUrl(teamMember.teamSlug)('repositories')} />
+      return <Redirect {...getTeamUrl(teamMember.teamSlug)('profile')} />
     }
 
     return <WrappedComponent {...props} />

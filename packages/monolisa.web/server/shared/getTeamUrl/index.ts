@@ -4,7 +4,7 @@ export type getTeamUrlType = (
   teamSlug: string,
 ) => (
   area:
-    | 'repositories'
+    | 'profile'
     | 'installations'
     | 'settings'
     | 'import'

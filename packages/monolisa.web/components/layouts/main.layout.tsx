@@ -161,7 +161,7 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
                       const area = 'jobs'
 
                       if (buildTeamUrl) {
-                        return { area, ...buildTeamUrl('repositories') }
+                        return { area, ...buildTeamUrl('profile') }
                       }
 
                       if (user) {

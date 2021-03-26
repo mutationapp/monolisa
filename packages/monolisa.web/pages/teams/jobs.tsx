@@ -32,7 +32,7 @@ const Repositories = () => {
   useEffect(() => {
     invitationKey &&
       setTimeout(() => {
-        const { as, href } = getTeamUrl(teamSlug)('repositories')
+        const { as, href } = getTeamUrl(teamSlug)('profile')
         router.replace(as || href, as)
       }, 1000)
   }, [invitationKey])

@@ -137,7 +137,7 @@ const Header = () => {
                       return { href: '/' }
                     }
                     if (reportRoute && buildTeamUrl) {
-                      const { as } = buildTeamUrl('repositories')
+                      const { as } = buildTeamUrl('profile')
                       return { href: as }
                     }
 
@@ -185,7 +185,7 @@ const Header = () => {
 
                           if (user && member?.id !== user.id) {
                             const repositoriesUrl = buildTeamUrl
-                              ? buildTeamUrl('repositories')
+                              ? buildTeamUrl('profile')
                               : { href: `/${user.slug}` }
 
                             return (
@@ -204,7 +204,7 @@ const Header = () => {
 
                           if (member) {
                             const repositoriesUrl = buildTeamUrl
-                              ? buildTeamUrl('repositories')
+                              ? buildTeamUrl('profile')
                               : { href: `/${member.slug}` }
 
                             return (

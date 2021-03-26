@@ -99,11 +99,7 @@ const teamRoute: routeBaseType = ({ server, app, auth }) => {
     async (request, response) => {
       const { section } = request.params
 
-      return render(
-        app,
-        request,
-        response,
-      )(`/teams/${section || 'repositories'}`)
+      return render(app, request, response)(`/teams/${section || 'profile'}`)
     },
   )
 }

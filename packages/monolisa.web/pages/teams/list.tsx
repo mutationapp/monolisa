@@ -141,7 +141,7 @@ const Teams = () => {
                 return teams.map(team => {
                   const { teamSlug } = team
 
-                  const { as } = getTeamUrl(teamSlug)('repositories')
+                  const { as } = getTeamUrl(teamSlug)('profile')
 
                   return (
                     <div key={teamSlug} className="team">

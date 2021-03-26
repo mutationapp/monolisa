@@ -21,7 +21,7 @@ const NewTeam = () => {
   const router = useRouter()
 
   const handleSuccess = async ({ value: teamSlug }) => {
-    const { as } = getTeamUrl(teamSlug)('repositories')
+    const { as } = getTeamUrl(teamSlug)('profile')
     router.push(as, as)
   }
 

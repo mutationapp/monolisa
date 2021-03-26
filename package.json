@@ -50,12 +50,14 @@
     ]
   },
   "dependencies": {
+    "dedent": "^0.7.0",
     "dotenv": "^8.2.0",
     "if-env": "^1.0.4",
     "nodemon": "^2.0.6",
     "pino": "^6.8.0"
   },
   "devDependencies": {
+    "@types/dedent": "^0.7.0",
     "@actions/core": "^1.2.6",
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
