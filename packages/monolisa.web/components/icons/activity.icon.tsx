@@ -2,7 +2,7 @@ import * as React from 'react'
 import { IconType } from '.'
 import { withSize } from './shared'
 
-const BoxIcon: IconType = props => {
+const ActivityIcon: IconType = props => {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -17,9 +17,9 @@ const BoxIcon: IconType = props => {
       color="var(--geist-foreground)"
       {...props}
     >
-      <rect x={3} y={3} width={18} height={18} rx={2} ry={2} />
+      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
     </svg>
   )
 }
 
-export default withSize(BoxIcon)
+export default withSize(ActivityIcon)

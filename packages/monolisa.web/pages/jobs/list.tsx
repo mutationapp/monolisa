@@ -157,10 +157,10 @@ const Repositories = () => {
               gap: '15px',
             })}
           >
-            {listings.map(tweet => {
-              const { company: user } = tweet
+            {listings.map(job => {
+              const { company: user } = job
               return (
-                <Box shadow key={tweet.id}>
+                <Box shadow key={job.id}>
                   <div
                     className={css({
                       position: 'relative',
@@ -180,17 +180,17 @@ const Repositories = () => {
                       })}
                     >
                       @{user.slug}{' '}
-                      <Link {...{ href: `/listing/${tweet.id}` }}>
+                      <Link {...{ href: `/jobs/${job.id}` }}>
                         <a>
                           {formatRelative(
-                            subDays(tweet.createdDate, 3),
+                            subDays(job.createdDate, 3),
                             new Date(),
                           )}
                         </a>
                       </Link>
                     </header>
                     <div style={t.content} className="tweet-details-content">
-                      <Markdown>{tweet.content}</Markdown>
+                      <Markdown>{job.content}</Markdown>
                     </div>
                     <ul className={css({ display: 'flex', gap: '10px' })}>
                       <li>
@@ -208,9 +208,6 @@ const Repositories = () => {
                           />{' '}
                           14
                         </a>
-                      </li>
-                      <li>
-                        <a>💬 Send a message</a>
                       </li>
                     </ul>
                   </section>

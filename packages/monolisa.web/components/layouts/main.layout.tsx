@@ -232,7 +232,6 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
       <footer>
         <Wrapper>
           <div className="footer-content">
-            from Amsterdam with love ...
             <Link href="/setup?section=contact">
               <a className="icon" title="contact">
                 <BikeIcon />

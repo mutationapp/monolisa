@@ -45,8 +45,10 @@ import RightIcon from './right.icon'
 import PlusIcon from './plus.icon'
 import MailIcon from './mail.icon'
 import BookmarkIcon from './bookmark.icon'
+import ActivityIcon from './activity.icon'
 
 export {
+  ActivityIcon,
   AddUserIcon,
   AlertIcon,
   AlignIcon,

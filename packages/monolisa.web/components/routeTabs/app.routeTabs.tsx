@@ -1,7 +1,15 @@
 import RouteTabs from '.'
-import { UserIcon, BookIcon, InstallationIcon, GridIcon } from '../icons'
-import { useAppContext } from '../../hooks'
 import getUrl from '../../server/shared/getUrl'
+
+import { useAppContext } from '../../hooks'
+
+import {
+  UserIcon,
+  InstallationIcon,
+  GridIcon,
+  OpenBookIcon,
+  ActivityIcon,
+} from '../icons'
 
 const AppRouteTabs = () => {
   const { member, user } = useAppContext()
@@ -21,7 +29,7 @@ const AppRouteTabs = () => {
         className="tabs"
         tabs={[
           {
-            icon: <BookIcon />,
+            icon: <OpenBookIcon />,
             children: 'Repositories',
             value: 'repositories',
             ...buildUrl('repositories'),
@@ -48,7 +56,7 @@ const AppRouteTabs = () => {
       className="tabs"
       tabs={[
         {
-          icon: <BookIcon />,
+          icon: <ActivityIcon />,
           children: 'Jobs',
           value: 'jobBoard',
           ...buildUrl('repositories'),

@@ -9,6 +9,7 @@ export type getTeamUrlType = (
     | 'settings'
     | 'import'
     | 'danger'
-    | 'invite',
+    | 'invite'
+    | 'jobs',
 ) => { as: string; href: string }
 export default getTeamUrl

@@ -33,6 +33,8 @@ const Settings = () => {
     <DashboardLayout
       pageTitle={`${teamSlug} : Settings`}
       title={company.companyName()}
+      back={false}
+      subtitle={company.catchPhrase()}
       aside={
         <Navigation
           icon
