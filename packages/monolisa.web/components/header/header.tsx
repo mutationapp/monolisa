@@ -180,7 +180,7 @@ const Header = () => {
                           }
 
                           if (!reportRoute?.query) {
-                            return <span className="brand">monolisa.app</span>
+                            return <span className="brand">Monolisa.app</span>
                           }
 
                           if (user && member?.id !== user.id) {

@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { BoxIcon } from '../icons'
-import { useAppContext, useLoading, useReducerState } from '../../hooks'
+import { useLoading, useReducerState } from '../../hooks'
 import { useEffect } from 'react'
 import { Spinner } from '..'
 
@@ -30,8 +30,6 @@ const Logo: React.FunctionComponent<{
   const href = props.href || '/'
   const size = props.size || 24
   const color = 'var(--shade-8)'
-
-  const { team } = useAppContext()
 
   return (
     <a
@@ -68,10 +66,9 @@ const Logo: React.FunctionComponent<{
         {...{
           size,
           color,
-          ...(team && !loading ? {} : { fill: color }),
+          fill: color,
         }}
       />
-
       {loading && (
         <span className="spinner">
           <Spinner />
