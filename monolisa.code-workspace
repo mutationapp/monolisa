@@ -5,28 +5,9 @@
     }
   ],
   "settings": {
-    "redisXplorer.config": {
-      "profiles": [
-        {
-          "name": "h",
-          "host": "127.0.0.1",
-          "accessKey": "",
-          "filter": "*",
-          "port": "6379"
-        },
-        {
-          "name": "test",
-          "host": "ec2-52-48-169-213.eu-west-1.compute.amazonaws.com",
-          "accessKey": "p8efa22b5031db0d213e36afb2dfdae8710b39beb48c8e9ac609776907998c36d",
-          "filter": "*",
-          "port": "16989"
-        }
-      ],
-      "scanLimit": 200
-    },
     "typescript.tsdk": "node_modules/typescript/lib",
     "workbench.colorCustomizations": {
-      "activityBar.activeBackground": "#e6e6e6",
+      "activityBar.activeBackground": "#eaeaea",
       "activityBar.activeBorder": "#d787d7",
       "activityBar.background": "#e6e6e6",
       "activityBar.foreground": "#15202b",
@@ -41,6 +22,6 @@
       "titleBar.inactiveBackground": "#cccccc99",
       "titleBar.inactiveForeground": "#15202b99"
     },
-    "peacock.color": "#ccc"
+    "peacock.color": "#eaeaea"
   }
 }

@@ -46,6 +46,7 @@ import PlusIcon from './plus.icon'
 import MailIcon from './mail.icon'
 import BookmarkIcon from './bookmark.icon'
 import ActivityIcon from './activity.icon'
+import MessageIcon from './message.icon'
 
 export {
   ActivityIcon,
@@ -78,6 +79,7 @@ export {
   LinkIcon,
   LockIcon,
   MailIcon,
+  MessageIcon,
   MergeIcon,
   MoonIcon,
   OpenBookIcon,

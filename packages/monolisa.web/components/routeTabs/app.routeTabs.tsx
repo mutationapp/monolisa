@@ -9,7 +9,9 @@ import {
   GridIcon,
   OpenBookIcon,
   ActivityIcon,
+  MessageIcon,
 } from '../icons'
+import React from 'react'
 
 const AppRouteTabs = () => {
   const { member, user } = useAppContext()
@@ -77,6 +79,12 @@ const AppRouteTabs = () => {
           icon: <UserIcon />,
           children: 'Account',
           value: 'account',
+          ...buildUrl('account'),
+        },
+        {
+          icon: <MessageIcon />,
+          children: 'Messages',
+          value: 'messages',
           ...buildUrl('account'),
         },
       ]}
