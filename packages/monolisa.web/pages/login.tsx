@@ -3,7 +3,7 @@ import { GithubIcon, AddUserIcon } from '../components/icons'
 import { useState, useEffect, Fragment } from 'react'
 import { setAppLoading } from '../hooks/useLoading'
 import Head from 'next/head'
-import getConfig from 'next/config'
+// import getConfig from 'next/config'
 import { parseQuery, buildQuery } from 'monolisa.lib/utils/url'
 import { useRouter } from 'next/router'
 import { run, betaTesting } from 'monolisa.lib'
@@ -15,8 +15,8 @@ import { loginResponseType } from '../server/shared'
 import { defaultTeamSize } from 'monolisa.model'
 
 // Needs to be on build time, but it doesn't work for prod env
-const { publicRuntimeConfig } = getConfig()
-const { GITHUB_CLIENT_ID } = publicRuntimeConfig
+// const { publicRuntimeConfig } = getConfig()
+// const { GITHUB_CLIENT_ID } = publicRuntimeConfig
 
 function LoginPage() {
   const { member } = useAppContext()
@@ -193,7 +193,7 @@ function LoginPage() {
 
                 setLoading(true)
               }}
-              href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&state=${authorizeHref}`}
+              href={`https://github.com/login/oauth/authorize?client_id=${'Iv1.8bf06283645483a6'}&state=${authorizeHref}`}
             >
               <Button disabled={loading} className="loginButton">
                 <GithubIcon />

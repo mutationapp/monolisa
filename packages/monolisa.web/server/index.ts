@@ -15,10 +15,11 @@ import featureToggles from './shared/featureToggles'
 import whenFeature from './middlewares/whenFeature'
 import helmet from 'helmet'
 
-// c(▀̿Ĺ̯▀̿ ̿).
 import { memberType } from 'monolisa.model'
 import { dealWithIt } from 'monolisa.lib'
 import { NextServer } from 'next/dist/server/next'
+
+// c(▀̿Ĺ̯▀̿ ̿).
 ;(async (server: Application, app: NextServer) => {
   const handle = app.getRequestHandler()
   await app.prepare()
@@ -115,6 +116,6 @@ import { NextServer } from 'next/dist/server/next'
   next({
     dev: process.env.NODE_ENV !== 'production',
     customServer: true,
-    // conf: baseConfig,
+    dir: '.',
   }),
 )

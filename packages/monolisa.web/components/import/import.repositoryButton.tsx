@@ -29,7 +29,7 @@ const ImportRepositoryButton = () => {
         className="provider"
         icon={<BoxIcon />}
       >
-        Create company
+        Install company
       </Button>
     )
   }

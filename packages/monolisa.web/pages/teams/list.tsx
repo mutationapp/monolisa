@@ -114,7 +114,7 @@ const Teams = () => {
                   : {
                       href: 'teams/new',
                     },
-                children: 'Create company',
+                children: 'Install company',
               },
             }}
             footer={run(() => {
@@ -125,7 +125,7 @@ const Teams = () => {
                 teams?.length
                   ? `${teams.length} companies listed.`
                   : 'Nothing here yet.'
-              } Go through navigation to create company.`
+              } Go through navigation to install company.`
             })}
           >
             <section

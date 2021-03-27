@@ -12,7 +12,7 @@ const BoxIcon: IconType = props => {
       strokeWidth={1.5}
       strokeLinecap="round"
       strokeLinejoin="round"
-      fill="none"
+      fill="var(--foreground)"
       shapeRendering="geometricPrecision"
       color="var(--geist-foreground)"
       {...props}
