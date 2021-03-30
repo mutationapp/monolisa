@@ -223,20 +223,18 @@ const Header = () => {
                         })}
                       </section>
                       <ul className="right-nav">
-                        {member && (
-                          <li>
-                            <Link href="/setup">
-                              <Button
-                                icon={<GearIcon />}
-                                size="small"
-                                secondary
-                                disabled={loggingOut}
-                              >
-                                Setup
-                              </Button>
-                            </Link>
-                          </li>
-                        )}
+                        <li>
+                          <Link href="/setup">
+                            <Button
+                              icon={<GearIcon />}
+                              size="small"
+                              secondary
+                              disabled={loggingOut}
+                            >
+                              Setup
+                            </Button>
+                          </Link>
+                        </li>
 
                         <li>{renderThemeSwitcher()}</li>
                         {member ? (
