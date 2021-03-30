@@ -32,7 +32,6 @@ const Installations = () => {
       title={`${
         teamSlug ? 'Team' : member?.id === user?.id ? 'Your' : 'User'
       } installations`}
-      aside={' '}
     >
       <div>
         {run(() => {

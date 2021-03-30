@@ -10,7 +10,6 @@ const Job = () => {
     <MainLayout
       subtitle={company.catchPhrase()}
       heading={<h1>Engineering Manager</h1>}
-      aside={' '}
     >
       <Markdown>
         {dedent`

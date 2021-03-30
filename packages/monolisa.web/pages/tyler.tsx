@@ -8,7 +8,6 @@ function Tyler() {
     <MainLayout
       pageTitle={'Tyler'}
       pull
-      aside={' '}
       back={{ area: 'Jack', href: '/' }}
       title={dealWithIt('Tyler...')}
     >

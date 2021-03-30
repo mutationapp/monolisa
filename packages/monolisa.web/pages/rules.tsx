@@ -8,7 +8,6 @@ function Rules() {
     <MainLayout
       pageTitle={dealWithIt('8 rules of monolisa.app')}
       pull
-      aside={' '}
       back={{ area: 'Tyler', href: '/tyler' }}
       title={dealWithIt('8 rules of monolisa.app')}
     >

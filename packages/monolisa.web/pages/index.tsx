@@ -13,7 +13,6 @@ function HomePage() {
     <MainLayout
       title={'Automated job board for github organizations'}
       pull
-      aside={' '}
       back={false}
       subtitle={'F# 🍒, TypeScript ✨, Javascript 🍉, ELM 🍐, HASKELL 🌊'}
     >

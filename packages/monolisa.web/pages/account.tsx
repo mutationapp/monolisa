@@ -15,7 +15,6 @@ const Account = () => {
     <MainLayout
       pageTitle={`${member?.slug} : Account`}
       title="Your account"
-      aside={' '}
       pull
     >
       <FieldSets>
