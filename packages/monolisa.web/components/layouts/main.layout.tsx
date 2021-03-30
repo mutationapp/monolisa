@@ -1,8 +1,7 @@
 import { Header, Heading, Wrapper } from '..'
-
-import { LeftIcon } from '../icons'
+import { LeftIcon, BikeIcon } from '../icons'
 import Link, { LinkProps } from 'next/link'
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import classNames from 'classnames'
 import { run } from 'monolisa.lib'
 import Head from 'next/head'
@@ -52,8 +51,8 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
     pull,
   })
 
-  const mainWidth = width ? width.main : '60%'
-  const asideWidth = width ? width.aside : '40%'
+  const mainWidth = width ? width.main : '70%'
+  const asideWidth = width ? width.aside : '30%'
 
   const headTitle = `monolisa ${pageTitle ? `| ${pageTitle}` : ''}`
 
@@ -234,10 +233,23 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
             <ul
               className={css({
                 display: 'flex',
-                gap: '15px',
+                gap: '10px',
                 fontSize: '0.875rem',
+                '& li': {
+                  display: 'flex',
+                },
+                '& a': {
+                  lineHeight: 1,
+                },
               })}
             >
+              <li>
+                <Link href="/setup?section=contact">
+                  <a className="icon" title="contact">
+                    <BikeIcon />
+                  </a>
+                </Link>
+              </li>
               <li>
                 <a title="Terms">Terms of Use</a>
               </li>

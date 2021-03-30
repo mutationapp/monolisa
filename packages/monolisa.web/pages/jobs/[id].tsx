@@ -7,10 +7,7 @@ import { randomEmoji } from '../../mock/emoji'
 
 const Job = () => {
   return (
-    <MainLayout
-      subtitle={company.catchPhrase()}
-      heading={<h1>Engineering Manager</h1>}
-    >
+    <MainLayout subtitle={company.catchPhrase()} title={'Engineering Manager'}>
       <Markdown>
         {dedent`
           ${lorem.paragraph()}
