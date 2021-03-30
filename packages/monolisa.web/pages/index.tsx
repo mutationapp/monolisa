@@ -11,11 +11,11 @@ function HomePage() {
 
   return (
     <MainLayout
-      heading={<h1>Automated job board for github organizations</h1>}
+      title={'Automated job board for github organizations'}
       pull
       aside={' '}
-      back={true}
-      subtitle={'saasas'}
+      back={false}
+      subtitle={'F#, Javascript, TypeScript, ELM, HASKELL'}
     >
       <ul
         className={css({
