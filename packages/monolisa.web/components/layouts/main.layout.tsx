@@ -8,6 +8,7 @@ import { run } from 'monolisa.lib'
 import Head from 'next/head'
 import { getTeamUrl } from '../../server/shared'
 import { useAppContext } from '../../hooks'
+import { css } from '@emotion/css'
 
 export type backType = LinkProps & {
   area: string
@@ -224,10 +225,27 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
             return <aside>{laside}</aside>
           })}
           <main>{children}</main>
-          {run(() => {
-            if (!aside) return
-            return <aside>{aside}</aside>
-          })}
+          <aside>
+            {aside}
+            <ul
+              className={css({
+                display: 'flex',
+                gap: '15px',
+              })}
+            >
+              <li>
+                <a title="Terms">Terms of Use</a>
+              </li>
+              <li>
+                <a title="Terms">Privacy Policy</a>
+              </li>
+              <li>
+                <Link href="/setup">
+                  <a title="Terms">Setup</a>
+                </Link>
+              </li>
+            </ul>
+          </aside>
         </div>
       </Wrapper>
       <footer>
