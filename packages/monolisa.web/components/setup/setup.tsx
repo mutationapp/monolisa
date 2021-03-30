@@ -18,7 +18,7 @@ function Setup() {
   const { asPath, pathname } = useRouter()
 
   const isHome = pathname === '/'
-  const title = isHome ? 'Functional programming job board.' : 'Setup'
+  const title = 'Functional programming job board.'
   const section = getSection(asPath)
 
   return (
