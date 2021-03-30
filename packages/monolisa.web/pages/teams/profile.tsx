@@ -1,5 +1,4 @@
 import { MainLayout } from '../../components/layouts'
-import withTeamAuth from '../../components/auth/withTeamAuth'
 import {
   Navigation,
   TeamDangerZone,
@@ -17,7 +16,7 @@ import { company, lorem } from 'faker'
 import dedent from 'dedent'
 import { randomEmoji } from '../../mock/emoji'
 
-const Settings = () => {
+const TeamProfile = () => {
   const router = useRouter()
 
   const { team } = useAppContext()
@@ -82,4 +81,4 @@ const Settings = () => {
   )
 }
 
-export default withTeamAuth(Settings)
+export default TeamProfile

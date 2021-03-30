@@ -1,6 +1,6 @@
 import { Header, Heading, Wrapper } from '..'
 
-import { LeftIcon, BikeIcon } from '../icons'
+import { LeftIcon } from '../icons'
 import Link, { LinkProps } from 'next/link'
 import { ReactNode } from 'react'
 import classNames from 'classnames'
@@ -248,17 +248,6 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
           </aside>
         </div>
       </Wrapper>
-      <footer>
-        <Wrapper>
-          <div className="footer-content">
-            <Link href="/setup?section=contact">
-              <a className="icon" title="contact">
-                <BikeIcon />
-              </a>
-            </Link>
-          </div>
-        </Wrapper>
-      </footer>
     </div>
   )
 }
