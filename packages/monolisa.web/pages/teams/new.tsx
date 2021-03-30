@@ -1,4 +1,4 @@
-import { DashboardLayout } from '../../components/layouts'
+import { MainLayout } from '../../components/layouts'
 import { TeamNavigation, Button, FieldSet, Box } from '../../components'
 
 import { getTeamUrl } from '../../server/shared'
@@ -30,7 +30,7 @@ const NewTeam = () => {
   const canCreateSlug = member && isFeature({ FT_TEAM_SLUG_CREATION: 'on' })
 
   return (
-    <DashboardLayout
+    <MainLayout
       pull
       pageTitle="Create company"
       title="Create company"
@@ -117,7 +117,7 @@ const NewTeam = () => {
           />
         )
       })}
-    </DashboardLayout>
+    </MainLayout>
   )
 }
 

@@ -2,7 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 
 import { useLoading, useTeam, useAppContext } from '../../hooks'
-import { DashboardLayout } from '../../components/layouts'
+import { MainLayout } from '../../components/layouts'
 import { isLoading } from '../../hooks/fetcher'
 import { run, nothingHereYet, dealWithIt } from 'monolisa.lib'
 import {
@@ -46,7 +46,7 @@ const Repositories = () => {
   const loading = useLoading(isLoading(teamProfile))
 
   return (
-    <DashboardLayout
+    <MainLayout
       pageTitle={`${teamSlug} : Repositories`}
       pull
       aside={
@@ -133,7 +133,7 @@ const Repositories = () => {
           )
         }
       })}
-    </DashboardLayout>
+    </MainLayout>
   )
 }
 

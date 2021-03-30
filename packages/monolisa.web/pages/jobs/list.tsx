@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useLoading, useProfile } from '../../hooks'
 import { Fragment } from 'react'
 import { UnlockIcon, LockIcon } from '../../components/icons'
-import { DashboardLayout } from '../../components/layouts'
+import { MainLayout } from '../../components/layouts'
 import { UserInfoHeading } from '../../components/dashboard/heading'
 import { isLoading } from '../../hooks/fetcher'
 import { run, dealWithIt, nothingHereYet } from 'monolisa.lib'
@@ -53,7 +53,7 @@ const Repositories = () => {
   const loading = useLoading(isLoading(profile))
 
   return (
-    <DashboardLayout
+    <MainLayout
       pageTitle={`${user.slug} : Repositories`}
       pull
       aside={
@@ -212,7 +212,7 @@ const Repositories = () => {
           </ul>
         )
       })}
-    </DashboardLayout>
+    </MainLayout>
   )
 }
 

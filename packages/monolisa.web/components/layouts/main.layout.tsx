@@ -40,6 +40,7 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
   children,
   width,
 }) => {
+  console.log(`🚀 ~ file: main.layout.tsx ~ line 43 ~ subtitle`, subtitle)
   const { user, member, team } = useAppContext()
 
   const teamSlug = team?.name

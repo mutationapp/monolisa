@@ -1,4 +1,4 @@
-import { DashboardLayout } from '../../components/layouts'
+import { MainLayout } from '../../components/layouts'
 import withTeamAuth from '../../components/auth/withTeamAuth'
 import {
   Navigation,
@@ -30,7 +30,7 @@ const Settings = () => {
   const teamSlug = team.name
 
   return (
-    <DashboardLayout
+    <MainLayout
       pageTitle={`${teamSlug} : Settings`}
       title={company.companyName()}
       back={false}
@@ -78,7 +78,7 @@ const Settings = () => {
           </Markdown>
         )
       })}
-    </DashboardLayout>
+    </MainLayout>
   )
 }
 

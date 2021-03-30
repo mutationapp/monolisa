@@ -1,4 +1,4 @@
-import { DashboardLayout } from '../components/layouts'
+import { MainLayout } from '../components/layouts'
 import { FieldSet, FieldSets, withAuth } from '../components'
 import { useAppContext } from '../hooks'
 
@@ -12,7 +12,7 @@ const Account = () => {
   }
 
   return (
-    <DashboardLayout
+    <MainLayout
       pageTitle={`${member?.slug} : Account`}
       title="Your account"
       aside={' '}
@@ -51,7 +51,7 @@ const Account = () => {
           onSuccess={handleSucess}
         />
       </FieldSets>
-    </DashboardLayout>
+    </MainLayout>
   )
 }
 export default withAuth(Account)

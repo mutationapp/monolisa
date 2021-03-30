@@ -1,4 +1,4 @@
-import { DashboardLayout } from '../../components/layouts'
+import { MainLayout } from '../../components/layouts'
 import withTeamAuth from '../../components/auth/withTeamAuth'
 import {
   TeamInvitation,
@@ -26,7 +26,7 @@ const Settings = () => {
   const teamSlug = team.name
 
   return (
-    <DashboardLayout
+    <MainLayout
       pageTitle={`${teamSlug} : Settings`}
       pull
       title="Team settings"
@@ -64,7 +64,7 @@ const Settings = () => {
 
         return <TeamMembers />
       })}
-    </DashboardLayout>
+    </MainLayout>
   )
 }
 

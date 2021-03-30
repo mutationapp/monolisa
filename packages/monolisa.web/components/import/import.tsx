@@ -1,6 +1,6 @@
 import getConfig from 'next/config'
 import { Button, Box, Modal } from '..'
-import { DashboardLayout } from '../layouts'
+import { MainLayout } from '../layouts'
 import Link from 'next/link'
 import { integrationProviderType } from 'monolisa.model'
 
@@ -119,7 +119,7 @@ const Import = () => {
   }
 
   return (
-    <DashboardLayout
+    <MainLayout
       pull
       aside={
         data?.repos?.length ? (
@@ -331,7 +331,7 @@ const Import = () => {
           return <Modal {...props} />
         })}
       </Fragment>
-    </DashboardLayout>
+    </MainLayout>
   )
 }
 

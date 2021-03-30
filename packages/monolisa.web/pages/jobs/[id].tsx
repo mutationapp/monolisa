@@ -2,12 +2,12 @@ import dedent from 'dedent'
 import { company, lorem } from 'faker'
 import React from 'react'
 import { Markdown } from '../../components'
-import { DashboardLayout } from '../../components/layouts'
+import { MainLayout } from '../../components/layouts'
 import { randomEmoji } from '../../mock/emoji'
 
 const Job = () => {
   return (
-    <DashboardLayout
+    <MainLayout
       subtitle={company.catchPhrase()}
       heading={<h1>Engineering Manager</h1>}
       aside={' '}
@@ -30,7 +30,7 @@ const Job = () => {
           ${lorem.paragraph()}
         `}
       </Markdown>
-    </DashboardLayout>
+    </MainLayout>
   )
 }
 

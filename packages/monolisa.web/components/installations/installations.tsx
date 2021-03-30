@@ -1,7 +1,7 @@
 import { useLoading, useProfile, useTeam, useAppContext } from '../../hooks'
 
 import { Error, Loading, Installation } from '..'
-import { DashboardLayout } from '../layouts'
+import { MainLayout } from '../layouts'
 import { run, somethingWentWrong } from 'monolisa.lib'
 import SomethingWentWrong from '../somethingWentWrong'
 
@@ -26,7 +26,7 @@ const Installations = () => {
   const loading = useLoading(!error && !data)
 
   return (
-    <DashboardLayout
+    <MainLayout
       pageTitle={`${teamSlug || user?.slug} : Installations`}
       pull
       title={`${
@@ -46,7 +46,7 @@ const Installations = () => {
           return <Installation installations={data?.installations} />
         })}
       </div>
-    </DashboardLayout>
+    </MainLayout>
   )
 }
 export default Installations

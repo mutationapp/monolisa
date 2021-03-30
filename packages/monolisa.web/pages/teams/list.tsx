@@ -4,7 +4,7 @@ import { run } from 'monolisa.lib'
 import { getTeamUrl, teamsPayloadType } from '../../server/shared'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { DashboardLayout } from '../../components/layouts'
+import { MainLayout } from '../../components/layouts'
 import { GridIcon } from '../../components/icons'
 
 import {
@@ -62,7 +62,7 @@ const Teams = () => {
   const teams = data?.teams
 
   return (
-    <DashboardLayout
+    <MainLayout
       pageTitle={'Companies'}
       title={'Companies'}
       subtitle={
@@ -163,7 +163,7 @@ const Teams = () => {
           </Box>
         )
       })}
-    </DashboardLayout>
+    </MainLayout>
   )
 }
 

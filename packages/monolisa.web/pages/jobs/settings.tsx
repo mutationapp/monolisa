@@ -1,4 +1,4 @@
-import { DashboardLayout } from '../../components/layouts'
+import { MainLayout } from '../../components/layouts'
 import {
   useRepositoryRoute,
   useAppContext,
@@ -42,7 +42,7 @@ const RepositorySettings = () => {
   const { overview, settings } = repositoryRoute
 
   return (
-    <DashboardLayout
+    <MainLayout
       pageTitle={useRepositoryPageTitle()}
       pull
       title={'Repository Settings'}
@@ -75,7 +75,7 @@ const RepositorySettings = () => {
 
         return <RepositoryToken />
       })}
-    </DashboardLayout>
+    </MainLayout>
   )
 }
 

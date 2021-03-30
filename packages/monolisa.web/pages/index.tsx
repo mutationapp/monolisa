@@ -4,17 +4,18 @@ import { listingType } from './jobs/list'
 import listingsMock from '../mock/listings'
 import { css, t } from '../styles/typography'
 import Link from 'next/link'
-import { DashboardLayout } from '../components/layouts'
+import { MainLayout } from '../components/layouts'
 
 function HomePage() {
   const [jobs] = React.useState<listingType[]>(listingsMock)
 
   return (
-    <DashboardLayout
+    <MainLayout
       heading={<h1>Automated job board for github organizations</h1>}
       pull
       aside={' '}
       back={true}
+      subtitle={'saasas'}
     >
       <ul
         className={css({
@@ -77,7 +78,7 @@ function HomePage() {
           )
         })}
       </ul>
-    </DashboardLayout>
+    </MainLayout>
   )
 }
 
