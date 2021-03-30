@@ -226,11 +226,17 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
           })}
           <main>{children}</main>
           <aside>
-            {aside}
+            {run(() => {
+              if (!aside) return
+              return (
+                <div className={css({ marginBottom: '15px' })}>{aside}</div>
+              )
+            })}
             <ul
               className={css({
                 display: 'flex',
                 gap: '15px',
+                fontSize: '0.875rem',
               })}
             >
               <li>
