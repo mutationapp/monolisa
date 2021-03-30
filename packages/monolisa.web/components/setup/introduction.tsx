@@ -4,9 +4,7 @@ import styles from './styles'
 
 import { useRouter } from 'next/router'
 import { Box } from '..'
-import { blank } from '../link'
 import { getSectionIcon, getSetupUrl } from './shared'
-import { defaultTeamSize } from 'monolisa.model'
 
 const Introduction = () => {
   const { pathname } = useRouter()
@@ -28,34 +26,15 @@ const Introduction = () => {
       <style jsx>{styles}</style>
       <section>
         <div>
-          <h3>
-            monolisa.app is a testing automation{' '}
-            <a {...blank} href="https://github.com/monolisaapp">
-              suite
-            </a>{' '}
-            for github projects
-          </h3>
+          <h2>Monolisa is automated job board for github organizations.</h2>
         </div>
         <div>
-          monolisa.app uploads{' '}
-          <a {...blank} href="https://stryker-mutator.io">
-            stryker
-          </a>{' '}
-          monolisa testing reports, saves as <strong>historical data</strong> to
-          provide <strong>pull request</strong> based comparisons.
-        </div>
-        <div>
-          monolisa.app&apos;s api supports <strong>public/private</strong>{' '}
-          repositories, <strong>teams/organizations</strong>, using github{' '}
+          monolisa.app&apos;s api supports <strong>public</strong> repositories,{' '}
+          <strong>teams/organizations</strong>, using github{' '}
           <Link {...buildSetupUrl('installation')}>
             <a>installations</a>
           </Link>
           .
-        </div>
-        <div>
-          β: App is <strong>free</strong> for <strong>individuals</strong> and{' '}
-          <strong>free</strong> up to <strong>{defaultTeamSize}</strong> seats
-          for <strong>teams</strong> 🙌.{' '}
         </div>
       </section>
     </Box>

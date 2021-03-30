@@ -47,21 +47,6 @@ const Privacy = () => {
           <strong>source code</strong> based on authentication preferences by
           the <strong>token</strong>.
         </div>
-        <h3>Data safety</h3>
-        <div>
-          monolisa.app does not store your <strong>source code</strong>. Instead
-          it stores monolisa reports with matched file names. Even if it is
-          provided{' '}
-          <a href="https://github.com/monolisaapp/mutate" {...blank}>
-            Mutate
-          </a>{' '}
-          strips before <strong>uploading</strong>.
-        </div>
-        <div>
-          Furthermore, each <strong>access token</strong> delivered by{' '}
-          <strong>github</strong> is encrypted by battle tested algorithms and
-          not accessible without <strong>private key</strong>.
-        </div>
       </section>
     </Box>
   )

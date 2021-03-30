@@ -3,7 +3,7 @@ import { integrationType } from 'monolisa.model'
 import Knex from 'knex'
 
 export type getIntegrationsType = (
-  conteext: Knex,
+  context: Knex,
 ) => (
   payload: Partial<integrationType>,
 ) => Promise<integrationType[] | undefined>

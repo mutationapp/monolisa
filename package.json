@@ -12,7 +12,7 @@
     "review:api": "HEROKU_PIPELINE='monolisa-api' node scripts/heroku/reviewApp",
     "review:web": "HEROKU_PIPELINE='monolisa-web' node scripts/heroku/reviewApp",
     "build": "yarn clean:dist && lerna run build",
-    "build:dev": "NODE_ENV=development lerna run build --since HEAD",
+    "build:dev": "lerna run build",
     "build:types": "tsc -b packages/**/tsconfig.build.json",
     "clean:dist": "rm -rf packages/**/dist*",
     "clean": "rm -rf packages/*/.next && rm -rf packages/**/dist* && rm -rf .stryker-t* **/*/.stryker-t* && tsc --build --clean && rm -rf yarn.lock && rm -rf yarn-*.log",

@@ -19,8 +19,8 @@ const Contact = () => {
         icon: getSectionIcon('contact'),
       }}
       footer={
-        <Link {...buildSetupUrl('courses')}>
-          <a>go next (courses)</a>
+        <Link {...buildSetupUrl('introduction')}>
+          <a>go to start (introduction)</a>
         </Link>
       }
     >
@@ -28,8 +28,10 @@ const Contact = () => {
       <section>
         <div className="small">
           Feel free to{' '}
-          <a href="mailto://contact@monolisa.app">contact from here</a> for any
-          question. You can also report an issue on github from{' '}
+          <a {...blank} href="https://twitter.com/monolisaapp">
+            contact from here
+          </a>{' '}
+          for any question. You can also report an issue on github from{' '}
           <a href="https://github.com/monolisaapp/mutate/issues" {...blank}>
             {'here'}
           </a>

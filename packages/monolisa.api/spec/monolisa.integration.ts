@@ -4,7 +4,7 @@ import { integrationProviderType, teamBaseType } from 'monolisa.model'
 import { v4 as uuid } from 'uuid'
 
 export type userStubType = {
-  //   providerUserId: string
+  providerUserId: string
   userName: string
   provider: integrationProviderType
   email: string
@@ -19,7 +19,7 @@ export const users: {
   ibsukru: {
     // accessToken: INTEGRATION_API_KEY,
     accessToken: uuid(),
-    // providerUserId: '1394705',
+    providerUserId: '1394705',
     userName: 'ibsukru',
     provider: 'github',
     email: 'ibsukru@gmail.com',
@@ -27,7 +27,7 @@ export const users: {
   },
   ibvelinov: {
     accessToken: '6f5fd96c30d4fd232e645b28eea9530936e7dbe5',
-    // providerUserId: '17336276',
+    providerUserId: '17336276',
     userName: 'ibvelinov',
     provider: 'github',
     email: 'ibvelinov@gmail.com',
@@ -35,7 +35,7 @@ export const users: {
   },
   diplomaticTechno: {
     accessToken: 'diplomaticTechno_accessToken',
-    // providerUserId: '2829280',
+    providerUserId: '2829280',
     userName: 'diplomaticTechno_',
     provider: 'github',
     email: 'diplomaticTechno@gmail.com',
@@ -50,7 +50,7 @@ const teams = {
 }
 
 const getStub = () =>
-  new Array(50)
+  new Array(5)
     .fill(undefined)
     .map(() => {
       const userCard = faker.helpers.userCard()
@@ -61,6 +61,7 @@ const getStub = () =>
         email: userCard.email,
         name: userCard.name,
         accessToken: 'accessToken',
+        providerUserId: uuid(),
       }
 
       const team: teamBaseType = {

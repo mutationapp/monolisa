@@ -11,7 +11,6 @@ import {
   Import,
   Privacy,
   Introduction,
-  Courses,
   Contact,
 } from '.'
 
@@ -19,7 +18,7 @@ function Setup() {
   const { asPath, pathname } = useRouter()
 
   const isHome = pathname === '/'
-  const title = isHome ? 'monolisa testing supercharged.' : 'Setup'
+  const title = isHome ? 'Functional programming job board.' : 'Setup'
   const section = getSection(asPath)
 
   return (
@@ -54,10 +53,6 @@ function Setup() {
 
         if (section === 'contact') {
           return <Contact />
-        }
-
-        if (section === 'courses') {
-          return <Courses />
         }
       })}
     </MainLayout>
