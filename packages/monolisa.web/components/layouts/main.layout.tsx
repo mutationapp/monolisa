@@ -48,8 +48,7 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
 
   const buildTeamUrl = teamSlug ? getTeamUrl(teamSlug) : undefined
 
-  const className = classNames('wrapper', {
-    withAside: !!aside || !!laside,
+  const className = classNames('wrapper', 'withAside', {
     pull,
   })
 
