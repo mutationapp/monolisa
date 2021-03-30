@@ -32,8 +32,8 @@ const AppRouteTabs = () => {
         tabs={[
           {
             icon: <OpenBookIcon />,
-            children: 'Repositories',
-            value: 'repositories',
+            children: 'Profile',
+            value: 'profile',
             ...buildUrl('repositories'),
           },
           {
@@ -60,7 +60,7 @@ const AppRouteTabs = () => {
         {
           icon: <ActivityIcon />,
           children: 'Jobs',
-          value: 'jobBoard',
+          value: 'jobs',
           ...buildUrl('repositories'),
         },
         {

@@ -71,7 +71,7 @@ const Teams = () => {
           : ''
       }
       pull
-      aside={member ? <TeamNavigation /> : ' '}
+      aside={member ? <TeamNavigation /> : undefined}
     >
       <style jsx>{`
         .teams:not(.empty) {
@@ -114,7 +114,7 @@ const Teams = () => {
                   : {
                       href: 'teams/new',
                     },
-                children: 'Install company',
+                children: 'Install',
               },
             }}
             footer={run(() => {
@@ -153,7 +153,7 @@ const Teams = () => {
                         }}
                         size="small"
                       >
-                        {'Company Profile'}
+                        {'Go to profile'}
                       </Button>
                     </div>
                   )

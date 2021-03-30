@@ -29,7 +29,7 @@ const ImportRepositoryButton = () => {
         className="provider"
         icon={<BoxIcon />}
       >
-        Install company
+        Install
       </Button>
     )
   }
@@ -40,11 +40,11 @@ const ImportRepositoryButton = () => {
 
   return teamMember ? (
     <Button link={getTeamUrl(teamMember.teamSlug)('import')} size="large">
-      Import Repository
+      Import
     </Button>
   ) : (
     <Button link={getUrl(member.slug)('import')} size="large">
-      Import Repository
+      Import
     </Button>
   )
 }
