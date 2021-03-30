@@ -7,7 +7,6 @@ import {
   InstallationIcon,
   PlusIcon,
   LinkIcon,
-  BookIcon,
   MailIcon,
 } from '../../icons'
 
@@ -23,8 +22,6 @@ const getSectionIcon = (section: sectionType) => {
       return <PlusIcon />
     case 'integration':
       return <LinkIcon />
-    case 'courses':
-      return <BookIcon />
     case 'contact':
       return <MailIcon />
     default:
