@@ -7,7 +7,7 @@ const Account = () => {
 
   const { member } = useAppContext()
 
-  const handleSucess = ({ response }) => {
+  const handleSuccess = ({ response }) => {
     member?.set(response)
   }
 
@@ -33,7 +33,7 @@ const Account = () => {
             maxLength: 32,
             minLength: 3,
           }}
-          onSuccess={handleSucess}
+          onSuccess={handleSuccess}
         />
         <FieldSet
           url={url}
@@ -47,7 +47,7 @@ const Account = () => {
             required: true,
             isEmail: true,
           }}
-          onSuccess={handleSucess}
+          onSuccess={handleSuccess}
         />
       </FieldSets>
     </MainLayout>
