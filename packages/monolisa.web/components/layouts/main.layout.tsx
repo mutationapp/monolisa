@@ -91,7 +91,7 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
           padding-top: 20px;
         }
         .wrapper.pull main {
-          margin-top: -45px;
+          margin-top: -40px;
         }
         .wrapper.withAside {
           display: flex;

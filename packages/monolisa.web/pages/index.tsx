@@ -15,7 +15,7 @@ function HomePage() {
       pull
       aside={' '}
       back={false}
-      subtitle={'F#, Javascript, TypeScript, ELM, HASKELL'}
+      subtitle={'F# 🍒, TypeScript ✨, Javascript 🍉, ELM 🍐, HASKELL 🌊'}
     >
       <ul
         className={css({
