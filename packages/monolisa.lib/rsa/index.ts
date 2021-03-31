@@ -1,7 +1,7 @@
 import { getEnv } from '../env'
 import crypto from 'crypto'
 
-const { monolisa_PRIVATE_KEY, monolisa_PUBLIC_KEY } = getEnv()
+const { MONOLISA_PRIVATE_KEY, MONOLISA_PUBLIC_KEY } = getEnv()
 
 const wrap = (key: string, type: 'public' | 'private') => {
   return type === 'private'
@@ -9,11 +9,11 @@ const wrap = (key: string, type: 'public' | 'private') => {
     : `-----BEGIN PUBLIC KEY-----\n${key}\n-----END PUBLIC KEY-----`
 }
 
-export const encrypt = (value: string, key = monolisa_PUBLIC_KEY) => {
+export const encrypt = (value: string, key = MONOLISA_PUBLIC_KEY) => {
   return crypto
     .publicEncrypt(
       {
-        key: wrap(key, 'public'),
+        key: wrap(key, 'private'),
         padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
         oaepHash: 'sha256',
       },
@@ -22,7 +22,7 @@ export const encrypt = (value: string, key = monolisa_PUBLIC_KEY) => {
     .toString('base64')
 }
 
-export const decrypt = (value: string, key = monolisa_PRIVATE_KEY) => {
+export const decrypt = (value: string, key = MONOLISA_PRIVATE_KEY) => {
   return crypto
     .privateDecrypt(
       {

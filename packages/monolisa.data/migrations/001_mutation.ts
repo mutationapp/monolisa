@@ -48,7 +48,7 @@ export const up = async (knex: Knex) => {
       table.string('userName', 255).notNullable()
       table.string('email', 255).notNullable()
       table.string('provider', 50).notNullable()
-      table.string('accessToken', 255).notNullable()
+      table.string('accessToken', 500).notNullable()
 
       withUser(table)
 

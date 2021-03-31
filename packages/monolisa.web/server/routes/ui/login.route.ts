@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-unfetch'
 import getAppInstallation from '../../shared/getAppInstallation'
 
-import { routeBaseType, renderError, render } from '../index'
+import { routeBaseType, render } from '../index'
 import { federate } from '../../middlewares'
 import { somethingWentWrong } from 'monolisa.lib'
 import { parseCookie } from 'monolisa.lib/utils/cookie'
@@ -64,272 +64,266 @@ const loginRoute: routeBaseType = ({ server, app, auth }) => {
         stateCookie.set(null)
       }
 
-      try {
-        const withError = (error: string) => {
-          installationCookie.set({ teamSlug: undefined })
-          return response.redirect('/jobs?error=' + error)
-        }
+      const withError = (error: string) => {
+        installationCookie.set({ teamSlug: undefined })
+        return response.redirect('/jobs?error=' + error)
+      }
 
-        const provider = 'github'
+      const provider = 'github'
 
-        const query = request.query as {
-          [key: string]: string
-        }
+      const query = request.query as {
+        [key: string]: string
+      }
 
-        const { code } = query
+      const { code } = query
 
-        const state = query.state
-          ? decodeProviderStateToken(query.state)
-          : undefined
+      const state = query.state
+        ? decodeProviderStateToken(query.state)
+        : undefined
 
-        const { invitationKey, returnUrl } = state
-          ? parseQuery(state)
-          : {
-              invitationKey: undefined,
-              returnUrl: undefined,
-            }
-
-        if (!code) {
-          return withError('code from provider is empty.')
-        }
-
-        const accessToken = await (async () => {
-          const githubResponse = await fetch(
-            `https://github.com/login/oauth/access_token?client_id=${GITHUB_CLIENT_ID}&client_secret=${GITHUB_CLIENT_SECRET}&code=${code}`,
-            {
-              method: 'POST',
-              headers: {
-                Accept: 'application/json',
-              },
-            },
-          )
-
-          if (!githubResponse.ok) {
-            console.warn('Github response was not ok', query)
-            return
+      const { invitationKey, returnUrl } = state
+        ? parseQuery(state)
+        : {
+            invitationKey: undefined,
+            returnUrl: undefined,
           }
 
-          const result = await githubResponse.json()
+      if (!code) {
+        return withError('code from provider is empty.')
+      }
 
-          return result.access_token
-        })()
-
-        if (!accessToken) {
-          return withError('Access token not found')
-        }
-
-        const githubUser = await (async () => {
-          const userResponse = await fetch('https://api.github.com/user', {
+      const accessToken = await (async () => {
+        const githubResponse = await fetch(
+          `https://github.com/login/oauth/access_token?client_id=${GITHUB_CLIENT_ID}&client_secret=${GITHUB_CLIENT_SECRET}&code=${code}`,
+          {
+            method: 'POST',
             headers: {
               Accept: 'application/json',
-              Authorization: 'token ' + accessToken,
             },
+          },
+        )
+
+        if (!githubResponse.ok) {
+          console.warn('Github response was not ok', query)
+          return
+        }
+
+        const result = await githubResponse.json()
+
+        return result.access_token
+      })()
+
+      if (!accessToken) {
+        return withError('Access token not found')
+      }
+
+      const githubUser = await (async () => {
+        const userResponse = await fetch('https://api.github.com/user', {
+          headers: {
+            Accept: 'application/json',
+            Authorization: 'token ' + accessToken,
+          },
+        })
+
+        return await userResponse.json()
+      })()
+
+      if (!githubUser) {
+        return withError('githubUser')
+      }
+
+      const { login: userName, ...rest } = githubUser
+      const providerUserId = '' + rest.id
+
+      const email = rest.email || Math.random().toString()
+      const name = rest.name || Math.random().toString()
+
+      const currentIntegration =
+        (await getIntegration({ accessToken: encrypt(accessToken) })) ||
+        (await getIntegration({ providerUserId }))
+
+      // TODO: Check email first
+      const user = currentIntegration
+        ? await getUser({ id: currentIntegration.userId })
+        : await saveUser({
+            name,
+            email,
+            slug: userName,
           })
 
-          return await userResponse.json()
-        })()
+      if (!user) {
+        return withError('user')
+      }
 
-        if (!githubUser) {
-          return withError('githubUser')
-        }
-
-        const { login: userName, ...rest } = githubUser
-        const providerUserId = '' + rest.id
-
-        const email = rest.email || Math.random().toString()
-        const name = rest.name || Math.random().toString()
-
-        const currentIntegration =
-          (await getIntegration({ accessToken: encrypt(accessToken) })) ||
-          (await getIntegration({ providerUserId }))
-
-        // TODO: Check email first
-        const user = currentIntegration
-          ? await getUser({ id: currentIntegration.userId })
-          : await saveUser({
-              name,
-              email,
-              slug: userName,
-            })
-
-        if (!user) {
-          return withError('user')
-        }
-
-        const integration = currentIntegration
-          ? await updateIntegration({
-              ...currentIntegration,
-              userName,
-              email,
-              accessToken,
-            })
-          : await saveIntegration({
-              provider,
-              accessToken,
-              userName,
-              userId: user.id,
-              email,
-              providerUserId,
-            })
-
-        if (!integration) {
-          return withError('integration')
-        }
-
-        const { installation_id, setup_action } = query
-
-        const installationId = (() => {
-          const id = parseInt(installation_id)
-          if (isNaN(id)) return
-
-          return id
-        })()
-
-        const hasInstallation = installationId && setup_action === 'install'
-
-        const integrationInstallation = await (async () => {
-          if (!hasInstallation || !installationId) return
-
-          return await getAppInstallation(installationId)
-        })()
-
-        if (hasInstallation && !integrationInstallation) {
-          console.warn('Can not find installation for:', request.query)
-
-          return withError(somethingWentWrong)
-        }
-
-        const installation = await (async () => {
-          if (!integrationInstallation) {
-            return
-          }
-
-          const { installationId } = integrationInstallation
-
-          return await getInstallation({
-            providerInstallationId: installationId.toString(),
+      const integration = currentIntegration
+        ? await updateIntegration({
+            ...currentIntegration,
+            userName,
+            email,
+            accessToken,
+          })
+        : await saveIntegration({
             provider,
+            accessToken,
+            userName,
+            userId: user.id,
+            email,
+            providerUserId,
           })
-        })()
 
-        const { teamSlug } = installationCookie.get()
+      if (!integration) {
+        return withError('integration')
+      }
 
-        const teamMember = await (async () => {
-          if (teamSlug) {
-            return await getUserTeam({ userId: integration.userId, teamSlug })
-          }
+      const { installation_id, setup_action } = query
 
-          if (!integrationInstallation) {
-            if (!invitationKey) {
-              return
-            }
+      const installationId = (() => {
+        const id = parseInt(installation_id)
+        if (isNaN(id)) return
 
-            const team = await getTeam({ invitationKey })
-            if (!team) {
-              return
-            }
+        return id
+      })()
 
-            const userTeam = await getUserTeam({
-              userId: user.id,
-              teamId: team.id,
-            })
+      const hasInstallation = installationId && setup_action === 'install'
 
-            if (userTeam) {
-              return userTeam
-            }
+      const integrationInstallation = await (async () => {
+        if (!hasInstallation || !installationId) return
 
-            const members = await getTeamMembers({ teamId: team.id })
+        return await getAppInstallation(installationId)
+      })()
 
-            const size = team.size || defaultTeamSize
-            const seats = members?.length || 0
+      if (hasInstallation && !integrationInstallation) {
+        console.warn('Can not find installation for:', request.query)
 
-            const needsResize = seats >= size
+        return withError(somethingWentWrong)
+      }
 
-            if (needsResize) {
-              return
-            }
+      const installation = await (async () => {
+        if (!integrationInstallation) {
+          return
+        }
 
-            await saveUserTeam({
-              userId: user.id,
-              teamId: team.id,
-              role: 'Member',
-            })
+        const { installationId } = integrationInstallation
 
-            return await getUserTeam({
-              userId: user.id,
-              teamId: team.id,
-            })
-          }
+        return await getInstallation({
+          providerInstallationId: installationId.toString(),
+          provider,
+        })
+      })()
 
-          const { login } = integrationInstallation
+      const { teamSlug } = installationCookie.get()
 
-          if (integration.userName === login) {
+      const teamMember = await (async () => {
+        if (teamSlug) {
+          return await getUserTeam({ userId: integration.userId, teamSlug })
+        }
+
+        if (!integrationInstallation) {
+          if (!invitationKey) {
             return
           }
 
-          const currentTeam = await getTeam({ slug: login })
-          if (currentTeam) {
-            return await getUserTeam({
-              userId: integration.userId,
-              teamSlug: currentTeam.slug,
-            })
+          const team = await getTeam({ invitationKey })
+          if (!team) {
+            return
           }
 
-          await saveTeam({
-            slug: login,
-            createdBy: integration.userId,
+          const userTeam = await getUserTeam({
+            userId: user.id,
+            teamId: team.id,
+          })
+
+          if (userTeam) {
+            return userTeam
+          }
+
+          const members = await getTeamMembers({ teamId: team.id })
+
+          const size = team.size || defaultTeamSize
+          const seats = members?.length || 0
+
+          const needsResize = seats >= size
+
+          if (needsResize) {
+            return
+          }
+
+          await saveUserTeam({
+            userId: user.id,
+            teamId: team.id,
+            role: 'Member',
           })
 
           return await getUserTeam({
             userId: user.id,
-            teamSlug: login,
-          })
-        })()
-
-        if (teamSlug && !teamMember) {
-          return withError('teamSlug && !teamMember')
-        }
-
-        if (integrationInstallation) {
-          const { login, installationId } = integrationInstallation
-
-          if (!teamMember && login !== integration.userName) {
-            return withError('!teamMember && login !== integration.userName')
-          }
-
-          await saveInstallation({
-            ...installation,
-            login,
-            provider,
-            teamId: teamMember ? teamMember.teamId : undefined,
-            userId: teamMember ? undefined : user.id,
-            providerInstallationId: installationId.toString(),
+            teamId: team.id,
           })
         }
 
-        clearFederate()
-        memberCookie.set(user.key)
+        const { login } = integrationInstallation
 
-        if (returnUrl) {
-          return response.redirect(returnUrl)
+        if (integration.userName === login) {
+          return
         }
 
-        return response.redirect(
-          teamMember
-            ? `/teams/${teamMember.teamSlug}${
-                invitationKey
-                  ? `?${buildQuery({
-                      invitationKey,
-                    })}`
-                  : ''
-              }`
-            : `/${user.slug}`,
-        )
-      } catch (error) {
-        clearFederate()
+        const currentTeam = await getTeam({ slug: login })
+        if (currentTeam) {
+          return await getUserTeam({
+            userId: integration.userId,
+            teamSlug: currentTeam.slug,
+          })
+        }
 
-        return renderError(app, request, response)
+        await saveTeam({
+          slug: login,
+          createdBy: integration.userId,
+        })
+
+        return await getUserTeam({
+          userId: user.id,
+          teamSlug: login,
+        })
+      })()
+
+      if (teamSlug && !teamMember) {
+        return withError('teamSlug && !teamMember')
       }
+
+      if (integrationInstallation) {
+        const { login, installationId } = integrationInstallation
+
+        if (!teamMember && login !== integration.userName) {
+          return withError('!teamMember && login !== integration.userName')
+        }
+
+        await saveInstallation({
+          ...installation,
+          login,
+          provider,
+          teamId: teamMember ? teamMember.teamId : undefined,
+          userId: teamMember ? undefined : user.id,
+          providerInstallationId: installationId.toString(),
+        })
+      }
+
+      clearFederate()
+      memberCookie.set(user.key)
+
+      if (returnUrl) {
+        return response.redirect(returnUrl)
+      }
+
+      return response.redirect(
+        teamMember
+          ? `/teams/${teamMember.teamSlug}${
+              invitationKey
+                ? `?${buildQuery({
+                    invitationKey,
+                  })}`
+                : ''
+            }`
+          : `/${user.slug}`,
+      )
     },
   )
 

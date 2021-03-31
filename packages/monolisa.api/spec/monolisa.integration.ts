@@ -1,5 +1,12 @@
 import faker from 'faker'
-import { getTeam, getUser, saveTeam, saveUser } from 'monolisa.data'
+import {
+  getIntegration,
+  getTeam,
+  getUser,
+  saveTeam,
+  saveUser,
+} from 'monolisa.data'
+import { encrypt } from 'monolisa.lib/rsa'
 import { integrationProviderType, teamBaseType } from 'monolisa.model'
 import { v4 as uuid } from 'uuid'
 
@@ -76,6 +83,9 @@ const getStub = () =>
 
 test.each(getStub())('Integrate', async current => {
   const { name, email, userName: slug } = current.user
+
+  const t = await getIntegration({ accessToken: encrypt(uuid()) })
+  console.log(`🚀 ~ file: monolisa.integration.ts ~ line 88 ~ test.each ~ t`, t)
 
   const teamPayload = current.team
 
