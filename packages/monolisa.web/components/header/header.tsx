@@ -237,7 +237,7 @@ const Header = () => {
                         {member ? (
                           <Fragment>
                             <li>
-                              <Link {...getUrl(member.slug)('account')}>
+                              <Link href={member.slug}>
                                 <a title={member.name} className="avatar">
                                   <Avatar name={member.name} />
                                 </a>

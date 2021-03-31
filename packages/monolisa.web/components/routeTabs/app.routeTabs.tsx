@@ -1,4 +1,4 @@
-import RouteTabs, { RouteTabType } from '.'
+import RouteTabs from '.'
 import getUrl from '../../server/shared/getUrl'
 
 import { useAppContext } from '../../hooks'
@@ -52,20 +52,10 @@ const AppRouteTabs = () => {
     )
   }
 
-  const memberTabs = (member
-    ? {
-        icon: <OpenBookIcon />,
-        children: 'Profile',
-        value: 'profile',
-        href: `/${member.slug}`,
-      }
-    : undefined) as RouteTabType
-
   return (
     <RouteTabs
       className="tabs"
       tabs={[
-        memberTabs,
         {
           icon: <ActivityIcon />,
           children: 'Jobs',
@@ -96,7 +86,7 @@ const AppRouteTabs = () => {
         //   value: 'messages',
         //   ...buildUrl('account'),
         // },
-      ].filter(Boolean)}
+      ]}
     />
   )
 }

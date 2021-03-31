@@ -54,7 +54,7 @@ function HomePage() {
                     , 23.10.1984
                   </div>
                   <Button link={{ ...{ href: `/jobs/${job.id}` } }}>
-                    Job Details
+                    View
                   </Button>
                 </div>
               }

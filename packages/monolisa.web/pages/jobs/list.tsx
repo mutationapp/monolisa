@@ -10,7 +10,6 @@ import { UserInfoHeading } from '../../components/dashboard/heading'
 import { isLoading } from '../../hooks/fetcher'
 import { run, dealWithIt, nothingHereYet } from 'monolisa.lib'
 import Error from '../_error'
-import listingsMock from '../../mock/listings'
 
 export type companyType = {
   slug: string
@@ -31,15 +30,11 @@ import {
   Flex,
   Spinner,
   Installation,
-  Markdown,
-  Button,
 } from '../../components'
 import { LoginNotification } from '../../components/notifications'
-import { css, t } from '../../styles/typography'
 
 const Repositories = () => {
   const { user, member } = useAppContext()
-  const [jobs] = React.useState<listingType[]>(listingsMock)
 
   if (!user) {
     return <Error statusCode={401} />
@@ -148,69 +143,7 @@ const Repositories = () => {
           )
         }
 
-        return (
-          <ul
-            className={css({
-              display: 'flex',
-              flexDirection: 'column',
-              margin: '-25px 0',
-              gap: '15px',
-            })}
-          >
-            {jobs.map(job => {
-              const { company } = job
-
-              return (
-                <Box
-                  shadow
-                  key={job.id}
-                  footer={
-                    <div
-                      className={css({
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        width: '100%',
-                      })}
-                    >
-                      <div className={css({ flex: 1 })}>
-                        @
-                        <Link {...{ href: `/teams/mutationapp` }}>
-                          <a
-                            className={css({
-                              marginLeft: 2,
-                            })}
-                          >
-                            {company.slug}
-                          </a>
-                        </Link>
-                        , 23.10.1984
-                      </div>
-                      <Button link={{ ...{ href: `/jobs/${job.id}` } }}>
-                        Job Details
-                      </Button>
-                    </div>
-                  }
-                >
-                  <div
-                    className={css({
-                      position: 'relative',
-                      top: '-10px',
-                      left: '-10px',
-                    })}
-                  >
-                    {/* <CompanyProfile {...{ listing: tweet }} /> */}
-                  </div>
-                  <section>
-                    <div style={t.content} className="tweet-details-content">
-                      <Markdown>{job.content}</Markdown>
-                    </div>
-                  </section>
-                </Box>
-              )
-            })}
-          </ul>
-        )
+        return 'something missing here'
       })}
     </MainLayout>
   )
