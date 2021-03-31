@@ -25,6 +25,8 @@ import injectUpdateTeam from './updateTeam'
 import injectDeleteTeam from './deleteTeam'
 
 import injectSaveJob from './saveJob'
+import injectGetJobs from './getJobs'
+import injectGetJob from './getJob'
 
 import injectSaveUserTeam from './saveUserTeam'
 import injectGetUser from './getUser'
@@ -57,6 +59,8 @@ export const updateTeam = injectUpdateTeam(context)({ getTeam })
 export const deleteTeam = injectDeleteTeam(context)
 
 export const saveJob = injectSaveJob(context)
+export const getJobs = injectGetJobs(context)
+export const getJob = injectGetJob({ getJobs })
 
 export const getTeamMembers = injectGetTeamMembers(context)({ getTeam })
 
