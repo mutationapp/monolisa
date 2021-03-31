@@ -4,11 +4,16 @@ import { withQuery } from '../utils'
 import { v4 as uuidv4 } from 'uuid'
 import { DbValidationError } from 'monolisa.lib/error'
 
-const saveJob: saveJobType = context => async ({ createdBy, details }) => {
-  if (!createdBy || !details) {
+const saveJob: saveJobType = context => async ({
+  createdBy,
+  details,
+  teamId,
+}) => {
+  if (!createdBy || !details || !teamId) {
     console.error('REQUIRED:', {
       createdBy,
       details,
+      teamId,
     })
 
     throw new DbValidationError('Required:', { createdBy, details })
@@ -22,6 +27,7 @@ const saveJob: saveJobType = context => async ({ createdBy, details }) => {
     id,
     details,
     createdBy,
+    teamId,
   })
 
   return await query().where('id', id).first<jobType>()

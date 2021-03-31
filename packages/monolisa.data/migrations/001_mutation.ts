@@ -42,7 +42,10 @@ export const up = async (knex: Knex) => {
       withTimeStamps(table)
     })
     .createTable(tables.jobs, table => {
-      table.string('details').notNullable()
+      table.uuid('id').notNullable().primary()
+      table.string('details', 3000).notNullable()
+      withUser(table, 'createdBy').notNullable()
+
       withTeam(table)
 
       withTimeStamps(table)

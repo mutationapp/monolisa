@@ -156,6 +156,7 @@ export type repositoryType = {
 export type jobType = {
   id: string
   createdBy?: string
+  teamId: string
   details: string
 } & withTimeStamps
 
