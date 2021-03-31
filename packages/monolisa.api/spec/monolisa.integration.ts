@@ -1,13 +1,12 @@
 import faker from 'faker'
 import {
-  getIntegration,
   getTeam,
   getUser,
   saveTeam,
   saveUser,
+  saveUserTeam,
 } from 'monolisa.data'
-import { encrypt } from 'monolisa.lib/rsa'
-import { integrationProviderType, teamBaseType } from 'monolisa.model'
+import { integrationProviderType } from 'monolisa.model'
 import { v4 as uuid } from 'uuid'
 
 export type userStubType = {
@@ -17,15 +16,13 @@ export type userStubType = {
   email: string
   name: string
   accessToken: string
-  //   team?: typeof mutationLab
 }
 
 export const users: {
   [key: string]: userStubType
 } = {
   ibsukru: {
-    // accessToken: INTEGRATION_API_KEY,
-    accessToken: uuid(),
+    accessToken: '4e2f0e41-f61e-4395-bf09-f72cf4eab82a',
     providerUserId: '1394705',
     userName: 'ibsukru',
     provider: 'github',
@@ -50,13 +47,19 @@ export const users: {
   },
 }
 
+type teamStubType = {
+  slug: string
+  users: string[]
+}
+
 const teams = {
   mutationApp: {
     slug: 'mutationapp',
+    users: ['ibsukru'],
   },
 }
 
-const getStub = () =>
+const usersStub = (() =>
   new Array(5)
     .fill(undefined)
     .map(() => {
@@ -71,49 +74,82 @@ const getStub = () =>
         providerUserId: uuid(),
       }
 
-      const team: teamBaseType = {
-        slug: `${userCard.username}-team`,
+      return user
+    })
+    .concat(users.ibsukru))()
+
+const teamsStub = (() => {
+  return new Array(3)
+    .fill(undefined)
+    .map(() => {
+      const team: teamStubType = {
+        slug: faker.lorem.slug(),
+        users: ['ibsukru'],
       }
-      return { user, team }
+
+      return team
     })
-    .concat({
-      user: users.ibsukru,
-      team: teams.mutationApp,
-    })
+    .concat(teams.mutationApp)
+})()
 
-test.each(getStub())('Integrate', async current => {
-  const { name, email, userName: slug } = current.user
+// test.each(usersStub)('Integration', async current => {
+//   const { name, email, userName: userSlug } = current
 
-  const t = await getIntegration({ accessToken: encrypt(uuid()) })
-  console.log(`🚀 ~ file: monolisa.integration.ts ~ line 88 ~ test.each ~ t`, t)
+//   const user =
+//     (await getUser({ slug: userSlug })) ||
+//     (await saveUser({ name, email, slug: userSlug }))
 
-  const teamPayload = current.team
+//   if (!user) {
+//     expect(user).toBeTruthy()
+//     return
+//   }
+// })
 
-  const user =
-    (await getUser({ slug })) || (await saveUser({ name, email, slug }))
+test('Integration', async () => {
+  await Promise.all(
+    usersStub.map(async current => {
+      const { name, email, userName: userSlug } = current
+      const user =
+        (await getUser({ slug: userSlug })) ||
+        (await saveUser({ name, email, slug: userSlug }))
+      if (!user) {
+        expect(user).toBeTruthy()
+        return
+      }
+    }),
+  )
 
-  if (!user) {
-    expect(user).toBeTruthy()
-    return
-  }
-  //   const team =
-  await (async () => {
-    if (!current.team) {
-      return
-    }
+  await Promise.all(
+    teamsStub.map(async current => {
+      const { slug, users } = current
+      const user = await getUser({ slug: users[0] })
+      if (!user) {
+        expect(user).toBeTruthy()
+        return
+      }
+      const team =
+        (await getTeam({ slug })) ||
+        (await saveTeam({ slug, createdBy: user.id }))
 
-    const { slug } = teamPayload
+      if (!team) {
+        expect(team).toBeTruthy()
+        return
+      }
 
-    const item =
-      (await getTeam({ slug })) ||
-      (await saveTeam({ slug, createdBy: user.id }))
-
-    expect(item).toBeTruthy()
-
-    return item
-  })()
-
-  //   if (!saved) {
-  //     expect(saved).toBeTruthy()
-  //   }
+      await Promise.all(
+        users.map(async userSlug => {
+          const currentUser = await getUser({ slug: userSlug })
+          if (!currentUser) {
+            expect(currentUser).toBeTruthy()
+            return
+          }
+          saveUserTeam({
+            userId: currentUser.id,
+            teamId: team.id,
+            role: 'Owner',
+          })
+        }),
+      )
+    }),
+  )
 })

@@ -41,6 +41,12 @@ export const up = async (knex: Knex) => {
 
       withTimeStamps(table)
     })
+    .createTable(tables.jobs, table => {
+      table.string('details').notNullable()
+      withTeam(table)
+
+      withTimeStamps(table)
+    })
     .createTable(tables.integrations, table => {
       table.uuid('id').notNullable().primary()
 
@@ -123,6 +129,7 @@ export const down = async (knex: Knex) => {
     .dropTableIfExists(tables.installations)
     .dropTableIfExists(tables.integrations)
     .dropTableIfExists(tables.userTeams)
+    .dropTableIfExists(tables.jobs)
     .dropTableIfExists(tables.teams)
     .dropTableIfExists(tables.users)
 }
