@@ -166,7 +166,7 @@ const Header = () => {
                                   }
                                   className="breadcrumb"
                                 >
-                                  companies
+                                  organizations
                                 </a>
                                 {spacer}
                                 <span className="breadcrumb repo">

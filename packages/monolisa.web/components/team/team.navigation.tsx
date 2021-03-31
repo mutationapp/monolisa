@@ -15,7 +15,7 @@ const TeamNavigation = () => {
       icon
       items={[
         {
-          name: 'Companies',
+          name: 'Organizations',
           ...buildUrl('teams'),
           icon: <GridIcon />,
         },

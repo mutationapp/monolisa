@@ -44,8 +44,8 @@ const AppRouteTabs = () => {
           },
           {
             icon: <GridIcon />,
-            children: 'Companies',
-            value: 'companies',
+            children: 'Organizations',
+            value: 'organizations',
             ...buildUrl('teams'),
           },
         ]}
@@ -65,8 +65,8 @@ const AppRouteTabs = () => {
         },
         {
           icon: <GridIcon />,
-          children: 'Companies',
-          value: 'companies',
+          children: 'Organizations',
+          value: 'organizations',
           ...buildUrl('teams'),
         },
         {

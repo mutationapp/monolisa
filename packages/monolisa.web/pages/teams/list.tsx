@@ -63,11 +63,11 @@ const Teams = () => {
 
   return (
     <MainLayout
-      pageTitle={'Companies'}
-      title={'Companies'}
+      pageTitle={'Organizations'}
+      title={'Organizations'}
       subtitle={
         user && !member
-          ? 'User companies are private, here are some public teams from monolisa.app'
+          ? 'User organizations are private, here are some public teams from monolisa.app'
           : ''
       }
       pull
@@ -103,7 +103,7 @@ const Teams = () => {
             shadow
             push
             header={{
-              children: 'Companies',
+              children: 'Organizations',
               icon: <GridIcon />,
               button: {
                 size: 'small',
@@ -123,7 +123,7 @@ const Teams = () => {
               }
               return `${
                 teams?.length
-                  ? `${teams.length} companies listed.`
+                  ? `${teams.length} organizations listed.`
                   : 'Nothing here yet.'
               } Go through navigation to install company.`
             })}
