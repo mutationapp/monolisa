@@ -9,7 +9,7 @@ import {
   GridIcon,
   OpenBookIcon,
   ActivityIcon,
-  MessageIcon,
+  // MessageIcon,
 } from '../icons'
 import React from 'react'
 
@@ -81,12 +81,12 @@ const AppRouteTabs = () => {
           value: 'account',
           ...buildUrl('account'),
         },
-        {
-          icon: <MessageIcon />,
-          children: 'Messages',
-          value: 'messages',
-          ...buildUrl('account'),
-        },
+        // {
+        //   icon: <MessageIcon />,
+        //   children: 'Messages',
+        //   value: 'messages',
+        //   ...buildUrl('account'),
+        // },
       ]}
     />
   ) : null

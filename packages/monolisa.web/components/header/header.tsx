@@ -133,15 +133,12 @@ const Header = () => {
               >
                 {run(() => {
                   const url = (() => {
-                    if (!member) {
-                      return { href: '/' }
-                    }
                     if (reportRoute && buildTeamUrl) {
                       const { as } = buildTeamUrl('profile')
                       return { href: as }
                     }
 
-                    return { href: `/${member.slug}` }
+                    return { href: `/` }
                   })()
 
                   return <Logo {...url} size={32} />

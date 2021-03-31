@@ -54,7 +54,7 @@ const Repositories = () => {
 
   return (
     <MainLayout
-      pageTitle={`${user.slug} : Repositories`}
+      pageTitle={`${user.slug} : Profile`}
       pull
       aside={
         repositories?.length ? (

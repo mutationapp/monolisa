@@ -70,13 +70,13 @@ import { NextServer } from 'next/dist/server/next'
   }
 
   ;[
-    { routes: ['/rules', '/tyler', '/setup', '/:slug/jobs'] },
+    { routes: ['/', '/rules', '/tyler', '/setup', '/:slug/jobs'] },
     {
       routes: ['/:slug/account', '/:slug/import'],
       authorize: true,
     },
     {
-      routes: ['/', '/login'],
+      routes: ['/login'],
       authorize: false,
       redirect: (member?: memberType) =>
         member ? `/${member.slug}` : undefined,
