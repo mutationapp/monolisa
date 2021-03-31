@@ -1,10 +1,9 @@
-import RouteTabs from '.'
+import RouteTabs, { RouteTabType } from '.'
 import getUrl from '../../server/shared/getUrl'
 
 import { useAppContext } from '../../hooks'
 
 import {
-  UserIcon,
   InstallationIcon,
   GridIcon,
   OpenBookIcon,
@@ -53,43 +52,53 @@ const AppRouteTabs = () => {
     )
   }
 
-  return member ? (
+  const memberTabs = (member
+    ? {
+        icon: <OpenBookIcon />,
+        children: 'Profile',
+        value: 'profile',
+        href: `/${member.slug}`,
+      }
+    : undefined) as RouteTabType
+
+  return (
     <RouteTabs
       className="tabs"
       tabs={[
+        memberTabs,
         {
           icon: <ActivityIcon />,
           children: 'Jobs',
           value: 'jobs',
-          ...buildUrl('repositories'),
+          href: '/',
         },
         {
           icon: <GridIcon />,
           children: 'Organizations',
           value: 'organizations',
-          ...buildUrl('teams'),
+          href: '/teams',
         },
-        {
-          icon: <InstallationIcon />,
-          children: 'Installations',
-          value: 'installations',
-          ...buildUrl('installations'),
-        },
-        {
-          icon: <UserIcon />,
-          children: 'Account',
-          value: 'account',
-          ...buildUrl('account'),
-        },
+        // {
+        //   icon: <InstallationIcon />,
+        //   children: 'Installations',
+        //   value: 'installations',
+        //   ...buildUrl('installations'),
+        // },
+        // {
+        //   icon: <UserIcon />,
+        //   children: 'Account',
+        //   value: 'account',
+        //   ...buildUrl('account'),
+        // },
         // {
         //   icon: <MessageIcon />,
         //   children: 'Messages',
         //   value: 'messages',
         //   ...buildUrl('account'),
         // },
-      ]}
+      ].filter(Boolean)}
     />
-  ) : null
+  )
 }
 
 export default AppRouteTabs

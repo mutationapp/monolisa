@@ -84,7 +84,7 @@ import { NextServer } from 'next/dist/server/next'
     { routes: ['/:slug'] },
   ].forEach(({ routes, authorize, redirect }) => {
     const map = {
-      '/:slug': `/jobs`,
+      '/:slug': `/profile`,
       '/:slug/account': `/account`,
       '/:slug/jobs': `/jobs`,
       '/:slug/import': `/jobs/import`,
