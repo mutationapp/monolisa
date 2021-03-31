@@ -146,7 +146,7 @@ test('Integration', async () => {
           saveUserTeam({
             userId: currentUser.id,
             teamId: team.id,
-            role: 'Owner',
+            role: users.indexOf(userSlug) === 0 ? 'Owner' : 'Member',
           })
         }),
       )

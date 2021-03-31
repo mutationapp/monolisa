@@ -153,6 +153,12 @@ export type repositoryType = {
   private: boolean
 } & withTimeStamps
 
+export type jobType = {
+  id: string
+  createdBy?: string
+  details: string
+} & withTimeStamps
+
 export type pullRequestStateType = 'open' | 'closed'
 
 export type pullRequestBaseType = {
