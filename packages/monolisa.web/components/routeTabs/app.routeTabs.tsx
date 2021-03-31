@@ -1,13 +1,14 @@
-import RouteTabs from '.'
+import RouteTabs, { RouteTabType } from '.'
 import getUrl from '../../server/shared/getUrl'
 
 import { useAppContext } from '../../hooks'
 
 import {
-  InstallationIcon,
+  // InstallationIcon,
   GridIcon,
   OpenBookIcon,
   ActivityIcon,
+  UserIcon,
   // MessageIcon,
 } from '../icons'
 import React from 'react'
@@ -24,7 +25,20 @@ const AppRouteTabs = () => {
     return null
   }
 
-  if (user && user?.id !== member?.id) {
+  const currentUser =
+    user && member && user?.id === member?.id ? user : undefined
+
+  const accountLink = currentUser
+    ? {
+        icon: <UserIcon />,
+        children: 'Account',
+        value: 'installations',
+        href: `/${currentUser.slug}/account`,
+        // ...buildUrl('installations'),
+      }
+    : undefined
+
+  if (user) {
     return (
       <RouteTabs
         className="tabs"
@@ -33,21 +47,16 @@ const AppRouteTabs = () => {
             icon: <OpenBookIcon />,
             children: 'Profile',
             value: 'profile',
-            ...buildUrl('repositories'),
+            href: `/${user.slug}`,
           },
-          {
-            icon: <InstallationIcon />,
-            children: 'Installations',
-            value: 'installations',
-            ...buildUrl('installations'),
-          },
+          accountLink as RouteTabType,
           {
             icon: <GridIcon />,
             children: 'Organizations',
             value: 'organizations',
             ...buildUrl('teams'),
           },
-        ]}
+        ].filter(Boolean)}
       />
     )
   }

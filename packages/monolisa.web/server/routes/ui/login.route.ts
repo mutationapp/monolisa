@@ -145,11 +145,13 @@ const loginRoute: routeBaseType = ({ server, app, auth }) => {
       // TODO: Check email first
       const user = currentIntegration
         ? await getUser({ id: currentIntegration.userId })
-        : await saveUser({
+        : // TODO: currently works only one to one with github
+          (await getUser({ slug: userName })) ||
+          (await saveUser({
             name,
             email,
             slug: userName,
-          })
+          }))
 
       if (!user) {
         return withError('user')
