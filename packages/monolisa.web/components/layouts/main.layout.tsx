@@ -50,8 +50,8 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
     pull,
   })
 
-  const mainWidth = width ? width.main : '70%'
-  const asideWidth = width ? width.aside : '30%'
+  const mainWidth = width ? width.main : '65%'
+  const asideWidth = width ? width.aside : '45%'
 
   const headTitle = `monolisa ${pageTitle ? `| ${pageTitle}` : ''}`
 
