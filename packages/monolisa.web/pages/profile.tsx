@@ -1,13 +1,15 @@
 import dedent from 'dedent'
-import { company, lorem } from 'faker'
+import { lorem, helpers } from 'faker'
 import React from 'react'
 import { Markdown } from '../components'
 import { MainLayout } from '../components/layouts'
 import { randomEmoji } from '../mock/emoji'
 
 const Job = () => {
+  const userCard = helpers.userCard()
+
   return (
-    <MainLayout subtitle={company.catchPhrase()} title={'Engineering Manager'}>
+    <MainLayout subtitle={userCard.company.catchPhrase} title={userCard.name}>
       <Markdown>
         {dedent`
           ${lorem.paragraph()}
