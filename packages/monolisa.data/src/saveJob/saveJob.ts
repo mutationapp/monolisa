@@ -7,16 +7,23 @@ import { DbValidationError } from 'monolisa.lib/error'
 const saveJob: saveJobType = context => async ({
   createdBy,
   details,
+  summary,
   teamId,
 }) => {
-  if (!createdBy || !details || !teamId) {
+  if (!createdBy || !details || !teamId || !summary) {
     console.error('REQUIRED:', {
       createdBy,
       details,
+      summary,
       teamId,
     })
 
-    throw new DbValidationError('Required:', { createdBy, details })
+    throw new DbValidationError('Required:', {
+      createdBy,
+      details,
+      summary,
+      teamId,
+    })
   }
 
   const query = withQuery<jobType>(context)('jobs')
@@ -27,6 +34,7 @@ const saveJob: saveJobType = context => async ({
     id,
     details,
     createdBy,
+    summary,
     teamId,
   })
 

@@ -1,5 +1,5 @@
 import { cache } from '../../middlewares'
-import { getMember } from '../../shared'
+import { getMember, jobsPayloadType } from '../../shared'
 import { apiRouteType } from '..'
 import { getBlob } from 'monolisa.integration'
 import { somethingWentWrong } from 'monolisa.lib'
@@ -11,6 +11,8 @@ import {
   resetImport,
   deleteRepository,
   getInstallation,
+  getJobs,
+  getTeam,
 } from 'monolisa.data'
 
 import {
@@ -21,7 +23,7 @@ import {
   internalError,
 } from 'monolisa.lib/api'
 
-import { integrationProviderType, isOwner } from 'monolisa.model'
+import { integrationProviderType, isOwner, teamType } from 'monolisa.model'
 
 import { getRepository } from 'monolisa.data'
 
@@ -31,6 +33,21 @@ const rootPath = '/api/jobs'
 const withRepoPath = rootPath + '/:provider(github)/:owner/:repo'
 
 const repositoryRoute: apiRouteType = ({ server, auth }) => {
+  server.get('/api/jobs', auth(), async (request, response) => {
+    const jobs = await getJobs({})
+
+    const join = jobs?.map(job => {
+      return getTeam({ id: job.teamId }) as Promise<teamType>
+    })
+
+    const teams = join ? await Promise.all(join) : undefined
+
+    return ok<jobsPayloadType>(response, {
+      jobs: jobs || [],
+      teams: teams || [],
+    })
+  })
+
   server.get(
     `${withRepoPath}/import`,
     auth(true),

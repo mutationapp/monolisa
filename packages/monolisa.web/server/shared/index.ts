@@ -15,6 +15,8 @@ import {
   teamUserType,
   teamMemberType,
   userType,
+  jobType,
+  teamType,
 } from 'monolisa.model'
 
 export type urlPathType = 'tree' | 'blob'
@@ -60,6 +62,11 @@ export type teamPayloadType = {
 
 export type teamsPayloadType = {
   teams: teamUserType[]
+}
+
+export type jobsPayloadType = {
+  jobs: jobType[]
+  teams: teamType[]
 }
 
 export type teamMemberPayloadType = {

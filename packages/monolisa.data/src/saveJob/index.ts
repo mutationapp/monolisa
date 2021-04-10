@@ -7,6 +7,7 @@ export type saveJobType = (
 ) => (payload: {
   createdBy: string
   details: string
+  summary: string
   teamId: string
 }) => Promise<jobType | undefined>
 

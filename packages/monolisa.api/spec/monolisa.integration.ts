@@ -221,6 +221,7 @@ test('Integration', async () => {
         createdBy: user.id,
         details,
         teamId: team.id,
+        summary: lorem.paragraph(),
       })
     }),
   )

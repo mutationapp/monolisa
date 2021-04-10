@@ -44,6 +44,7 @@ export const up = async (knex: Knex) => {
     .createTable(tables.jobs, table => {
       table.uuid('id').notNullable().primary()
       table.string('details', 3000).notNullable()
+      table.string('summary', 3000).notNullable()
       withUser(table, 'createdBy').notNullable()
 
       withTeam(table)
