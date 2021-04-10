@@ -2,11 +2,8 @@ import { useJobType } from '.'
 import { jobResponseType } from '../../server/shared'
 import { useSWR } from '..'
 
-const useJob: useJobType = ({ fetcher }) => ({ owner, repo, provider }) => {
-  const response = useSWR<jobResponseType>(
-    `/api/jobs/${provider}/${owner}/${repo}`,
-    fetcher,
-  )
+const useJob: useJobType = ({ fetcher }) => ({ id }) => {
+  const response = useSWR<jobResponseType>(`/api/jobs/${id}`, fetcher)
 
   const { data, error } = response
 

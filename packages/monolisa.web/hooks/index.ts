@@ -15,6 +15,7 @@ import useSWR from './useSWR'
 import useAppContext from './useAppContext'
 import useLogin from './useLogin'
 import useJobs from './useJobs'
+import useJob from './useJob'
 
 export {
   useAppContext,
@@ -34,4 +35,5 @@ export {
   useTeams,
   useThemeContext,
   useJobs,
+  useJob,
 }

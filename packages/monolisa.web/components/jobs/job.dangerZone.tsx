@@ -31,9 +31,7 @@ const RepositoryDangerZone = () => {
   const { repo, owner, provider } = query
 
   const { data, error: apiError } = useJob({
-    provider,
-    owner,
-    repo,
+    id: 'id',
   })
 
   const isLoading = useLoading(!data && !apiError)

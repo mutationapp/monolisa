@@ -1,5 +1,5 @@
 import { cache } from '../../middlewares'
-import { getMember, jobsPayloadType } from '../../shared'
+import { getMember, jobPayloadType, jobsPayloadType } from '../../shared'
 import { apiRouteType } from '..'
 import { getBlob } from 'monolisa.integration'
 import { somethingWentWrong } from 'monolisa.lib'
@@ -12,6 +12,7 @@ import {
   deleteRepository,
   getInstallation,
   getJobs,
+  getJob,
   getTeam,
 } from 'monolisa.data'
 
@@ -33,7 +34,7 @@ const rootPath = '/api/jobs'
 const withRepoPath = rootPath + '/:provider(github)/:owner/:repo'
 
 const repositoryRoute: apiRouteType = ({ server, auth }) => {
-  server.get('/api/jobs', auth(), async (request, response) => {
+  server.get('/api/jobs', auth(), async (_, response) => {
     const jobs = await getJobs({})
 
     const join = jobs?.map(job => {
@@ -45,6 +46,27 @@ const repositoryRoute: apiRouteType = ({ server, auth }) => {
     return ok<jobsPayloadType>(response, {
       jobs: jobs || [],
       teams: teams || [],
+    })
+  })
+
+  server.get('/api/jobs/:id', auth(), async (request, response) => {
+    const id = request.params.id
+
+    const job = await getJob({ id })
+
+    if (!job) {
+      return notFound(response)
+    }
+
+    const team = await getTeam({ id: job.teamId })
+
+    if (!team) {
+      return notFound(response)
+    }
+
+    return ok<jobPayloadType>(response, {
+      job,
+      team,
     })
   })
 

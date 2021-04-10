@@ -69,6 +69,11 @@ export type jobsPayloadType = {
   teams: teamType[]
 }
 
+export type jobPayloadType = {
+  job: jobType
+  team: teamType
+}
+
 export type teamMemberPayloadType = {
   teamMember: teamMemberType
 }
@@ -113,8 +118,8 @@ export type buildRepositoryUrlType = (
 export type buildReportCurriedType = (pathType?: urlPathType) => buildUrlType
 
 export type jobResponseType = {
-  installation: installationType
-  repository: repoType
+  job: jobType
+  team: teamType
 }
 
 export { buildRepositoryUrl, getMember, getTeamUrl, getIntallationsUrl }
