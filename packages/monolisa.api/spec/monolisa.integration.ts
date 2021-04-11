@@ -222,6 +222,8 @@ test('Integration', async () => {
         details,
         teamId: team.id,
         summary: lorem.paragraph(),
+        title: lorem.sentence(3),
+        subtitle: lorem.sentence(5),
       })
     }),
   )

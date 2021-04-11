@@ -1,4 +1,3 @@
-import { company } from 'faker'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { Markdown } from '../../components'
@@ -20,7 +19,7 @@ const Job = () => {
   }
 
   return (
-    <MainLayout subtitle={company.catchPhrase()} title={'Engineering Manager'}>
+    <MainLayout subtitle={job.subtitle} title={job.title}>
       <Markdown>{job.details}</Markdown>
     </MainLayout>
   )

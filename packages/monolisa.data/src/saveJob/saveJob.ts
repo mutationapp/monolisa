@@ -9,13 +9,17 @@ const saveJob: saveJobType = context => async ({
   details,
   summary,
   teamId,
+  title,
+  subtitle,
 }) => {
-  if (!createdBy || !details || !teamId || !summary) {
+  if (!createdBy || !details || !teamId || !summary || !title || !subtitle) {
     console.error('REQUIRED:', {
       createdBy,
       details,
       summary,
       teamId,
+      title,
+      subtitle,
     })
 
     throw new DbValidationError('Required:', {
@@ -36,6 +40,8 @@ const saveJob: saveJobType = context => async ({
     createdBy,
     summary,
     teamId,
+    title,
+    subtitle,
   })
 
   return await query().where('id', id).first<jobType>()

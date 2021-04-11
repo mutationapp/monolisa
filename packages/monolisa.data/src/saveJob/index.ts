@@ -9,6 +9,8 @@ export type saveJobType = (
   details: string
   summary: string
   teamId: string
+  title: string
+  subtitle: string
 }) => Promise<jobType | undefined>
 
 export default saveJob

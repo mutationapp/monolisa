@@ -159,6 +159,8 @@ export type jobType = {
   teamId: string
   details: string
   summary: string
+  title: string
+  subtitle: string
 } & withTimeStamps
 
 export type pullRequestStateType = 'open' | 'closed'
