@@ -49,7 +49,7 @@ function HomePage() {
                     >
                       <div className={css({ flex: 1 })}>
                         @
-                        <Link {...{ href: `/teams/mutationapp` }}>
+                        <Link {...{ href: `/teams/${team.slug}` }}>
                           <a
                             className={css({
                               marginLeft: 2,
