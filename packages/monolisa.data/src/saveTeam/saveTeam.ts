@@ -13,19 +13,20 @@ const saveTeam: saveTeamType = context => ({
   getTeam,
   saveUserTeam,
 }) => async team => {
-  const { slug, createdBy, reviewComments } = team
+  const { slug, createdBy, reviewComments, title, subtitle, profile } = team
   if (!slug) {
     console.error('REQUIRED:', {
-      slug,
-      createdBy,
+      team,
     })
-    return
+
+    throw new DbValidationError('REQUIRED:', team)
   }
 
   if (await getTeam({ slug })) {
-    throw new DbValidationError(`Team with slug: "${slug}" already exist.`, {
-      name,
-    })
+    throw new DbValidationError(
+      `Team with slug: "${slug}" already exist.`,
+      team,
+    )
   }
 
   const id = uuid()
@@ -47,6 +48,9 @@ const saveTeam: saveTeamType = context => ({
     invitationKey: uuid(),
     size,
     reviewComments: reviewComments ?? true,
+    title,
+    subtitle,
+    profile,
   })
 
   await saveUserTeam({

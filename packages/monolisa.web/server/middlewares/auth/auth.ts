@@ -192,6 +192,9 @@ const auth: (inject?: { app?: NextServer }) => authType = ({ app } = {}) => (
           teamMember: member
             ? await getUserTeam({ userId: member.id, teamId: team.id })
             : undefined,
+          title: team.title,
+          subtitle: team.subtitle,
+          profile: team.profile,
         } as teamContextPayloadType)
       : undefined,
     repository,

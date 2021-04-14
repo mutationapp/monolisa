@@ -2,7 +2,7 @@ import dedent from 'dedent'
 
 import { integrationProviderType } from 'monolisa.model'
 
-import faker, { lorem } from 'faker'
+import faker, { company, lorem } from 'faker'
 import { v4 as uuid } from 'uuid'
 
 import {
@@ -169,7 +169,28 @@ test('Integration', async () => {
       }
       const team =
         (await getTeam({ slug })) ||
-        (await saveTeam({ slug, createdBy: user.id }))
+        (await saveTeam({
+          slug,
+          createdBy: user.id,
+          title: company.companyName(),
+          subtitle: company.companySuffix(),
+          profile: dedent`
+          ${lorem.paragraph()}
+
+          ${lorem.paragraph()}
+          
+          * ${lorem.sentence()}
+          * ${lorem.sentence()}
+          * ${lorem.sentence()}
+          * ${lorem.sentence()}
+          * ${lorem.sentence()}
+          * ${lorem.sentence()}
+          * ${lorem.sentence()}
+          
+          ${lorem.paragraph()}
+          ${lorem.paragraph()}
+        `,
+        }))
 
       if (!team) {
         expect(team).toBeTruthy()

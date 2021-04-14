@@ -263,8 +263,38 @@ const teamRoute: apiRouteType = ({ server, auth, whenFeature }) => {
         })
       }
 
+      const title = team?.title
+      if (!title) {
+        return invalid(response, {
+          error: 'title is required.',
+          data: mergeUndefinedtoNull({
+            title,
+          }),
+        })
+      }
+
+      const subtitle = team?.subtitle
+      if (!subtitle) {
+        return invalid(response, {
+          error: 'subtitle is required.',
+          data: mergeUndefinedtoNull({
+            subtitle,
+          }),
+        })
+      }
+
+      const profile = team?.profile
+      if (!profile) {
+        return invalid(response, {
+          error: 'profile is required.',
+          data: mergeUndefinedtoNull({
+            profile,
+          }),
+        })
+      }
+
       try {
-        await saveTeam({ slug, createdBy: member.id })
+        await saveTeam({ slug, createdBy: member.id, title, subtitle, profile })
         return created(response)
       } catch (error) {
         if (error instanceof DbValidationError) {

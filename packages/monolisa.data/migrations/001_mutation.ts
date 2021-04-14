@@ -31,6 +31,10 @@ export const up = async (knex: Knex) => {
       table.integer('size').notNullable()
       table.boolean('reviewComments').notNullable()
 
+      table.string('title', 3000)
+      table.string('subtitle', 3000)
+      table.string('profile', 3000)
+
       withUser(table, 'createdBy').nullable()
       withTimeStamps(table)
     })

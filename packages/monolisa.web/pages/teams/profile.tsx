@@ -1,20 +1,19 @@
-import { MainLayout } from '../../components/layouts'
-import {
-  Navigation,
-  TeamDangerZone,
-  Markdown,
-  Installations,
-} from '../../components'
+import React from 'react'
+
 import { useRouter } from 'next/router'
 import { run } from 'monolisa.lib'
 import { AlertIcon } from '../../components/icons'
 import { parseQuery } from 'monolisa.lib/utils/url'
 import { getTeamUrl } from '../../server/shared'
 import { useAppContext } from '../../hooks'
-import React from 'react'
-import { company, lorem } from 'faker'
-import dedent from 'dedent'
-import { randomEmoji } from '../../mock/emoji'
+import { MainLayout } from '../../components/layouts'
+
+import {
+  Navigation,
+  TeamDangerZone,
+  Markdown,
+  Installations,
+} from '../../components'
 
 const TeamProfile = () => {
   const router = useRouter()
@@ -31,8 +30,8 @@ const TeamProfile = () => {
   return (
     <MainLayout
       pageTitle={`${teamSlug} : Settings`}
-      title={company.companyName()}
-      subtitle={company.catchPhrase()}
+      title={team.title}
+      subtitle={team.subtitle}
       aside={
         <Navigation
           icon
@@ -55,26 +54,7 @@ const TeamProfile = () => {
           return <Installations />
         }
 
-        return (
-          <Markdown>
-            {dedent`
-          ${lorem.paragraph()}
-
-          ${lorem.paragraph()}
-          
-          * ${randomEmoji()} ${lorem.sentence()}
-          * ${randomEmoji()} ${lorem.sentence()}
-          * ${randomEmoji()} ${lorem.sentence()}
-          * ${randomEmoji()} ${lorem.sentence()}
-          * ${randomEmoji()} ${lorem.sentence()}
-          * ${randomEmoji()} ${lorem.sentence()}
-          * ${randomEmoji()} ${lorem.sentence()}
-          
-          ${lorem.paragraph()}
-          ${lorem.paragraph()}
-        `}
-          </Markdown>
-        )
+        return <Markdown>{team.profile || 'N/A'}</Markdown>
       })}
     </MainLayout>
   )

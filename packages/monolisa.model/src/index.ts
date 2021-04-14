@@ -40,6 +40,9 @@ export type teamContextPayloadType = {
   size?: number
   teamMember?: teamMemberType
   installations?: installationType[]
+  title?: string
+  subtitle?: string
+  profile?: string
 }
 
 export type integrationProviderType = 'github' | 'bitbucket'
@@ -97,6 +100,9 @@ export type teamBaseType = {
   slug: string
   createdBy?: string
   reviewComments?: boolean
+  title?: string
+  subtitle?: string
+  profile?: string
 }
 
 export type teamType = teamBaseType & {
