@@ -45,7 +45,7 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
   const mainWidth = width ? width.main : '65%'
   const asideWidth = width ? width.aside : '45%'
 
-  const headTitle = `monolisa ${pageTitle ? `| ${pageTitle}` : ''}`
+  const headTitle = `Monolisa ${pageTitle ? `| ${pageTitle}` : ''}`
 
   return (
     <div className="mainLayout">
