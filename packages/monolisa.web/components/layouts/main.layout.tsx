@@ -5,8 +5,6 @@ import React, { ReactNode } from 'react'
 import classNames from 'classnames'
 import { run } from 'monolisa.lib'
 import Head from 'next/head'
-import { getTeamUrl } from '../../server/shared'
-import { useAppContext } from '../../hooks'
 import { css } from '@emotion/css'
 
 export type backType = LinkProps & {
@@ -40,12 +38,6 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
   children,
   width,
 }) => {
-  const { user, member, team } = useAppContext()
-
-  const teamSlug = team?.name
-
-  const buildTeamUrl = teamSlug ? getTeamUrl(teamSlug) : undefined
-
   const className = classNames('wrapper', 'withAside', {
     pull,
   })
@@ -154,33 +146,7 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
               }
 
               const { area, ...props } =
-                typeof back === 'object'
-                  ? back
-                  : (() => {
-                      const area = 'jobs'
-
-                      if (buildTeamUrl) {
-                        return { area, ...buildTeamUrl('profile') }
-                      }
-
-                      if (user) {
-                        return {
-                          area,
-                          href: '/jobs',
-                          as: `/${user.slug}`,
-                        }
-                      }
-
-                      if (member) {
-                        return {
-                          area,
-                          href: '/jobs',
-                          as: `/${member.slug}`,
-                        }
-                      }
-
-                      return { area: 'home', href: `/` }
-                    })()
+                typeof back === 'object' ? back : { area: 'home', href: `/` }
 
               if (!props) {
                 return
