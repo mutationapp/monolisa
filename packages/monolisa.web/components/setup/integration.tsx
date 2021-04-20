@@ -3,7 +3,6 @@ import styles from './styles'
 import Prism from '../highlight/prism'
 
 import { Box } from '..'
-import { blank } from '../link'
 import { useRouter } from 'next/router'
 import { capitalizeFirstLetter } from 'monolisa.lib/utils/string'
 import { Fragment } from 'react'
@@ -75,8 +74,6 @@ function Installation() {
             node-version: \${{matrix.node-version}}
         - name: Install
           run: npm install
-        - name: Stryker
-          run: npm run stryker
         - name: Monolisa
           env:
             MONOLISA_REPOSITORY_TOKEN: \${{secrets.REPOSITORY_TOKEN}}
@@ -91,12 +88,7 @@ function Installation() {
                   <strong>required</strong> variables
                 </div>
                 <div>
-                  🙌 Well done!{' '}
-                  <a href="https://github.com/monolisaapp/mutate" {...blank}>
-                    Mutate
-                  </a>{' '}
-                  is ready to upload monolisa reports, you will see review
-                  comments on your pull requests.
+                  🙌 Well done! Monolisa is ready to upload job listings.
                 </div>
               </Fragment>
             )
@@ -107,7 +99,7 @@ function Installation() {
               <p>
                 You can use your <strong>repository token</strong> in your{' '}
                 <strong>continuos integration pipelines</strong> and start
-                uploading monolisa reports to <strong>monolisa.app</strong>
+                uploading jobs to <strong>monolisa.app</strong>
               </p>
               <p>
                 Before doing that be sure you installed all the{' '}
