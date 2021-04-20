@@ -29,8 +29,8 @@ const Introduction = () => {
           <h2>Monolisa is automated job board for github organizations.</h2>
         </div>
         <div>
-          monolisa.app&apos;s api supports <strong>public</strong> repositories,{' '}
-          <strong>teams/organizations</strong>, using github{' '}
+          monolisa.app&apos;s api supports <strong>public</strong> repositories
+          from <strong>organizations</strong>, using github{' '}
           <Link {...buildSetupUrl('installation')}>
             <a>installations</a>
           </Link>
