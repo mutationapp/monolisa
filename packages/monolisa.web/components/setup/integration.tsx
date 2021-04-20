@@ -77,11 +77,9 @@ function Installation() {
           run: npm install
         - name: Stryker
           run: npm run stryker
-        - name: Mutate
+        - name: Monolisa
           env:
-            MUTATE_REPOSITORY_TOKEN: \${{secrets.REPOSITORY_TOKEN}}
-            MUTATE_PULL_NUMBER: \${{github.event.pull_request.number}}
-            MUTATE_PULL_OWNER: \${{github.event.pull_request.user.login}}
+            MONOLISA_REPOSITORY_TOKEN: \${{secrets.REPOSITORY_TOKEN}}
           run: npm run mutate
   `}
                   />
@@ -119,7 +117,7 @@ function Installation() {
                 <Prism
                   language="bash"
                   id="bash"
-                  source={`npm install @monolisaapp/mutate @stryker-mutator/core @stryker-mutator/jest-runner --save-dev`}
+                  source={`npm install monolisa --save-dev`}
                 />
               </div>
               <p>
@@ -133,23 +131,11 @@ function Installation() {
                   source={`{
   "scripts": {
     "test": "jest"
-    "stryker": "stryker run",
-    "mutate": "mutate"
+    "monolisa": "monolisa"
   }
 }`}
                 />
               </div>
-              <p>
-                We choose to use jest test runner in this template but you can
-                choose any test runner{' '}
-                <a
-                  {...blank}
-                  href="https://github.com/stryker-mutator/stryker/tree/epic/monolisa-switching/packages"
-                >
-                  stryker
-                </a>{' '}
-                supports.
-              </p>
             </Fragment>
           )
         })}
