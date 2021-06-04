@@ -2,7 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 
 import { useLoading, useTeam, useAppContext } from '../../hooks'
-import { MainLayout } from '../../components/layouts'
+import { DashboardLayout } from '../../components/layouts'
 import { isLoading } from '../../hooks/fetcher'
 import { run, nothingHereYet, dealWithIt } from 'monolisa.lib'
 import {
@@ -32,7 +32,7 @@ const Repositories = () => {
   useEffect(() => {
     invitationKey &&
       setTimeout(() => {
-        const { as, href } = getTeamUrl(teamSlug)('profile')
+        const { as, href } = getTeamUrl(teamSlug)('repositories')
         router.replace(as || href, as)
       }, 1000)
   }, [invitationKey])
@@ -46,7 +46,7 @@ const Repositories = () => {
   const loading = useLoading(isLoading(teamProfile))
 
   return (
-    <MainLayout
+    <DashboardLayout
       pageTitle={`${teamSlug} : Repositories`}
       pull
       aside={
@@ -133,7 +133,7 @@ const Repositories = () => {
           )
         }
       })}
-    </MainLayout>
+    </DashboardLayout>
   )
 }
 

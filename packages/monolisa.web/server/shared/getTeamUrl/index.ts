@@ -4,12 +4,11 @@ export type getTeamUrlType = (
   teamSlug: string,
 ) => (
   area:
-    | 'profile'
+    | 'repositories'
     | 'installations'
     | 'settings'
     | 'import'
     | 'danger'
-    | 'invite'
-    | 'jobs',
+    | 'invite',
 ) => { as: string; href: string }
 export default getTeamUrl

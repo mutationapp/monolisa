@@ -58,6 +58,11 @@ const SetupNavigation = () => {
           name: 'Contact',
           ...buildSetupUrl('contact'),
         },
+        {
+          icon: getSectionIcon('courses'),
+          name: 'Courses',
+          ...buildSetupUrl('courses'),
+        },
       ]}
     />
   )

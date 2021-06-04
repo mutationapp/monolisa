@@ -6,13 +6,13 @@ const BoxIcon: IconType = props => {
   return (
     <svg
       viewBox="0 0 24 24"
-      width="1em"
-      height="1em"
+      width={24}
+      height={24}
       stroke="currentColor"
       strokeWidth={1.5}
       strokeLinecap="round"
       strokeLinejoin="round"
-      fill="var(--foreground)"
+      fill="none"
       shapeRendering="geometricPrecision"
       color="var(--geist-foreground)"
       {...props}

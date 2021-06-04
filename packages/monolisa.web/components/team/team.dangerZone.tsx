@@ -98,7 +98,7 @@ const TeamDangerZone = () => {
             }
 
             if (deleted) {
-              return 'Deleted, going back to your organizations'
+              return 'Deleted, going back to your companies'
             }
 
             return 'This will delete all related data from the system.'

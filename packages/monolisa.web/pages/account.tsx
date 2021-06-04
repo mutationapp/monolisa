@@ -1,4 +1,4 @@
-import { MainLayout } from '../components/layouts'
+import { DashboardLayout } from '../components/layouts'
 import { FieldSet, FieldSets, withAuth } from '../components'
 import { useAppContext } from '../hooks'
 
@@ -7,14 +7,15 @@ const Account = () => {
 
   const { member } = useAppContext()
 
-  const handleSuccess = ({ response }) => {
+  const handleSucess = ({ response }) => {
     member?.set(response)
   }
 
   return (
-    <MainLayout
+    <DashboardLayout
       pageTitle={`${member?.slug} : Account`}
       title="Your account"
+      aside={' '}
       pull
     >
       <FieldSets>
@@ -33,7 +34,7 @@ const Account = () => {
             maxLength: 32,
             minLength: 3,
           }}
-          onSuccess={handleSuccess}
+          onSuccess={handleSucess}
         />
         <FieldSet
           url={url}
@@ -47,10 +48,10 @@ const Account = () => {
             required: true,
             isEmail: true,
           }}
-          onSuccess={handleSuccess}
+          onSuccess={handleSucess}
         />
       </FieldSets>
-    </MainLayout>
+    </DashboardLayout>
   )
 }
 export default withAuth(Account)

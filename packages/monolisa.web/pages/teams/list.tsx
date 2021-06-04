@@ -4,7 +4,7 @@ import { run } from 'monolisa.lib'
 import { getTeamUrl, teamsPayloadType } from '../../server/shared'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { MainLayout } from '../../components/layouts'
+import { DashboardLayout } from '../../components/layouts'
 import { GridIcon } from '../../components/icons'
 
 import {
@@ -62,16 +62,16 @@ const Teams = () => {
   const teams = data?.teams
 
   return (
-    <MainLayout
-      pageTitle={'Organizations'}
-      title={'Organizations'}
+    <DashboardLayout
+      pageTitle={member ? `${user?.slug} : Teams` : 'Teams'}
+      title={member ? 'Managed companies' : 'Public teams'}
       subtitle={
         user && !member
-          ? 'User organizations are private, here are some public teams from monolisa.app'
+          ? 'User teams are private, here are some public teams from monolisa.app'
           : ''
       }
       pull
-      aside={member ? <TeamNavigation /> : undefined}
+      aside={member ? <TeamNavigation /> : ' '}
     >
       <style jsx>{`
         .teams:not(.empty) {
@@ -103,7 +103,7 @@ const Teams = () => {
             shadow
             push
             header={{
-              children: 'Organizations',
+              children: 'Teams',
               icon: <GridIcon />,
               button: {
                 size: 'small',
@@ -114,7 +114,7 @@ const Teams = () => {
                   : {
                       href: 'teams/new',
                     },
-                children: 'Install',
+                children: 'Create team',
               },
             }}
             footer={run(() => {
@@ -123,9 +123,9 @@ const Teams = () => {
               }
               return `${
                 teams?.length
-                  ? `${teams.length} organizations listed.`
+                  ? `${teams.length} teams listed.`
                   : 'Nothing here yet.'
-              } Go through navigation to install company.`
+              } Go through navigation to create team.`
             })}
           >
             <section
@@ -141,7 +141,7 @@ const Teams = () => {
                 return teams.map(team => {
                   const { teamSlug } = team
 
-                  const { as } = getTeamUrl(teamSlug)('profile')
+                  const { as } = getTeamUrl(teamSlug)('repositories')
 
                   return (
                     <div key={teamSlug} className="team">
@@ -153,7 +153,7 @@ const Teams = () => {
                         }}
                         size="small"
                       >
-                        {'Go to profile'}
+                        {'Company Profile'}
                       </Button>
                     </div>
                   )
@@ -163,7 +163,7 @@ const Teams = () => {
           </Box>
         )
       })}
-    </MainLayout>
+    </DashboardLayout>
   )
 }
 

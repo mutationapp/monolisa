@@ -1,5 +1,5 @@
 import { cache } from '../../middlewares'
-import { getMember, jobPayloadType, jobsPayloadType } from '../../shared'
+import { getMember } from '../../shared'
 import { apiRouteType } from '..'
 import { getBlob } from 'monolisa.integration'
 import { somethingWentWrong } from 'monolisa.lib'
@@ -11,9 +11,6 @@ import {
   resetImport,
   deleteRepository,
   getInstallation,
-  getJobs,
-  getJob,
-  getTeam,
 } from 'monolisa.data'
 
 import {
@@ -24,7 +21,7 @@ import {
   internalError,
 } from 'monolisa.lib/api'
 
-import { integrationProviderType, isOwner, teamType } from 'monolisa.model'
+import { integrationProviderType, isOwner } from 'monolisa.model'
 
 import { getRepository } from 'monolisa.data'
 
@@ -34,42 +31,6 @@ const rootPath = '/api/jobs'
 const withRepoPath = rootPath + '/:provider(github)/:owner/:repo'
 
 const repositoryRoute: apiRouteType = ({ server, auth }) => {
-  server.get('/api/jobs', auth(), async (_, response) => {
-    const jobs = await getJobs({})
-
-    const join = jobs?.map(job => {
-      return getTeam({ id: job.teamId }) as Promise<teamType>
-    })
-
-    const teams = join ? await Promise.all(join) : undefined
-
-    return ok<jobsPayloadType>(response, {
-      jobs: jobs || [],
-      teams: teams || [],
-    })
-  })
-
-  server.get('/api/jobs/:id', auth(), async (request, response) => {
-    const id = request.params.id
-
-    const job = await getJob({ id })
-
-    if (!job) {
-      return notFound(response)
-    }
-
-    const team = await getTeam({ id: job.teamId })
-
-    if (!team) {
-      return notFound(response)
-    }
-
-    return ok<jobPayloadType>(response, {
-      job,
-      team,
-    })
-  })
-
   server.get(
     `${withRepoPath}/import`,
     auth(true),

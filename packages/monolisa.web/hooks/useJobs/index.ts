@@ -1,10 +1,12 @@
-import useJobs from './useJobs'
-
 import fetcher, { useFetchType } from '../fetcher'
-import { jobsPayloadType } from '../../server/shared'
+
+import { repositoryType } from 'monolisa.model'
+import useJobs from './useJobs'
 
 export type useJobsType = (inject: {
   fetcher: typeof fetcher
-}) => () => useFetchType<jobsPayloadType>
+}) => () => useFetchType<{
+  repositories: repositoryType[]
+}>
 
-export default useJobs({ fetcher })
+export default useJobs

@@ -9,7 +9,7 @@
   "scripts": {
     "build": "yarn run babel src -d --out-dir dist --extensions '.ts'",
     "dev": "ALLOW_UPDATE=true SKIP_EXIST=true nodemon --watch dist",
-    "spec": "jest --testRegex '(integration)\\.[jt]sx?$' --detectOpenHandles",
+    "spec": "jest --testRegex '(integration)\\.[jt]sx?$' --forceExit -u",
     "start": "ALLOW_UPDATE=true SKIP_EXIST=true node dist",
     "test": "echo skipping for now"
   },

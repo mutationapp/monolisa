@@ -10,7 +10,6 @@ export const tables = {
   teams: 'teams',
   installations: 'installations',
   userTeams: 'userTeams',
-  jobs: 'jobs',
 }
 
 export const withIntegration = (

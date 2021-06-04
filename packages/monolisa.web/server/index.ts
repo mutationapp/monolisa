@@ -15,11 +15,10 @@ import featureToggles from './shared/featureToggles'
 import whenFeature from './middlewares/whenFeature'
 import helmet from 'helmet'
 
+// c(▀̿Ĺ̯▀̿ ̿).
 import { memberType } from 'monolisa.model'
 import { dealWithIt } from 'monolisa.lib'
 import { NextServer } from 'next/dist/server/next'
-
-// c(▀̿Ĺ̯▀̿ ̿).
 ;(async (server: Application, app: NextServer) => {
   const handle = app.getRequestHandler()
   await app.prepare()
@@ -70,13 +69,13 @@ import { NextServer } from 'next/dist/server/next'
   }
 
   ;[
-    { routes: ['/', '/rules', '/tyler', '/setup', '/:slug/jobs'] },
+    { routes: ['/rules', '/tyler', '/setup', '/:slug/jobs'] },
     {
       routes: ['/:slug/account', '/:slug/import'],
       authorize: true,
     },
     {
-      routes: ['/login'],
+      routes: ['/', '/login'],
       authorize: false,
       redirect: (member?: memberType) =>
         member ? `/${member.slug}` : undefined,
@@ -84,7 +83,7 @@ import { NextServer } from 'next/dist/server/next'
     { routes: ['/:slug'] },
   ].forEach(({ routes, authorize, redirect }) => {
     const map = {
-      '/:slug': `/profile`,
+      '/:slug': `/jobs`,
       '/:slug/account': `/account`,
       '/:slug/jobs': `/jobs`,
       '/:slug/import': `/jobs/import`,
@@ -116,6 +115,6 @@ import { NextServer } from 'next/dist/server/next'
   next({
     dev: process.env.NODE_ENV !== 'production',
     customServer: true,
-    dir: '.',
+    // conf: baseConfig,
   }),
 )

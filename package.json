@@ -12,7 +12,7 @@
     "review:api": "HEROKU_PIPELINE='monolisa-api' node scripts/heroku/reviewApp",
     "review:web": "HEROKU_PIPELINE='monolisa-web' node scripts/heroku/reviewApp",
     "build": "yarn clean:dist && lerna run build",
-    "build:dev": "lerna run build",
+    "build:dev": "NODE_ENV=development lerna run build --since HEAD",
     "build:types": "tsc -b packages/**/tsconfig.build.json",
     "clean:dist": "rm -rf packages/**/dist*",
     "clean": "rm -rf packages/*/.next && rm -rf packages/**/dist* && rm -rf .stryker-t* **/*/.stryker-t* && tsc --build --clean && rm -rf yarn.lock && rm -rf yarn-*.log",
@@ -50,10 +50,8 @@
     ]
   },
   "dependencies": {
-    "dedent": "^0.7.0",
     "dotenv": "^8.2.0",
     "if-env": "^1.0.4",
-    "next-transpile-modules": "^6.3.0",
     "nodemon": "^2.0.6",
     "pino": "^6.8.0"
   },
@@ -67,7 +65,6 @@
     "@stryker-mutator/core": "^4.2.0",
     "@stryker-mutator/jest-runner": "^4.2.0",
     "@stryker-mutator/typescript": "^4.0.0",
-    "@types/dedent": "^0.7.0",
     "@types/dotenv": "^8.2.0",
     "@types/faker": "^5.1.5",
     "@typescript-eslint/eslint-plugin": "^4.11.0",

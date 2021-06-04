@@ -133,12 +133,15 @@ const Header = () => {
               >
                 {run(() => {
                   const url = (() => {
+                    if (!member) {
+                      return { href: '/' }
+                    }
                     if (reportRoute && buildTeamUrl) {
-                      const { as } = buildTeamUrl('profile')
+                      const { as } = buildTeamUrl('repositories')
                       return { href: as }
                     }
 
-                    return { href: `/` }
+                    return { href: `/${member.slug}` }
                   })()
 
                   return <Logo {...url} size={32} />
@@ -166,7 +169,7 @@ const Header = () => {
                                   }
                                   className="breadcrumb"
                                 >
-                                  organizations
+                                  companies
                                 </a>
                                 {spacer}
                                 <span className="breadcrumb repo">
@@ -177,12 +180,12 @@ const Header = () => {
                           }
 
                           if (!reportRoute?.query) {
-                            return <span className="brand">Monolisa.app</span>
+                            return <span className="brand">monolisa.app</span>
                           }
 
                           if (user && member?.id !== user.id) {
                             const repositoriesUrl = buildTeamUrl
-                              ? buildTeamUrl('profile')
+                              ? buildTeamUrl('repositories')
                               : { href: `/${user.slug}` }
 
                             return (
@@ -201,7 +204,7 @@ const Header = () => {
 
                           if (member) {
                             const repositoriesUrl = buildTeamUrl
-                              ? buildTeamUrl('profile')
+                              ? buildTeamUrl('repositories')
                               : { href: `/${member.slug}` }
 
                             return (
@@ -220,24 +223,26 @@ const Header = () => {
                         })}
                       </section>
                       <ul className="right-nav">
-                        <li>
-                          <Link href="/setup">
-                            <Button
-                              icon={<GearIcon />}
-                              size="small"
-                              secondary
-                              disabled={loggingOut}
-                            >
-                              Setup
-                            </Button>
-                          </Link>
-                        </li>
+                        {member && (
+                          <li>
+                            <Link href="/setup">
+                              <Button
+                                icon={<GearIcon />}
+                                size="small"
+                                secondary
+                                disabled={loggingOut}
+                              >
+                                Setup
+                              </Button>
+                            </Link>
+                          </li>
+                        )}
 
                         <li>{renderThemeSwitcher()}</li>
                         {member ? (
                           <Fragment>
                             <li>
-                              <Link href={member.slug}>
+                              <Link {...getUrl(member.slug)('account')}>
                                 <a title={member.name} className="avatar">
                                   <Avatar name={member.name} />
                                 </a>

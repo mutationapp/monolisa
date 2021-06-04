@@ -156,7 +156,7 @@ const auth: (inject?: { app?: NextServer }) => authType = ({ app } = {}) => (
         : await getUser({ id: installation.userId })
       : userSlug
       ? await getUser({ slug: userSlug })
-      : undefined
+      : member
 
   if ((userSlug || installation?.userId) && !user) {
     return getNotFound()
@@ -192,9 +192,6 @@ const auth: (inject?: { app?: NextServer }) => authType = ({ app } = {}) => (
           teamMember: member
             ? await getUserTeam({ userId: member.id, teamId: team.id })
             : undefined,
-          title: team.title,
-          subtitle: team.subtitle,
-          profile: team.profile,
         } as teamContextPayloadType)
       : undefined,
     repository,

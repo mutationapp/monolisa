@@ -31,28 +31,12 @@ export const up = async (knex: Knex) => {
       table.integer('size').notNullable()
       table.boolean('reviewComments').notNullable()
 
-      table.string('title', 3000)
-      table.string('subtitle', 3000)
-      table.string('profile', 3000)
-
       withUser(table, 'createdBy').nullable()
       withTimeStamps(table)
     })
     .createTable(tables.userTeams, table => {
       table.string('role', 255).notNullable()
       withUser(table)
-      withTeam(table)
-
-      withTimeStamps(table)
-    })
-    .createTable(tables.jobs, table => {
-      table.uuid('id').notNullable().primary()
-      table.string('title', 3000).notNullable()
-      table.string('subtitle', 3000).notNullable()
-      table.string('details', 3000).notNullable()
-      table.string('summary', 3000).notNullable()
-      withUser(table, 'createdBy').notNullable()
-
       withTeam(table)
 
       withTimeStamps(table)
@@ -64,7 +48,7 @@ export const up = async (knex: Knex) => {
       table.string('userName', 255).notNullable()
       table.string('email', 255).notNullable()
       table.string('provider', 50).notNullable()
-      table.string('accessToken', 500).notNullable()
+      table.string('accessToken', 255).notNullable()
 
       withUser(table)
 
@@ -139,7 +123,6 @@ export const down = async (knex: Knex) => {
     .dropTableIfExists(tables.installations)
     .dropTableIfExists(tables.integrations)
     .dropTableIfExists(tables.userTeams)
-    .dropTableIfExists(tables.jobs)
     .dropTableIfExists(tables.teams)
     .dropTableIfExists(tables.users)
 }

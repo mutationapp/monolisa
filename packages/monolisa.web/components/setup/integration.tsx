@@ -3,6 +3,7 @@ import styles from './styles'
 import Prism from '../highlight/prism'
 
 import { Box } from '..'
+import { blank } from '../link'
 import { useRouter } from 'next/router'
 import { capitalizeFirstLetter } from 'monolisa.lib/utils/string'
 import { Fragment } from 'react'
@@ -74,9 +75,13 @@ function Installation() {
             node-version: \${{matrix.node-version}}
         - name: Install
           run: npm install
-        - name: Monolisa
+        - name: Stryker
+          run: npm run stryker
+        - name: Mutate
           env:
-            MONOLISA_REPOSITORY_TOKEN: \${{secrets.REPOSITORY_TOKEN}}
+            MUTATE_REPOSITORY_TOKEN: \${{secrets.REPOSITORY_TOKEN}}
+            MUTATE_PULL_NUMBER: \${{github.event.pull_request.number}}
+            MUTATE_PULL_OWNER: \${{github.event.pull_request.user.login}}
           run: npm run mutate
   `}
                   />
@@ -88,7 +93,12 @@ function Installation() {
                   <strong>required</strong> variables
                 </div>
                 <div>
-                  🙌 Well done! Monolisa is ready to upload job listings.
+                  🙌 Well done!{' '}
+                  <a href="https://github.com/monolisaapp/mutate" {...blank}>
+                    Mutate
+                  </a>{' '}
+                  is ready to upload monolisa reports, you will see review
+                  comments on your pull requests.
                 </div>
               </Fragment>
             )
@@ -99,7 +109,7 @@ function Installation() {
               <p>
                 You can use your <strong>repository token</strong> in your{' '}
                 <strong>continuos integration pipelines</strong> and start
-                uploading jobs to <strong>monolisa.app</strong>
+                uploading monolisa reports to <strong>monolisa.app</strong>
               </p>
               <p>
                 Before doing that be sure you installed all the{' '}
@@ -109,7 +119,7 @@ function Installation() {
                 <Prism
                   language="bash"
                   id="bash"
-                  source={`npm install monolisa --save-dev`}
+                  source={`npm install @monolisaapp/mutate @stryker-mutator/core @stryker-mutator/jest-runner --save-dev`}
                 />
               </div>
               <p>
@@ -123,11 +133,23 @@ function Installation() {
                   source={`{
   "scripts": {
     "test": "jest"
-    "monolisa": "monolisa"
+    "stryker": "stryker run",
+    "mutate": "mutate"
   }
 }`}
                 />
               </div>
+              <p>
+                We choose to use jest test runner in this template but you can
+                choose any test runner{' '}
+                <a
+                  {...blank}
+                  href="https://github.com/stryker-mutator/stryker/tree/epic/monolisa-switching/packages"
+                >
+                  stryker
+                </a>{' '}
+                supports.
+              </p>
             </Fragment>
           )
         })}

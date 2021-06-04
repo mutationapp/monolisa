@@ -1,17 +1,7 @@
-import RouteTabs, { RouteTabType } from '.'
-import getUrl from '../../server/shared/getUrl'
-
+import RouteTabs from '.'
+import { UserIcon, BookIcon, InstallationIcon, GridIcon } from '../icons'
 import { useAppContext } from '../../hooks'
-
-import {
-  // InstallationIcon,
-  GridIcon,
-  OpenBookIcon,
-  ActivityIcon,
-  UserIcon,
-  // MessageIcon,
-} from '../icons'
-import React from 'react'
+import getUrl from '../../server/shared/getUrl'
 
 const AppRouteTabs = () => {
   const { member, user } = useAppContext()
@@ -25,79 +15,65 @@ const AppRouteTabs = () => {
     return null
   }
 
-  const currentUser =
-    user && member && user?.id === member?.id ? user : undefined
-
-  const accountLink = currentUser
-    ? {
-        icon: <UserIcon />,
-        children: 'Account',
-        value: 'installations',
-        href: `/${currentUser.slug}/account`,
-        // ...buildUrl('installations'),
-      }
-    : undefined
-
-  if (user) {
+  if (user && user?.id !== member?.id) {
     return (
       <RouteTabs
         className="tabs"
         tabs={[
           {
-            icon: <OpenBookIcon />,
-            children: 'Profile',
-            value: 'profile',
-            href: `/${user.slug}`,
+            icon: <BookIcon />,
+            children: 'Repositories',
+            value: 'repositories',
+            ...buildUrl('repositories'),
           },
-          accountLink as RouteTabType,
+          {
+            icon: <InstallationIcon />,
+            children: 'Installations',
+            value: 'installations',
+            ...buildUrl('installations'),
+          },
           {
             icon: <GridIcon />,
-            children: 'Organizations',
-            value: 'organizations',
+            children: 'Companies',
+            value: 'companies',
             ...buildUrl('teams'),
           },
-        ].filter(Boolean)}
+        ]}
       />
     )
   }
 
-  return (
+  return member ? (
     <RouteTabs
       className="tabs"
       tabs={[
         {
-          icon: <ActivityIcon />,
-          children: 'Jobs',
-          value: 'jobs',
-          href: '/',
+          icon: <BookIcon />,
+          children: 'Job Board',
+          value: 'jobBoard',
+          ...buildUrl('repositories'),
         },
         {
           icon: <GridIcon />,
-          children: 'Organizations',
-          value: 'organizations',
-          href: '/teams',
+          children: 'Companies',
+          value: 'companies',
+          ...buildUrl('teams'),
         },
-        // {
-        //   icon: <InstallationIcon />,
-        //   children: 'Installations',
-        //   value: 'installations',
-        //   ...buildUrl('installations'),
-        // },
-        // {
-        //   icon: <UserIcon />,
-        //   children: 'Account',
-        //   value: 'account',
-        //   ...buildUrl('account'),
-        // },
-        // {
-        //   icon: <MessageIcon />,
-        //   children: 'Messages',
-        //   value: 'messages',
-        //   ...buildUrl('account'),
-        // },
+        {
+          icon: <InstallationIcon />,
+          children: 'Installations',
+          value: 'installations',
+          ...buildUrl('installations'),
+        },
+        {
+          icon: <UserIcon />,
+          children: 'Account',
+          value: 'account',
+          ...buildUrl('account'),
+        },
       ]}
     />
-  )
+  ) : null
 }
 
 export default AppRouteTabs

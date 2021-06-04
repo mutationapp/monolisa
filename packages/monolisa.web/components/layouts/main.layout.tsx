@@ -1,11 +1,13 @@
 import { Header, Heading, Wrapper } from '..'
+
 import { LeftIcon, BikeIcon } from '../icons'
 import Link, { LinkProps } from 'next/link'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import classNames from 'classnames'
 import { run } from 'monolisa.lib'
 import Head from 'next/head'
-import { css } from '@emotion/css'
+import { getTeamUrl } from '../../server/shared'
+import { useAppContext } from '../../hooks'
 
 export type backType = LinkProps & {
   area: string
@@ -38,14 +40,21 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
   children,
   width,
 }) => {
-  const className = classNames('wrapper', 'withAside', {
+  const { user, member, team } = useAppContext()
+
+  const teamSlug = team?.name
+
+  const buildTeamUrl = teamSlug ? getTeamUrl(teamSlug) : undefined
+
+  const className = classNames('wrapper', {
+    withAside: !!aside || !!laside,
     pull,
   })
 
-  const mainWidth = width ? width.main : '65%'
-  const asideWidth = width ? width.aside : '45%'
+  const mainWidth = width ? width.main : '60%'
+  const asideWidth = width ? width.aside : '40%'
 
-  const headTitle = `Monolisa ${pageTitle ? `| ${pageTitle}` : ''}`
+  const headTitle = `monolisa ${pageTitle ? `| ${pageTitle}` : ''}`
 
   return (
     <div className="mainLayout">
@@ -80,7 +89,7 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
           padding-top: 20px;
         }
         .wrapper.pull main {
-          margin-top: -40px;
+          margin-top: -45px;
         }
         .wrapper.withAside {
           display: flex;
@@ -146,7 +155,33 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
               }
 
               const { area, ...props } =
-                typeof back === 'object' ? back : { area: 'home', href: `/` }
+                typeof back === 'object'
+                  ? back
+                  : (() => {
+                      const area = 'jobs'
+
+                      if (buildTeamUrl) {
+                        return { area, ...buildTeamUrl('repositories') }
+                      }
+
+                      if (user) {
+                        return {
+                          area,
+                          href: '/jobs',
+                          as: `/${user.slug}`,
+                        }
+                      }
+
+                      if (member) {
+                        return {
+                          area,
+                          href: '/jobs',
+                          as: `/${member.slug}`,
+                        }
+                      }
+
+                      return { area: 'home', href: `/` }
+                    })()
 
               if (!props) {
                 return
@@ -188,48 +223,24 @@ const MainLayout: React.FunctionComponent<MainLayoutPropsType> = ({
             return <aside>{laside}</aside>
           })}
           <main>{children}</main>
-          <aside>
-            {run(() => {
-              if (!aside) return
-              return (
-                <div className={css({ marginBottom: '15px' })}>{aside}</div>
-              )
-            })}
-            <ul
-              className={css({
-                display: 'flex',
-                gap: '10px',
-                fontSize: '0.875rem',
-                '& li': {
-                  display: 'flex',
-                },
-                '& a': {
-                  lineHeight: 1,
-                },
-              })}
-            >
-              <li>
-                <Link href="/setup?section=contact">
-                  <a className="icon" title="contact">
-                    <BikeIcon />
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <a title="Terms">Terms of Use</a>
-              </li>
-              <li>
-                <a title="Terms">Privacy Policy</a>
-              </li>
-              <li>
-                <Link href="/setup">
-                  <a title="Terms">Setup</a>
-                </Link>
-              </li>
-            </ul>
-          </aside>
+          {run(() => {
+            if (!aside) return
+            return <aside>{aside}</aside>
+          })}
         </div>
       </Wrapper>
+      <footer>
+        <Wrapper>
+          <div className="footer-content">
+            from Amsterdam with love ...
+            <Link href="/setup?section=contact">
+              <a className="icon" title="contact">
+                <BikeIcon />
+              </a>
+            </Link>
+          </div>
+        </Wrapper>
+      </footer>
     </div>
   )
 }

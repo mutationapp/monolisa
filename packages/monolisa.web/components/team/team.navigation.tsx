@@ -15,12 +15,12 @@ const TeamNavigation = () => {
       icon
       items={[
         {
-          name: 'Organizations',
+          name: 'Your teams',
           ...buildUrl('teams'),
           icon: <GridIcon />,
         },
         {
-          name: 'Create',
+          name: 'Create team',
           ...buildUrl('teams/new'),
           icon: <BoxIcon />,
         },

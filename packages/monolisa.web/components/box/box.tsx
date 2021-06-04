@@ -71,7 +71,6 @@ const Box: React.FunctionComponent<{
           margin-bottom: 10px;
           border-bottom: 1px solid var(--shade-2);
         }
-
         header.only {
           border-bottom: none;
           margin-bottom: 0;
@@ -80,12 +79,9 @@ const Box: React.FunctionComponent<{
           display: inline-flex;
           margin-right: 10px;
         }
-
         .header-content {
           flex: 1;
-          font-family: var(--font-header-medium);
         }
-
         footer {
           flex: 1;
           background-color: var(--shade-1);

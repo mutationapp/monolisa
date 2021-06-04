@@ -14,8 +14,6 @@ import useThemeContext from './useThemeContext'
 import useSWR from './useSWR'
 import useAppContext from './useAppContext'
 import useLogin from './useLogin'
-import useJobs from './useJobs'
-import useJob from './useJob'
 
 export {
   useAppContext,
@@ -34,6 +32,4 @@ export {
   useTeamInvitationKey,
   useTeams,
   useThemeContext,
-  useJobs,
-  useJob,
 }

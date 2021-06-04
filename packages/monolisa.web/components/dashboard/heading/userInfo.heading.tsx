@@ -61,7 +61,7 @@ const UserInfoHeading: React.FunctionComponent<{
       <div className="userCard">
         <Avatar name={user.name} size={90} />
         <div className="userInfo">
-          <h2 className="name">{user.name}</h2>
+          <span className="name">{user.name}</span>
           {run(() => {
             if (!installations?.length) {
               return

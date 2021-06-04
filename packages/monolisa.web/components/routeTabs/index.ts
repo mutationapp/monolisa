@@ -5,16 +5,14 @@ import AppRouteTabs from './app.routeTabs'
 import RepositoryRouteTabs from './job.routeTabs'
 import TeamRouteTabs from './team.routeTabs'
 
-export type RouteTabType = {
-  value: string
-  children: ReactNode
-  href: string
-  as?: string
-  icon?: ReactNode
-}
-
 export type RouteTabsType = (options: {
-  tabs: Array<RouteTabType>
+  tabs: Array<{
+    value: string
+    children: ReactNode
+    href: string
+    as?: string
+    icon?: ReactNode
+  }>
   className?: string
 }) => JSX.Element
 

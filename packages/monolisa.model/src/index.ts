@@ -40,9 +40,6 @@ export type teamContextPayloadType = {
   size?: number
   teamMember?: teamMemberType
   installations?: installationType[]
-  title?: string
-  subtitle?: string
-  profile?: string
 }
 
 export type integrationProviderType = 'github' | 'bitbucket'
@@ -100,9 +97,6 @@ export type teamBaseType = {
   slug: string
   createdBy?: string
   reviewComments?: boolean
-  title?: string
-  subtitle?: string
-  profile?: string
 }
 
 export type teamType = teamBaseType & {
@@ -157,16 +151,6 @@ export type repositoryType = {
   repo: string
   owner: string
   private: boolean
-} & withTimeStamps
-
-export type jobType = {
-  id: string
-  createdBy?: string
-  teamId: string
-  details: string
-  summary: string
-  title: string
-  subtitle: string
 } & withTimeStamps
 
 export type pullRequestStateType = 'open' | 'closed'

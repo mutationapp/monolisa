@@ -11,7 +11,9 @@ const getTeamUrl: getTeamUrlType = teamSlug => area => {
   }
   return {
     as:
-      area === 'profile' ? `/teams/${teamSlug}` : `/teams/${teamSlug}/${area}`,
+      area === 'repositories'
+        ? `/teams/${teamSlug}`
+        : `/teams/${teamSlug}/${area}`,
     href: `/teams/${area}?teamSlug=${teamSlug}`,
   }
 }

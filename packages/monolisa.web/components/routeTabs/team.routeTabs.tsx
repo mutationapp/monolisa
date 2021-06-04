@@ -2,13 +2,7 @@ import RouteTabs from '.'
 import { getTeamUrl } from '../../server/shared'
 import { isOwner } from 'monolisa.model'
 import { useAppContext } from '../../hooks'
-
-import {
-  OpenBookIcon,
-  ActivityIcon,
-  GearIcon,
-  InstallationIcon,
-} from '../icons'
+import { BookIcon, GearIcon, InstallationIcon } from '../icons'
 
 const TeamRouteTabs = () => {
   const { team } = useAppContext()
@@ -25,16 +19,10 @@ const TeamRouteTabs = () => {
     <RouteTabs
       tabs={[
         {
-          icon: <OpenBookIcon />,
-          children: 'Profile',
-          value: 'profile',
-          ...buildTeamUrl('profile'),
-        },
-        {
-          icon: <ActivityIcon />,
-          children: 'Jobs',
-          value: 'jobs',
-          ...buildTeamUrl('jobs'),
+          icon: <BookIcon />,
+          children: 'Repositories',
+          value: 'repositories',
+          ...buildTeamUrl('repositories'),
         },
         {
           icon: <GearIcon />,

@@ -44,18 +44,13 @@ import LinkIcon from './link.icon'
 import RightIcon from './right.icon'
 import PlusIcon from './plus.icon'
 import MailIcon from './mail.icon'
-import BookmarkIcon from './bookmark.icon'
-import ActivityIcon from './activity.icon'
-import MessageIcon from './message.icon'
 
 export {
-  ActivityIcon,
   AddUserIcon,
   AlertIcon,
   AlignIcon,
   ArrowIcon,
   BasketballIcon,
-  BookmarkIcon,
   BikeIcon,
   BookIcon,
   BoxIcon,
@@ -79,7 +74,6 @@ export {
   LinkIcon,
   LockIcon,
   MailIcon,
-  MessageIcon,
   MergeIcon,
   MoonIcon,
   OpenBookIcon,
@@ -109,5 +103,4 @@ export type IconType = React.FunctionComponent<{
   color?: string
   direction?: IconDirectionType
   align?: IconAlignType
-  className?: string
 }>

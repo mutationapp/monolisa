@@ -29,5 +29,4 @@ const result: Knex.Config = config
       ...config,
     }
   : {}
-
 export default result as Knex.Config

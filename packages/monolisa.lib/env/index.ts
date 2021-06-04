@@ -19,8 +19,8 @@ type envType = {
   MUTATE_APP_URL: string
   MUTATE_API_URL: string
   MONOLISA_ENV: monolisaEnvType
-  MONOLISA_PRIVATE_KEY: string
-  MONOLISA_PUBLIC_KEY: string
+  monolisa_PRIVATE_KEY: string
+  monolisa_PUBLIC_KEY: string
   [key: string]: string | undefined
 }
 

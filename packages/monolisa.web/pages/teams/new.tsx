@@ -1,4 +1,4 @@
-import { MainLayout } from '../../components/layouts'
+import { DashboardLayout } from '../../components/layouts'
 import { TeamNavigation, Button, FieldSet, Box } from '../../components'
 
 import { getTeamUrl } from '../../server/shared'
@@ -21,7 +21,7 @@ const NewTeam = () => {
   const router = useRouter()
 
   const handleSuccess = async ({ value: teamSlug }) => {
-    const { as } = getTeamUrl(teamSlug)('profile')
+    const { as } = getTeamUrl(teamSlug)('repositories')
     router.push(as, as)
   }
 
@@ -30,10 +30,10 @@ const NewTeam = () => {
   const canCreateSlug = member && isFeature({ FT_TEAM_SLUG_CREATION: 'on' })
 
   return (
-    <MainLayout
+    <DashboardLayout
       pull
-      pageTitle="Create company"
-      title="Create company"
+      pageTitle="Create team"
+      title="Create team"
       back={{ area: 'teams', href: '/teams' }}
       aside={<TeamNavigation />}
     >
@@ -117,7 +117,7 @@ const NewTeam = () => {
           />
         )
       })}
-    </MainLayout>
+    </DashboardLayout>
   )
 }
 
