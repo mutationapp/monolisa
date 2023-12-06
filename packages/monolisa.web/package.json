@@ -37,7 +37,7 @@
     "monolisa.lib": "1.0.0",
     "monolisa.model": "1.0.0",
     "monolisa.storage": "1.0.0",
-    "newrelic": "^7.0.2",
+    "newrelic": "^9.7.1",
     "next": "^10.0.3",
     "next-cookies": "^2.0.3",
     "nprogress": "^0.2.0",
